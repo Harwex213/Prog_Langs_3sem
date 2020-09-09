@@ -1,4 +1,4 @@
- 'ко'    ;
+print 'конер'    ;
 sc = fs(sa,sb);
 integer function fi(integer x, integer y)
 {

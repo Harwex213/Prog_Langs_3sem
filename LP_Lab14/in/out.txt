@@ -1,8 +1,8 @@
-'ко'  ;|sc=fs(sa,sb);|integer function fi(integer x,integer y)|{|declare integer z;|z=x*(x+y);|return z;|};|string function fs(string a,string b)|{|declare string c;|declare string function substr(string a,integer p,|integer n);|c=substr(a,1,3)+b;|return c;|};|main|{|declare integer x;|declare integer y;|declare integer z;|declare string sa;|declare string sb;|declare string sc;|declare integer strlen(string p);|x=1;|y=5;|sa='1234567890';|sb='1234567890';|z=fi(x,y);|sc=fs(sa,sb);|print'контрольный пример'  ;|print z;|print sc;|print strlen(sc);|return 0;|};
+print'конер';|sc=fs(sa,sb);|integer function fi(integer x,integer y)|{|declare integer z;|z=x*(x+y);|return z;|};|string function fs(string a,string b)|{|declare string c;|declare string function substr(string a,integer p,|integer n);|c=substr(a,1,3)+b;|return c;|};|main|{|declare integer x;|declare integer y;|declare integer z;|declare string sa;|declare string sb;|declare string sc;|declare integer strlen(string p);|x=1;|y=5;|sa='1234567890';|sb='1234567890';|z=fi(x,y);|sc=fs(sa,sb);|print'контрольный пример';|print z;|print sc;|print strlen(sc);|return 0;|};
 
 
------ Анализ -----  Дата: 09.09.2020 17:49:07 ----- 
-Цепочка: 'ко'  ;	не распознана, содержит ошибку. Символ: ', строка: 1, позиция: 1
+----- Анализ -----  Дата: 09.09.2020 19:05:24 ----- 
+Цепочка: print'конер';	не распознана, содержит ошибку. Символ: p, строка: 1, позиция: 1
 Цепочка: sc=fs(sa,sb);	не распознана, содержит ошибку. Символ: s, строка: 2, позиция: 1
 Цепочка: integer function fi(integer x,integer y)	не распознана, содержит ошибку. Символ: i, строка: 3, позиция: 1
 Цепочка: {	не распознана, содержит ошибку. Символ: {, строка: 4, позиция: 1
@@ -33,8 +33,9 @@
 Цепочка: sb='1234567890';	не распознана, содержит ошибку. Символ: s, строка: 29, позиция: 1
 Цепочка: z=fi(x,y);	не распознана, содержит ошибку. Символ: z, строка: 30, позиция: 1
 Цепочка: sc=fs(sa,sb);	не распознана, содержит ошибку. Символ: s, строка: 31, позиция: 1
-Цепочка: print'контрольный пример'  ;	не распознана, содержит ошибку. Символ: p, строка: 32, позиция: 1
+Цепочка: print'контрольный пример';	не распознана, содержит ошибку. Символ: p, строка: 32, позиция: 1
 Цепочка: print z;	не распознана, содержит ошибку. Символ: p, строка: 33, позиция: 1
 Цепочка: print sc;	не распознана, содержит ошибку. Символ: p, строка: 34, позиция: 1
 Цепочка: print strlen(sc);	не распознана, содержит ошибку. Символ: p, строка: 35, позиция: 1
 Цепочка: return 0;	не распознана, содержит ошибку. Символ: r, строка: 36, позиция: 1
+Цепочка: };	не распознана, содержит ошибку. Символ: }, строка: 37, позиция: 1
