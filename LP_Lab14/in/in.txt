@@ -1,9 +1,9 @@
-print 'конер'    ;
-sc = fs(sa,sb);
-integer function fi(integer x, integer y)
+       print '      ewq *  +++ / -          конер'    ;
+sc = fs        (  sa,sb);
+integer function fi    (   integer x, integer y)
 {
 declare integer z;
-z= x*(x+y);
+z=x* (x+y);
 return z;
 };
 string function fs (string a, string b)
@@ -11,7 +11,7 @@ string function fs (string a, string b)
 declare string c;
 declare string function substr(string a, integer p,
  integer n);
-c = substr(a, 1,3)+ b;
+c = substr(a, 1,3)   +b;
 return c;
 };
 main

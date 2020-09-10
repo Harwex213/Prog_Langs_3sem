@@ -2,7 +2,7 @@
 #include "Error.h"
 #include <fstream>
 using namespace std;
-
+// /c/Workplace/1University/second_cource/Prog_Languages/Labs/Prog_Langs_3sem
 namespace In
 {
 	IN getin(wchar_t* infile)
@@ -19,9 +19,9 @@ namespace In
 		char unsigned txt_temp;			//Посимвольное чтение
 		int  position = 1;				//Позиция (для вывода ошибок)
 		int	 counter  = 0;				//Счётчик для записи обработонного кода
-		bool whitespace_existe = false;	//Присутствие (или отсутствие) пробела в прошлой строке
-		bool separator_existe = false;	//Присутствие (или отсутствие) сепаратора в прошлой строке
-		bool ltrl_in = false;			//Вошли ли в литерал
+		bool true_symbol = false;		//Наличие "true" символа
+		bool space_request = false;		//Запрос пробела на внесение
+		bool ltrl_in = false;			//Находимся ли в литерале
 		bool chek_file = false;			//Проверка пустоты файла
 
 		if (file.is_open())
@@ -32,40 +32,30 @@ namespace In
 				switch (sample.code[txt_temp])
 				{
 				case IN::T:
+					true_symbol = true;
+					if (space_request)
+					{
+						sample.text[counter++] = IN_WHITE_SPACE;
+						space_request = false;
+						sample.ignor--;
+					}
 					sample.text[counter++] = txt_temp;
-					whitespace_existe = false;
-					separator_existe = false;
 					position++;
 					sample.size++;
 					break;
-				case IN::W: 
-					if (ltrl_in || position != 1 && !(whitespace_existe || separator_existe))
-					{
+				case IN::W:
+					if (ltrl_in)
 						sample.text[counter++] = IN_WHITE_SPACE;
-						whitespace_existe = true;
-					}
-					else
-					{
-						sample.ignor++;
-						if (separator_existe)
-						{
-							whitespace_existe = false;
-							separator_existe = false;
-						}
-					}
+					if (true_symbol)
+						space_request = true;
+					sample.ignor++;
 					position++;
 					sample.size++;
 					break;
 				case IN::S:
-					if (ltrl_in || !whitespace_existe)
-						sample.text[counter++] = txt_temp;
-					else
-					{
-						sample.text[counter - 1] = txt_temp;
-						sample.ignor++;
-						whitespace_existe = false;
-					}
-					separator_existe = true;
+					true_symbol = false;
+					space_request = false;
+					sample.text[counter++] = txt_temp;
 					position++;
 					sample.size++;
 					break;
@@ -78,24 +68,13 @@ namespace In
 					sample.size++;
 					break;
 				case IN::L:
+					true_symbol = false;
+					space_request = false;
 					if (ltrl_in)
-					{
 						ltrl_in = false;
-						sample.text[counter++] = txt_temp;
-						separator_existe = true;
-					}
 					else
-					{
 						ltrl_in = true;
-						if (whitespace_existe)
-						{
-							sample.text[counter - 1] = txt_temp;
-							sample.ignor++;
-							whitespace_existe = false;
-						}
-						else
-							sample.text[counter++] = txt_temp;
-					}
+					sample.text[counter++] = txt_temp;
 					position++;
 					sample.size++;
 					break;
@@ -109,7 +88,12 @@ namespace In
 					sample.size++;
 					break;
 				default:
-					sample.text[counter++] = sample.code[txt_temp];
+					true_symbol = false;
+					space_request = false;
+					if (ltrl_in)
+						sample.text[counter++] = IN_CODE_ENDL;
+					else
+						sample.text[counter++] = sample.code[txt_temp];
 					position = 1;
 					sample.lines++;
 					break;
