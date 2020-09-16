@@ -41,7 +41,7 @@ namespace In
 					}
 					sample.text[counter++] = txt_temp;
 					position++;
-					sample.size++;
+					sample.size++; 
 					break;
 				case IN::W:
 					if (ltrl_in)

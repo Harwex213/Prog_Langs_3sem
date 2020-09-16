@@ -22,8 +22,6 @@
 #define	LEX_DIRSLASH	'v'			// лексема для /
 #define	LEX_EQUAL_SIGN	'='			// лексема для =
 
-#define PARM_LEX_DEFAULT_EXT L".lex.txt" //для файла с итогом лексического анализa
-
 namespace LT							// таблица лексем
 {
 	struct Entry						// строка таблицы лексем
@@ -31,8 +29,6 @@ namespace LT							// таблица лексем
 		char lexema[LEXEMA_FIXSIZE];	// лексема
 		int sn;							// номер строки в исходном тексте
 		int idxTI;						// индекс в таблице идентификаторов или LT_TI_NULLIDX
-		Entry();
-		Entry(const char lex, int str_n, int idxTI);
 	};
 
 	struct LexTable						// экземпляр таблицы лексем
@@ -40,12 +36,10 @@ namespace LT							// таблица лексем
 		int maxsize;					// емкость таблицы лексем < LT_MAXSIZE
 		int current_size;				// текущий размер таблицы лексем < maxsize
 		Entry* table;					// массив строк таблицы лексем
-
-		LexTable (int size);					// создать таблицу лексем
-
-		void Add(LexTable& lextable, Entry entry);	// добавление лексем
-		Entry GetEntry(LexTable& lextable, int n);	// получить строку таблицы лексем
-		void PrintLexTable(const wchar_t* in);		// вывод лексем в файл
-		void Delete(LexTable& lextable);			// удалить таблицу лексем (освободить память)
 	};
+	LexTable Create(int size);					// создать таблицу лексем
+	void Add(LexTable& lextable, Entry entry);	// добавление лексем
+	Entry GetEntry(LexTable& lextable, int n);	// получить строку таблицы лексем
+	void PrintLexTable(const wchar_t* in);		// вывод лексем в файл
+	void Delete(LexTable& lextable);			// удалить таблицу лексем (освободить память)
 }

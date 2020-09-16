@@ -55,7 +55,7 @@ namespace Out
 			out_text = new char[chain_size+1];
 			out_text[chain_size] = PARM_NULL_STR;
 			strncpy(out_text, start, chain_size);
-
+			FST::NODE(1, FST::RELATION('a', 1));
 			fst = { 
 				out_text,									
 				GRAPH };
