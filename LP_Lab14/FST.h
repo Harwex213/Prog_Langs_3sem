@@ -8,7 +8,6 @@ FST::NODE(4, FST::RELATION('c', 2), FST::RELATION('d', 2), FST::RELATION('e', 2)
 FST::NODE(2, FST::RELATION('b', 3), FST::RELATION('h', 4)), \
 FST::NODE()
 
-
 namespace FST
 {
 	struct RELATION							// ребро :символ->вершина графа переходов КА

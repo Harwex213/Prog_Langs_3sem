@@ -58,7 +58,7 @@ namespace Out
 			FST::NODE(1, FST::RELATION('a', 1));
 			fst = { 
 				out_text,									
-				GRAPH };
+				GRAPH};
 			if (FST::execute(fst))
 				*out.stream << "Цепочка: " << out_text << "\tраспознана" << endl;
 			else

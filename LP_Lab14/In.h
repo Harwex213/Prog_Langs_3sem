@@ -1,4 +1,7 @@
 #pragma once
+#include "LT.h"
+#include <vector>
+#pragma warning(disable: 4996)
 
 #define IN_MAX_LEN_TEXT 1024*1024
 #define IN_CODE_ENDL	'\n'
@@ -21,7 +24,7 @@
  IN::F,IN::F,IN::F,IN::F,IN::F,IN::F,IN::F,IN::F,IN::F,IN::W,'|'  ,IN::F,IN::F,IN::F,IN::F,IN::F, /*0*/\
  IN::F,IN::F,IN::F,IN::F,IN::F,IN::F,IN::F,IN::F,IN::F,IN::F,IN::F,IN::F,IN::F,IN::F,IN::F,IN::F, /*1*/\
  IN::W,IN::F,IN::T,IN::F,IN::F,IN::F,IN::S,IN::L,IN::S,IN::S,IN::S,IN::S,IN::S,IN::A,IN::A,IN::S, /*2*/\
- IN::T,IN::T,IN::T,IN::T,IN::T,IN::T,IN::T,IN::T,IN::T,IN::T,IN::A,IN::S,IN::S,IN::S,IN::S,IN::S, /*3*/\
+ IN::L,IN::L,IN::L,IN::L,IN::L,IN::L,IN::L,IN::L,IN::L,IN::L,IN::A,IN::S,IN::S,IN::S,IN::S,IN::S, /*3*/\
  IN::A,IN::T,IN::T,IN::T,IN::T,IN::T,IN::T,IN::T,IN::T,IN::T,IN::T,IN::T,IN::T,IN::T,IN::T,IN::T, /*4*/\
  IN::T,IN::T,IN::T,IN::T,IN::T,IN::T,IN::T,IN::T,IN::T,IN::T,IN::T,IN::S,IN::F,IN::S,IN::A,IN::T, /*5*/\
  IN::F,IN::T,IN::T,IN::T,IN::T,IN::T,IN::T,IN::T,IN::T,IN::T,IN::T,IN::T,IN::T,IN::T,IN::T,IN::T, /*6*/\
@@ -41,13 +44,21 @@ namespace In
 {
 	struct IN
 	{
-		enum { L = 64, A = 128, S = 256, W = 512, T = 1024, F = 2048, I = 4096 };
-		int size;
-		int lines;
-		int ignor;
+		int size = 0;
+		int ignor = 0;
+		int	lines = 1;
 		unsigned char* text;
+		enum { L = 64, A = 128, S = 256, W = 512, T = 1024, F = 2048, I = 4096 };
 		int code[256] = IN_CODE_TABLE;
 	};
 
+	struct IN_WORD
+	{
+		char* text; //Записываем лексему
+		int position = 1;	 //Позиция
+		int line = 1;		 //Строка
+	};
+
 	IN getin(wchar_t* infile);
+	int getword(std::vector<IN_WORD>& table, char* intext, int position, int line, int counter);
 }

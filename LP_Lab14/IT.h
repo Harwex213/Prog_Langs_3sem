@@ -30,9 +30,6 @@ namespace IT	// таблица идентификатов
 				char str[TI_STR_MAXSIZE - 1];	// символы string
 			} vstr[TI_STR_MAXSIZE];	// значение string
 		}value;	// значение идентификатора
-
-		Entry();
-		Entry(const char* parrentFunc, const char* id, IDDATATYPE iddatatype, IDTYPE idtype);
 	};
 
 	struct IdTable // экземпляр таблицы идентификаторов
@@ -40,13 +37,12 @@ namespace IT	// таблица идентификатов
 		int maxsize;				// емкость таблицы идентификаторов < TI_MAXSIZE
 		int current_size;			// текущий размер таблицы идентификаторов < maxsize
 		Entry* table;				// массив строк таблицы идентификаторов
-
-		IdTable (int size);
-
-		void Add(IdTable& idtable, Entry entry);
-		Entry GetEntry(IdTable& idtable, int n);
-		int IsId(IdTable& idtable, char id[ID_MAXSIZE]);
-		void PrintIdTable(const wchar_t* in);
-		void Delete();
 	};
+
+	IdTable Create(int size);
+	void Add(IdTable& idtable, Entry entry);
+	Entry GetEntry(IdTable& idtable, int n);
+	int IsId(IdTable& idtable, char id[ID_MAXSIZE]);
+	void PrintIdTable(const wchar_t* in);
+	void Delete(IdTable& idtable);
 }

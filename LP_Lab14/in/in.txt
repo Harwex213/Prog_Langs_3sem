@@ -1,5 +1,3 @@
-       print '      ewq *  +++ / -          конер'    ;
-sc = fs        (  sa,sb);
 integer function fi    (   integer x, integer y)
 {
 declare integer z;

@@ -3,8 +3,8 @@
 #include "Parm.h"
 #include "In.h"
 #include "Log.h"
-using namespace std;
 #pragma warning(disable: 4996)
+using namespace std;
 
 namespace Out {
 
