@@ -1,10 +1,4 @@
-#include "Out.h"
-#include "Error.h"
-#include "In.h"
-#include "FST.h"
-#include "Parm.h"
-#include "Log.h"
-#include <time.h>
+#include "stdafx.h"
 
 namespace Out 
 {

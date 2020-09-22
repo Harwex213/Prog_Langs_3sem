@@ -1,4 +1,4 @@
-#include "Error.h"
+#include "stdafx.h"
 
 namespace Error
 {

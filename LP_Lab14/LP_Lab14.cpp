@@ -1,14 +1,4 @@
-﻿#include <iostream>
-#include <locale>
-#include <cwchar>
-
-#include "Error.h"
-#include "Parm.h"
-#include "In.h"
-#include "Log.h"
-#include "FST.h"
-#include "Out.h"
-using namespace std;
+﻿#include "stdafx.h"
 
 // -in:c:#in\in.txt -out:c:#in\out.txt -log:c:#in\log.txt
 

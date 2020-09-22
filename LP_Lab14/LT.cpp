@@ -1,8 +1,5 @@
-#pragma once
-#include <iostream>
-#include <tchar.h>
-#include "LT.h"
-#include "Error.h"
+#include "stdafx.h"
+
 namespace LT							// таблица лексем
 {
 	LexTable Create(int size)			// создать таблицу лексем

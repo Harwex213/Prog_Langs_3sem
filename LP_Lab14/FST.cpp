@@ -1,5 +1,4 @@
-#include "FST.h"
-#include "Error.h"
+#include "stdafx.h"
 
 namespace FST
 {

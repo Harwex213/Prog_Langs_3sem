@@ -1,9 +1,4 @@
-#include "In.h"
-#include "Error.h"
-#include "FST.h"
-#include <fstream>
-#include <vector>
-using namespace std;
+#include "stdafx.h"
 // /c/Workplace/1University/second_cource/Prog_Languages/Labs/Prog_Langs_3sem
 namespace In
 {
@@ -26,9 +21,9 @@ namespace In
 		int counterLxm = 0;				//Счётчик для количества лексем (структур)
 		vector<IN_WORD> AlfaLexTable(counterLxm+1);	//Массив структур со словами (лексемами)
 
-		bool longLxm_symbol = false;		//
-		bool lxm_symbol = false;		//
-		bool space_symbol = false;		//
+		bool longLxm_symbol = false;	//N-ое количество символов превращаемое в лексему через граф
+		bool lxm_symbol = false;		//Лексема-символ
+		bool space_symbol = false;		//Пробел
 		bool ltrl_in = false;			//Находимся ли в литерале
 		bool chek_file = false;			//Проверка пустоты файла
 

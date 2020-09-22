@@ -1,8 +1,4 @@
-#include <iostream>
-#include "Log.h"
-#include "Parm.h"
-#include "Error.h"
-#include <time.h>
+#include "stdafx.h"
 
 namespace Log
 {
