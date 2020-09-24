@@ -1,7 +1,7 @@
 #pragma once
 #include <iostream>
 #include <tchar.h>
-#define GRAPH 5, \
+#define GRAPH1 5, \
 FST::NODE(1, FST::RELATION('a', 1)), \
 FST::NODE(5, FST::RELATION('b', 1), FST::RELATION('c', 2), FST::RELATION('d', 2), FST::RELATION('e', 2), FST::RELATION('b', 3)), \
 FST::NODE(4, FST::RELATION('c', 2), FST::RELATION('d', 2), FST::RELATION('e', 2), FST::RELATION('b', 3)), \

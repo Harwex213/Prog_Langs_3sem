@@ -36,7 +36,7 @@ namespace Out
 		char* out_text = NULL;
 		FST::FST fst(
 			out_text,									// цепочка для распознавания
-			GRAPH);
+			GRAPH1);
 		int i = 0;
 		while (i < in.size)
 		{
@@ -52,7 +52,7 @@ namespace Out
 			FST::NODE(1, FST::RELATION('a', 1));
 			fst = { 
 				out_text,									
-				GRAPH};
+				GRAPH1};
 			if (FST::execute(fst))
 				*out.stream << "Цепочка: " << out_text << "\tраспознана" << endl;
 			else

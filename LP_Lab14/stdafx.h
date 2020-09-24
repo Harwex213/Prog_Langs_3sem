@@ -14,5 +14,7 @@
 #include "LT.h"
 #include "Out.h"
 #include "Parm.h"
+#include "Automat.h"
+#include "Graph.h"
 
 using namespace std;
