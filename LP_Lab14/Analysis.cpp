@@ -5,8 +5,7 @@ namespace Analysis
 	void MakeAnalysis(LT::LexTable& lxmTable, IT::IdTable& idTable)
 	{
 		Automat::AUTOMAT automats;
-		char text[] = "integer";
-		char* string = text;
+		char* string = NULL;
 		GRAPHES;
 		Automat::createAutomat(automats, graphArray);
 		FST::FST fstN = automats['i'];
