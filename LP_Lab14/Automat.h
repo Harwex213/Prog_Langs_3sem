@@ -7,8 +7,8 @@ namespace Automat
 	{
 		FST::FST* KeyWord = NULL;
 
-		FST::FST& operator[] (const int index);
+		FST::FST& operator[] (const char index);
 	};
 
-	void createAutomat(AUTOMAT& sample);
+	void createAutomat(AUTOMAT& sample, FST::FST array[]);
 }

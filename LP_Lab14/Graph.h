@@ -12,6 +12,15 @@
 #define IDENTIFICATOR_INDEX 9
 #define GRAPHS_SIZE 10
 
+#define RELATION_INT FST::RELATION('i', 0)
+#define RELATION_STR FST::RELATION('s', 0)
+#define RELATION_FUN FST::RELATION('f', 0)
+#define RELATION_DEC FST::RELATION('d', 0)
+#define RELATION_RET FST::RELATION('r', 0)
+#define RELATION_PRINT FST::RELATION('p', 0)
+#define RELATION_MAIN FST::RELATION('m', 0)
+#define RELATION_LTRL_STR FST::RELATION('\'', 0)
+
 #define GRAPH_INT string, 8, \
 FST::NODE(1, FST::RELATION('i', 1)), \
 FST::NODE(1, FST::RELATION('n', 2)), \
@@ -208,26 +217,25 @@ FST::NODE(27, \
 	FST::RELATION('z', 0), \
 	FST::RELATION('_', 0))
 
-//#define GRAPHES FST::FST graphArray[GRAPHS_SIZE] = \
-//{ \
-//	(string, GRAPH_INT), \
-//	(string, GRAPH_STR), \
-//	(string, GRAPH_FUN), \
-//	(string, GRAPH_DEC), \
-//	(string, GRAPH_RET), \
-//	(string, GRAPH_PRINT), \
-//	(string, GRAPH_MAIN), \
-//	(string, GRAPH_LTRL_INT), \
-//	(string, GRAPH_LTRL_STR), \
-//	(string, GRAPH_IDENTIFY), \
-//};
+#define GRAPH_SELECT nothing, 1, \
+FST::NODE(8, \
+	FST::RELATION('i', 0), \
+	FST::RELATION('s', 0), \
+	FST::RELATION('f', 0), \
+	FST::RELATION('d', 0), \
+	FST::RELATION('r', 0), \
+	FST::RELATION('p', 0), \
+	FST::RELATION('m', 0), \
+	FST::RELATION('\'', 0))
 
-namespace Graph
-{
-
-	struct GRAPH
-	{
-		char symbol;
-
-	};
-}
+#define GRAPHES \
+FST::FST fst1(GRAPH_INT); \
+FST::FST fst2(GRAPH_STR); \
+FST::FST fst3(GRAPH_FUN); \
+FST::FST fst4(GRAPH_DEC); \
+FST::FST fst5(GRAPH_RET); \
+FST::FST fst6(GRAPH_PRINT); \
+FST::FST fst7(GRAPH_LTRL_INT); \
+FST::FST fst8(GRAPH_LTRL_STR); \
+FST::FST fst9(GRAPH_IDENTIFY); \
+FST::FST fst10(GRAPH_INT);

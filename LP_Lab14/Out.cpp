@@ -34,9 +34,9 @@ namespace Out
 		int chain_size = 0;
 		char* start = NULL;
 		char* out_text = NULL;
-		FST::FST fst(
-			out_text,									// цепочка для распознавания
-			GRAPH1);
+		//FST::FST fst(
+		//	out_text,									// цепочка для распознавания
+		//	GRAPH1);
 		int i = 0;
 		while (i < in.size)
 		{
@@ -50,7 +50,7 @@ namespace Out
 			out_text[chain_size] = PARM_NULL_STR;
 			strncpy(out_text, start, chain_size);
 			FST::NODE(1, FST::RELATION('a', 1));
-			fst = { 
+			/*fst = { 
 				out_text,									
 				GRAPH1};
 			if (FST::execute(fst))
@@ -62,7 +62,7 @@ namespace Out
 
 				*log.stream << "Цепочка: " << out_text << "\tне распознана, содержит ошибку.";
 				*log.stream << " Символ: " << out_text[fst.position] << ", строка: " << count_lines << ", позиция: " << fst.position + 1 << endl;
-			}
+			}*/
 
 			delete[] out_text;
 			chain_size = 0;

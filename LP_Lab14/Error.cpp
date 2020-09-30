@@ -5,6 +5,7 @@ namespace Error
 	// серии ошибок: 0-99 - системные ошибки
 	//				 100-109 - ошибки параметров
 	//				 110-119 - ошибки открытия и чтения файлов
+	//				 120-XXX - ошибки определения лексем
 	ERROR errors[ERROR_MAX_ENTRY] =
 	{
 		ERROR_ENTRY(0, "Недопустимый код ошибки"),
@@ -34,7 +35,8 @@ namespace Error
 		ERROR_ENTRY_NODEF(115),
 		ERROR_ENTRY_NODEF(116),		ERROR_ENTRY_NODEF(117),		ERROR_ENTRY_NODEF(118),
 		ERROR_ENTRY_NODEF(119),
-		ERROR_ENTRY(120, "Ошибка при анализе цепочки"),
+		ERROR_ENTRY(120, "Ошибка автомата при анализе"),
+		ERROR_ENTRY(121, "Ошибка при поиске нужного автомата"),
 		ERROR_ENTRY_NODEF10(130),
 		ERROR_ENTRY_NODEF10(140),	ERROR_ENTRY_NODEF10(150),	ERROR_ENTRY_NODEF10(160),
 		ERROR_ENTRY_NODEF10(170),	ERROR_ENTRY_NODEF10(180),	ERROR_ENTRY_NODEF10(190),

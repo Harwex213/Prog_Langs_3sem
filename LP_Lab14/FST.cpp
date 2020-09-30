@@ -19,9 +19,16 @@ namespace FST
 		relations = new RELATION[n];
 		for (int i = 0; i < n; ++i, ptr++)relations[i] = *ptr;
 	}
-	FST::FST(const char* s, short ns, NODE n, ...)
+	FST::FST()
 	{
-		string = (char*)s;
+		string = NULL;
+		nstates = 0;
+		nodes = NULL;
+		rstates = 0;
+	}
+	FST::FST(char* &s, short ns, NODE n, ...)
+	{
+		string = &s;
 		nstates = ns;
 		nodes = new NODE[ns];
 		NODE* ptr = &n;
@@ -42,7 +49,7 @@ namespace FST
 			if (rstates[i] == fst.position)
 				for (short j = 0; j < fst.nodes[i].n_relation; j++)
 				{
-					if (fst.nodes[i].relations[j].symbol == fst.string[fst.position])
+					if (fst.nodes[i].relations[j].symbol == fst.string[0][fst.position])
 					{
 						fst.rstates[fst.nodes[i].relations[j].nnode] = fst.position + 1;
 						rc = true;
@@ -56,7 +63,7 @@ namespace FST
 	{
 		short* rstates = new short[fst.nstates];
 		memset(rstates, 0xff, sizeof(short) * fst.nstates);
-		short lstring = strlen(fst.string);
+		short lstring = strlen(*(fst.string));
 		bool rc = true;
 
 		for (short i = 0; i < lstring && rc; i++)
