@@ -18,8 +18,10 @@ namespace In
 		int word_size = 0;				//Подсчёт длины слова
 		char* out_text = NULL;
 
-		int counterLxm = 0;				//Счётчик для количества лексем (структур)
-		vector<IN_WORD> AlfaLexTable(counterLxm+1);	//Массив структур со словами (лексемами)
+		char compareINT[] = "integer";
+		char compareSTR[] = "string";
+		vector<IN_WORD> AlfaLexTable(sample.lxmCounter+1);	//Массив структур со словами (лексемами)
+		sample.AlfaLexTable = AlfaLexTable;
 
 		bool longLxm_symbol = false;	//N-ое количество символов превращаемое в лексему через граф
 		bool lxm_symbol = false;		//Лексема-символ
@@ -125,8 +127,10 @@ namespace In
 					out_text = new char[word_size + 1];
 					out_text[word_size] = PARM_NULL_STR;
 					strncpy(out_text, start, word_size);
-					counterLxm = getword(AlfaLexTable, out_text, position, sample.lines, counterLxm);
+					sample.lxmCounter = getword(sample.AlfaLexTable, out_text, position, sample.lines, sample.lxmCounter);
 					word_size = 0;
+					if (!strcmp(out_text,compareINT) || !strcmp(out_text, compareSTR))
+						sample.idntCouner++;
 					delete[] out_text;
 				}
 				if (lxm_symbol)
@@ -134,7 +138,7 @@ namespace In
 					out_text = new char[2];
 					out_text[1] = PARM_NULL_STR;
 					out_text[0] = txt_temp;
-					counterLxm = getword(AlfaLexTable, out_text, position, sample.lines, counterLxm);
+					sample.lxmCounter = getword(sample.AlfaLexTable, out_text, position, sample.lines, sample.lxmCounter);
 					delete[] out_text;
 				}
 			}
@@ -147,6 +151,7 @@ namespace In
 			throw ERROR_THROW(110);
 		}
 
+		sample.lxmCounter++;
 		sample.text[counter] = PARM_NULL_STR;
 		file.close();
 		return sample;
@@ -154,7 +159,8 @@ namespace In
 
 	int getword(vector<IN_WORD>& table, char* intext, int position, int line, int counter)
 	{
-		table[counter].text = intext;
+		table[counter].text = new char[strlen(intext)];
+		strcpy(table[counter].text, intext);
 		cout << table[counter].text << endl;
 		table[counter].position = position;
 		table[counter].line = line;

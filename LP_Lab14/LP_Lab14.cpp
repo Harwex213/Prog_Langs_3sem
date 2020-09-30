@@ -14,30 +14,15 @@ int wmain(int argc, wchar_t* argv[])
 		Log::WriteLog(log);
 		Log::WriteParm(log, parm);
 		In::IN in = In::getin(parm.in);
-		Automat::AUTOMAT automats;
-		char text[] = "integer";
-		char* string = text;
-		GRAPHES;
-		FST::FST graphArray[GRAPHS_SIZE] = { fst1, fst2, fst3, fst4, fst5, fst6, fst7, fst8, fst9, fst10 };
-		Automat::createAutomat(automats, graphArray);
-		FST::FST fstN = automats['i'];
-		cout << string << endl;
-		if (FST::execute(automats[string[0]]))
-			cout << "WE DONE IT\n";
-		else
-			cout << "F*CK\n";
-		char text1[] = "function";
-		string = text1;
-		cout << string << endl;
-		if (FST::execute(automats[string[0]]))
-			cout << "WE DONE IT\n";
-		else
-			cout << "F*CK\n";
+		LT::LexTable lexTable = LT::Create(in.lxmCounter);
+		IT::IdTable idTable = IT::Create(in.idntCouner);
+		Analysis::MakeAnalysis(lexTable, idTable);
 		Log::WriteIn(log, in);
 		Out::OUT out = Out::getout(parm.out);
 		Out::WriteAnalyze(out, in, log);
 		Log::Close(log);
 		Out::OutClose(out);
+		Delete(lexTable);
 		delete[] in.text;			//Удаляем использованную память
 	}
 	catch (Error::ERROR e)

@@ -5,7 +5,7 @@ namespace LT							// таблица лексем
 	LexTable Create(int size)			// создать таблицу лексем
 	{
 		if(size > LT_MAXSIZE)
-			throw ERROR_THROW(121);
+			throw ERROR_THROW(120);
 		LexTable sample;
 		sample.maxsize = size;
 		sample.current_size = 0;

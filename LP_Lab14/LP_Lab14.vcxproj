@@ -151,11 +151,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Analysis.cpp" />
     <ClCompile Include="Automat.cpp" />
     <ClCompile Include="Error.cpp" />
     <ClCompile Include="FST.cpp" />
-    <ClCompile Include="Graph.cpp" />
     <ClCompile Include="In.cpp" />
+    <ClCompile Include="IT.cpp" />
     <ClCompile Include="Log.cpp" />
     <ClCompile Include="LP_Lab14.cpp" />
     <ClCompile Include="LT.cpp" />
@@ -163,6 +164,7 @@
     <ClCompile Include="Parm.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Analysis.h" />
     <ClInclude Include="Automat.h" />
     <ClInclude Include="Error.h" />
     <ClInclude Include="FST.h" />

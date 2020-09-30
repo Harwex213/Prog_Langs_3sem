@@ -42,6 +42,13 @@
 
 namespace In
 {
+	struct IN_WORD
+	{
+		char* text; //Записываем лексему
+		int position = 1;	 //Позиция
+		int line = 1;		 //Строка
+	};
+
 	struct IN
 	{
 		int size = 0;
@@ -50,13 +57,9 @@ namespace In
 		unsigned char* text;
 		enum { L = 64, A = 128, S = 256, W = 512, T = 1024, F = 2048, I = 4096 };
 		int code[256] = IN_CODE_TABLE;
-	};
-
-	struct IN_WORD
-	{
-		char* text; //Записываем лексему
-		int position = 1;	 //Позиция
-		int line = 1;		 //Строка
+		std::vector<IN_WORD> AlfaLexTable;
+		int lxmCounter = 0;
+		int idntCouner = 0;
 	};
 
 	IN getin(wchar_t* infile);
