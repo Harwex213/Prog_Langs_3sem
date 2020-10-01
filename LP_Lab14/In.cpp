@@ -150,8 +150,6 @@ namespace In
 			file.close();
 			throw ERROR_THROW(110);
 		}
-
-		sample.lxmCounter++;
 		sample.text[counter] = PARM_NULL_STR;
 		file.close();
 		return sample;
@@ -161,7 +159,7 @@ namespace In
 	{
 		table[counter].text = new char[strlen(intext)];
 		strcpy(table[counter].text, intext);
-		cout << table[counter].text << endl;
+		//cout << table[counter].text << endl;
 		table[counter].position = position;
 		table[counter].line = line;
 		table.resize(++counter+1);

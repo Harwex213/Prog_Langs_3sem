@@ -31,21 +31,35 @@ namespace FST
 
 	struct FST
 	{
-		char** string;					//цепочка (строка, завершатся 0x00 ) 
+		char** string;					//цепочка (строка, завершатся 0x00 )
+		char lexema;					//возвращаемая лексема
 		short position = 0;					//текущая позиция в цепочке 
 		short nstates;						//количество состояний автомата
 		NODE* nodes;						//граф переходов: [0] -начальное состояние, [nstate-1]-конечное
-		short* rstates;						//возможные состояния автомата на данной позиции.
-		FST();
+		short* rstates;						//возможные состояния автомата на данной позиции
 		FST(
-			char* &s,					//цепочка (строка, завершатся 0x00 ) 
+			char* &s,					//цепочка (строка, завершатся 0x00 )
+			char lxm,
 			short ns,						//количество состояний автомата 
 			NODE n, ...						//список состояний (граф переходов)
 		);
+
+		void operator = (const FST& other)
+		{
+			this->string = other.string;
+			this->lexema = other.lexema;
+			this->position = other.position;
+			this->nstates = other.nstates;
+			this->nodes = new NODE[this->nstates];
+			this->nodes = other.nodes;
+			this->rstates = new short[this->nstates];
+			memset(this->rstates, 0xff, sizeof(short) * this->nstates);
+			this->rstates[0] = 0;
+		}
 	};
 
-	bool execute(							//выполнить распознавание цепочки 
-		FST& fst							//недетерминировнный конечный автомат
+	char execute(							//выполнить распознавание цепочки 
+		FST fst							//недетерминировнный конечный автомат
 	);
 
 };

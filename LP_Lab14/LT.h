@@ -10,24 +10,23 @@
 #define	LEX_DECLARE		'd'			// лексема для declare
 #define	LEX_RETURN		'r'			// лексема для return
 #define	LEX_PRINT		'p'			// лексема для print
+#define	LEX_MAIN		'm'			// лексема для main
 #define	LEX_SEMICOLON	';'			// лексема для ;
 #define	LEX_COMMA		','			// лексема для ,
-#define	LEX_LEFTBRACE	'{'			// лексема для {
-#define	LEX_RIGHTBRACE	'}'			// лексема для }
-#define	LEX_LEFTHESIS	'('			// лексема для (
-#define	LEX_RIGHTHESIS	')'			// лексема для )
-#define	LEX_PLUS		'v'			// лексема для +
-#define	LEX_MINUS		'v'			// лексема для -
-#define	LEX_STAR		'v'			// лексема для *
-#define	LEX_DIRSLASH	'v'			// лексема для /
+#define	LEX_LEFTBRACE	'('			// лексема для {
+#define	LEX_RIGHTBRACE	')'			// лексема для }
+#define	LEX_LEFTHESIS	'{'			// лексема для (
+#define	LEX_RIGHTHESIS	'}'			// лексема для )
+#define	LEX_COMPUTATION	'v'			// лексема для + - / *
 #define	LEX_EQUAL_SIGN	'='			// лексема для =
 
 namespace LT							// таблица лексем
 {
 	struct Entry						// строка таблицы лексем
 	{
-		char lexema[LEXEMA_FIXSIZE];	// лексема
+		char lexema[LEXEMA_FIXSIZE+1];	// лексема
 		int sn;							// номер строки в исходном тексте
+		int psn;
 		int idxTI;						// индекс в таблице идентификаторов или LT_TI_NULLIDX
 	};
 

@@ -15,8 +15,10 @@ namespace LT							// таблица лексем
 
 	void Add(LexTable& lextable, Entry entry)
 	{
+		strcpy(lextable.table[lextable.current_size].lexema, entry.lexema);
+		lextable.table[lextable.current_size].psn = entry.psn;
+		lextable.table[lextable.current_size].sn = entry.sn;
 		lextable.current_size++;
-		lextable.table[lextable.current_size] = entry;
 	};
 
 	Entry GetEntry(LexTable& lextable, int n)

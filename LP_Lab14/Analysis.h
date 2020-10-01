@@ -1,6 +1,7 @@
 #pragma once
 #include "IT.h"
 #include "LT.h"
+#include "In.h"
 
 namespace Analysis
 {
@@ -10,5 +11,5 @@ namespace Analysis
 		IT::IDDATATYPE idtype;
 	};
 
-	void MakeAnalysis(LT::LexTable& lxmTable, IT::IdTable& idTable);
+	void MakeAnalysis(In::IN in, LT::LexTable& lxmTable, IT::IdTable& idTable);
 }

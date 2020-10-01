@@ -11,7 +11,7 @@
 
 namespace IT	// таблица идентификатов
 {
-	enum IDDATATYPE { UNDEF = 0, INT = 1, STR = 2 };					// типы данных идентификаторов: integer, string
+	enum IDDATATYPE { UNDEF = 0, INT = 1, STR = 2 };				// типы данных идентификаторов: integer, string
 	enum IDTYPE { U = 0, V = 1, F = 2, P = 3, L = 4 };					// типы идентификаторов: переменная, функция, параметр, литерал
 
 
@@ -43,6 +43,5 @@ namespace IT	// таблица идентификатов
 	void Add(IdTable& idtable, Entry entry);
 	Entry GetEntry(IdTable& idtable, int n);
 	int IsId(IdTable& idtable, char id[ID_MAXSIZE]);
-	void PrintIdTable(const wchar_t* in);
 	void Delete(IdTable& idtable);
 }

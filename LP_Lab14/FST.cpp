@@ -19,16 +19,10 @@ namespace FST
 		relations = new RELATION[n];
 		for (int i = 0; i < n; ++i, ptr++)relations[i] = *ptr;
 	}
-	FST::FST()
-	{
-		string = NULL;
-		nstates = 0;
-		nodes = NULL;
-		rstates = 0;
-	}
-	FST::FST(char* &s, short ns, NODE n, ...)
+	FST::FST(char* &s, char lxm, short ns, NODE n, ...)
 	{
 		string = &s;
+		lexema = lxm;
 		nstates = ns;
 		nodes = new NODE[ns];
 		NODE* ptr = &n;
@@ -59,7 +53,7 @@ namespace FST
 		return rc;
 	};
 
-	bool execute(FST& fst)										// выполнить распознавание цепочки
+	char execute(FST fst)										// выполнить распознавание цепочки
 	{
 		short* rstates = new short[fst.nstates];
 		memset(rstates, 0xff, sizeof(short) * fst.nstates);
@@ -73,6 +67,8 @@ namespace FST
 		}
 
 		delete[] rstates;
-		return (rc ? (fst.rstates[fst.nstates - 1] == lstring) : rc);
+		if (!(fst.rstates[fst.nstates - 1] == lstring))
+			rc = false;
+		return (rc ? fst.lexema : LEX_ID);
 	}
 };
