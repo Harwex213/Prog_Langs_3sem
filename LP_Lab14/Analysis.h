@@ -9,6 +9,7 @@ namespace Analysis
 	{
 		IT::IDDATATYPE iddatatype;
 		IT::IDDATATYPE idtype;
+
 	};
 
 	void MakeAnalysis(In::IN in, LT::LexTable& lxmTable, IT::IdTable& idTable);

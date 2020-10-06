@@ -14,7 +14,7 @@
 	Табуляция && пробелы					- enum W (Whitespace)
 	& () * + , / ; <> =  ? 					- enum S (Separate)
 	А-Я а-я - . : @	^						- enum A (Allowed)
-	'										- enum L (Literal)
+	' 1-9									- enum L (Literal)
 
 	I - Ignor
 	F - False
@@ -57,9 +57,9 @@ namespace In
 		unsigned char* text;
 		enum { L = 64, A = 128, S = 256, W = 512, T = 1024, F = 2048, I = 4096 };
 		int code[256] = IN_CODE_TABLE;
-		std::vector<IN_WORD> AlfaLexTable;
 		int lxmCounter = 0;
 		int idntCouner = 0;
+		std::vector<IN_WORD> AlfaLexTable;
 	};
 
 	IN getin(wchar_t* infile);
