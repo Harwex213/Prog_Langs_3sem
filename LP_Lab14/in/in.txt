@@ -19,6 +19,7 @@ main
 declare integer substq;
 declare integer subste;
 declare integer z;
+z = 1;
 declare string sa;
 declare string sb;
 declare string sc;

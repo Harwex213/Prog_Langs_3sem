@@ -16,7 +16,7 @@ int wmain(int argc, wchar_t* argv[])
 		In::IN in = In::getin(parm.in);
 		LT::LexTable lexTable = LT::Create(in.lxmCounter);
 		IT::IdTable idTable = IT::Create(in.idntCouner);
-		Analysis::MakeAnalysis(in, lexTable, idTable);
+		Analysis::StartAnalysis(in, lexTable, idTable);
 		Log::WriteIn(log, in);
 		Out::OUT out = Out::getout(parm.out);
 		Out::WriteAnalyze(out, in, log);

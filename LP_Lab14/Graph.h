@@ -1,4 +1,5 @@
 #pragma once
+#include "LT.h"
 #define GRAPH_INT string, 8, \
 FST::NODE(1, FST::RELATION('i', 1)), \
 FST::NODE(1, FST::RELATION('n', 2)), \

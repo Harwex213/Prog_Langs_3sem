@@ -30,8 +30,13 @@ namespace FST
 
 	struct INTERIM_DATA
 	{
+		//lexema sector
 		char lexema;					//returnable lexema
-		IT::IDDATATYPE iddatatype;
+		int line;						//
+		int position;					//
+
+		//identificator sector
+		IT::IDDATATYPE iddatatype;		//
 		IT::IDTYPE idtype;
 	};
 

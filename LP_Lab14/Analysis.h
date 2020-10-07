@@ -6,6 +6,19 @@
 
 namespace Analysis
 {
-	void MakeAnalysis(In::IN in, LT::LexTable& lxmTable, IT::IdTable& idTable);
-	FST::INTERIM_DATA UpdateInterimData(const FST::FST& fst, FST::INTERIM_DATA idata);
+	void StartAnalysis(
+		In::IN in,					//Contain IN_WORDS
+		LT::LexTable& lxmTable,		//To fill lxmTable
+		IT::IdTable& idTable		//To fill idTable
+	);
+	
+	FST::INTERIM_DATA UpdateInterimData(
+		const FST::FST& fst,		//Contain unique for this fst interim datas
+		FST::INTERIM_DATA idata		//To fill interim data
+	);
+	
+	void CreateEntry(
+		FST::INTERIM_DATA idata,	//Contain interim data
+		LT::LexTable& lxmTable		//To fill lxmTable
+	);
 }

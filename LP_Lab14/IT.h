@@ -12,14 +12,14 @@
 namespace IT	// таблица идентификатов
 {
 	enum IDDATATYPE { UNDEF = 0, INT = 1, STR = 2 };				// типы данных идентификаторов: integer, string
-	enum IDTYPE { U = 0, V = 1, F = 2, GF = 3, P = 4, L = 5 };					// типы идентификаторов: переменная, функция, глобальная функция, параметр, литерал
+	enum IDTYPE { U = 0, P = 1, V = 2, F = 2, GF = 3, L = 5 };		// типы идентификаторов: переменная, функция, глобальная функция, параметр, литерал
 
 
 	struct Entry						// строка таблицы идентификаторов
 	{
 		int idxfirstLE;
 		char id[ID_MAXSIZE+1];			// идентификатор (автоматически усекается до ID_MAXSIZE
-		IDDATATYPE	iddatatype = UNDEF;			// тип данных
+		IDDATATYPE	iddatatype;			// тип данных
 		IDTYPE	idtype;					// тип идентикатора
 		union
 		{
