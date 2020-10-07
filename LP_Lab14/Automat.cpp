@@ -2,7 +2,7 @@
 
 namespace Automat
 {
-	FST::FST AUTOMAT::operator[] (const char index)
+	FST::FST& AUTOMAT::operator[] (const char index)
 	{
 		NULL_DATA;
 		NULL_STRING;
@@ -13,12 +13,5 @@ namespace Automat
 				return	KeyWord[sample.nodes[0].relations[j].nnode];
 		};
 		throw ERROR_THROW(121);
-	};
-
-	void fillAutomat(AUTOMAT& sample, char* string)
-	{
-		GRAPHES;
-		sample.KeyWord = graphArray;
-		/*sample.AutomatSelect = ;*/
 	};
 }

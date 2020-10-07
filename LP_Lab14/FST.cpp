@@ -19,7 +19,7 @@ namespace FST
 		relations = new RELATION[n];
 		for (int i = 0; i < n; ++i, ptr++)relations[i] = *ptr;
 	}
-	FST::FST(Analysis::INTERIM_DATA idata, char* &s, short ns, NODE n, ...)
+	FST::FST(INTERIM_DATA idata, char* &s, short ns, NODE n, ...)
 	{
 		interim_data = idata;
 		string = &s;
@@ -27,7 +27,7 @@ namespace FST
 		nodes = new NODE[ns];
 		NODE* ptr = &n;
 		for (int i = 0; i < ns; ++i)nodes[i] = ptr[i];
-		rstates = new short[ns];
+		rstates = new short[ns];								//why new?
 		memset(rstates, 0xff, sizeof(short) * nstates);
 		rstates[0] = 0;
 		position = -1;
@@ -53,7 +53,7 @@ namespace FST
 		return rc;
 	};
 
-	char execute(FST fst)										// выполнить распознавание цепочки
+	bool execute(FST& fst)				// выполнить распознавание цепочки
 	{
 		short* rstates = new short[fst.nstates];
 		memset(rstates, 0xff, sizeof(short) * fst.nstates);
@@ -67,8 +67,12 @@ namespace FST
 		}
 
 		delete[] rstates;
-		if (!(fst.rstates[fst.nstates - 1] == lstring))
-			rc = false;
-		return fst.interim_data.lexema;
+		if (rc)
+			if (!(fst.rstates[fst.nstates - 1] == lstring))
+				rc = false;
+		memset(fst.rstates, 0xff, sizeof(short) * fst.nstates);
+		fst.rstates[0] = 0;
+		fst.position = -1;
+		return rc;
 	}
 };

@@ -19,7 +19,7 @@ namespace IT	// таблица идентификатов
 	{
 		int idxfirstLE;
 		char id[ID_MAXSIZE+1];			// идентификатор (автоматически усекается до ID_MAXSIZE
-		IDDATATYPE	iddatatype;			// тип данных
+		IDDATATYPE	iddatatype = UNDEF;			// тип данных
 		IDTYPE	idtype;					// тип идентикатора
 		union
 		{
@@ -30,6 +30,7 @@ namespace IT	// таблица идентификатов
 				char str[TI_STR_MAXSIZE - 1];	// символы string
 			} vstr[TI_STR_MAXSIZE];	// значение string
 		}value;	// значение идентификатора
+
 	};
 
 	struct IdTable // экземпляр таблицы идентификаторов

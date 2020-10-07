@@ -81,31 +81,6 @@ namespace In
 					position++;
 					sample.size++;
 					break;
-				//case IN::L:
-				//	if (txt_temp == '\'')
-				//		if (!ltrl_in)	ltrl_in = true;
-				//		else			ltrl_in = false;
-				//	if (!longLxm_symbol)
-				//		start = (char*)(sample.text + counter);
-				//	word_size++;
-				//	longLxm_symbol = true;
-				//	lxm_symbol = false;
-				//	space_symbol = false;
-				//	sample.text[counter++] = txt_temp;
-				//	position++;
-				//	sample.size++;
-				//	break;
-				//case IN::A:
-				//	if (ltrl_in)
-				//	{
-				//		sample.text[counter++] = txt_temp;
-				//		word_size++;
-				//	}
-				//	else
-				//		throw ERROR_THROW_IN(111, sample.lines, position);
-				//	position++;
-				//	sample.size++;
-				//	break;
 				case IN::F:
 					position++;
 					throw ERROR_THROW_IN(111, sample.lines, position);
@@ -124,7 +99,7 @@ namespace In
 					else
 						sample.text[counter++] = sample.code[txt_temp];
 					position = 0;
-					sample.lines++;
+					
 					break;
 				}
 				if (!long_symbols && word_size != 0)
@@ -146,6 +121,8 @@ namespace In
 					sample.lxmCounter = getword(sample.AlfaLexTable, out_text, position, sample.lines, sample.lxmCounter);
 					delete[] out_text;
 				}
+				if (txt_temp == '\n')
+					sample.lines++;
 			}
 			if (!chek_file)
 				throw ERROR_THROW(113)

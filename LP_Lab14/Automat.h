@@ -8,8 +8,6 @@ namespace Automat
 	{
 		FST::FST* KeyWord = NULL;
 
-		FST::FST operator[] (const char index);
+		FST::FST& operator[] (const char index);
 	};
-
-	void fillAutomat(AUTOMAT& sample, char* string);
 }

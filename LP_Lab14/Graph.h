@@ -297,24 +297,24 @@ FST::NODE(GRAPH_SELECT_SIZE, \
 	FST::RELATION('=', ASSIGN_INDEX))
 
 #define GRAPHES \
-Analysis::INTERIM_DATA idata1  = { LEX_INTEGER,	   IT::INT,		IT::P };\
-Analysis::INTERIM_DATA idata2  = { LEX_STRING,	   IT::STR,		IT::P };\
-Analysis::INTERIM_DATA idata3  = { LEX_FUNCTION,	   IT::UNDEF,	IT::F };\
-Analysis::INTERIM_DATA idata4  = { LEX_DECLARE,	   IT::UNDEF,	IT::V };\
-Analysis::INTERIM_DATA idata5  = { LEX_RETURN,	   IT::UNDEF,	IT::U };\
-Analysis::INTERIM_DATA idata6  = { LEX_PRINT,	   IT::UNDEF,	IT::U };\
-Analysis::INTERIM_DATA idata7  = { LEX_MAIN,		   IT::UNDEF,	IT::U };\
-Analysis::INTERIM_DATA idata8  = { LEX_SEMICOLON,   IT::UNDEF,	IT::U };\
-Analysis::INTERIM_DATA idata9  = { LEX_COMMA,	   IT::UNDEF,	IT::U };\
-Analysis::INTERIM_DATA idata10 = { LEX_LEFTHESIS,   IT::UNDEF,	IT::U };\
-Analysis::INTERIM_DATA idata11 = { LEX_RIGHTHESIS,  IT::UNDEF,	IT::U };\
-Analysis::INTERIM_DATA idata12 = { LEX_LEFTBRACE,   IT::UNDEF,	IT::U };\
-Analysis::INTERIM_DATA idata13 = { LEX_RIGHTBRACE,  IT::UNDEF,	IT::U };\
-Analysis::INTERIM_DATA idata14 = { LEX_LITERAL,	   IT::UNDEF,	IT::L };\
-Analysis::INTERIM_DATA idata15 = { LEX_LITERAL,	   IT::UNDEF,	IT::L };\
-Analysis::INTERIM_DATA idata16 = { LEX_COMPUTATION, IT::UNDEF,	IT::U };\
-Analysis::INTERIM_DATA idata17 = { LEX_EQUAL_SIGN,  IT::UNDEF,	IT::U };\
-Analysis::INTERIM_DATA idata18 = { LEX_ID,		   IT::UNDEF,	IT::U };\
+FST::INTERIM_DATA idata1  = { LEX_INTEGER,	   IT::INT,		IT::P };\
+FST::INTERIM_DATA idata2  = { LEX_STRING,	   IT::STR,		IT::P };\
+FST::INTERIM_DATA idata3  = { LEX_FUNCTION,	   IT::UNDEF,	IT::F };\
+FST::INTERIM_DATA idata4  = { LEX_DECLARE,	   IT::UNDEF,	IT::V };\
+FST::INTERIM_DATA idata5  = { LEX_RETURN,	   IT::UNDEF,	IT::U };\
+FST::INTERIM_DATA idata6  = { LEX_PRINT,	   IT::UNDEF,	IT::U };\
+FST::INTERIM_DATA idata7  = { LEX_MAIN,		   IT::UNDEF,	IT::U };\
+FST::INTERIM_DATA idata8  = { LEX_SEMICOLON,   IT::UNDEF,	IT::U };\
+FST::INTERIM_DATA idata9  = { LEX_COMMA,	   IT::UNDEF,	IT::U };\
+FST::INTERIM_DATA idata10 = { LEX_LEFTHESIS,   IT::UNDEF,	IT::U };\
+FST::INTERIM_DATA idata11 = { LEX_RIGHTHESIS,  IT::UNDEF,	IT::U };\
+FST::INTERIM_DATA idata12 = { LEX_LEFTBRACE,   IT::UNDEF,	IT::U };\
+FST::INTERIM_DATA idata13 = { LEX_RIGHTBRACE,  IT::UNDEF,	IT::U };\
+FST::INTERIM_DATA idata14 = { LEX_LITERAL,	   IT::UNDEF,	IT::L };\
+FST::INTERIM_DATA idata15 = { LEX_LITERAL,	   IT::UNDEF,	IT::L };\
+FST::INTERIM_DATA idata16 = { LEX_COMPUTATION, IT::UNDEF,	IT::U };\
+FST::INTERIM_DATA idata17 = { LEX_EQUAL_SIGN,  IT::UNDEF,	IT::U };\
+FST::INTERIM_DATA idata18 = { LEX_ID,		   IT::UNDEF,	IT::U };\
 FST::FST fst1(idata1, GRAPH_INT); \
 FST::FST fst2(idata2, GRAPH_STR); \
 FST::FST fst3(idata3, GRAPH_FUN); \
@@ -333,4 +333,4 @@ FST::FST fst15(idata15, GRAPH_LTRL_STR); \
 FST::FST fst16(idata16, GRAPH_COMPUTATION); \
 FST::FST fst17(idata17, GRAPH_ASSIGN); \
 FST::FST fst18(idata18, GRAPH_IDENTIFY); \
-FST::FST graphArray[GRAPHS_SIZE] = { fst1, fst2, fst3, fst4, fst5, fst6, fst7, fst8, fst9, fst10, fst11, fst12, fst13, fst14, fst15, fst16, fst17, fst18 };
+FST::FST* graphArray = new FST::FST[GRAPHS_SIZE]{ fst1, fst2, fst3, fst4, fst5, fst6, fst7, fst8, fst9, fst10, fst11, fst12, fst13, fst14, fst15, fst16, fst17, fst18 };
