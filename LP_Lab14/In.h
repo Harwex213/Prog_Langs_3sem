@@ -1,5 +1,4 @@
 #pragma once
-#include "LT.h"
 #include <vector>
 #pragma warning(disable: 4996)
 

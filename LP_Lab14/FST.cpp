@@ -19,10 +19,10 @@ namespace FST
 		relations = new RELATION[n];
 		for (int i = 0; i < n; ++i, ptr++)relations[i] = *ptr;
 	}
-	FST::FST(char* &s, char lxm, short ns, NODE n, ...)
+	FST::FST(Analysis::INTERIM_DATA idata, char* &s, short ns, NODE n, ...)
 	{
+		interim_data = idata;
 		string = &s;
-		lexema = lxm;
 		nstates = ns;
 		nodes = new NODE[ns];
 		NODE* ptr = &n;
@@ -69,6 +69,6 @@ namespace FST
 		delete[] rstates;
 		if (!(fst.rstates[fst.nstates - 1] == lstring))
 			rc = false;
-		return (rc ? fst.lexema : LEX_ID);
+		return fst.interim_data.lexema;
 	}
 };

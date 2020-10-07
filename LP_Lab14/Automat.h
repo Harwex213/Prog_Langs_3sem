@@ -1,5 +1,6 @@
 #pragma once
 #include "FST.h"
+#include "IT.h"
 
 namespace Automat
 {
@@ -10,5 +11,5 @@ namespace Automat
 		FST::FST operator[] (const char index);
 	};
 
-	void createAutomat(AUTOMAT& sample, FST::FST array[]);
+	void fillAutomat(AUTOMAT& sample, char* string);
 }

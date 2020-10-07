@@ -1,7 +1,5 @@
 #pragma once
-#include "FST.h"
-#include "LT.h"
-#define GRAPH_INT string, LEX_INTEGER, 8, \
+#define GRAPH_INT string, 8, \
 FST::NODE(1, FST::RELATION('i', 1)), \
 FST::NODE(1, FST::RELATION('n', 2)), \
 FST::NODE(1, FST::RELATION('t', 3)), \
@@ -11,7 +9,7 @@ FST::NODE(1, FST::RELATION('e', 6)), \
 FST::NODE(1, FST::RELATION('r', 7)), \
 FST::NODE()
 
-#define GRAPH_STR string, LEX_STRING, 7, \
+#define GRAPH_STR string, 7, \
 FST::NODE(1, FST::RELATION('s', 1)), \
 FST::NODE(1, FST::RELATION('t', 2)), \
 FST::NODE(1, FST::RELATION('r', 3)), \
@@ -20,7 +18,7 @@ FST::NODE(1, FST::RELATION('n', 5)), \
 FST::NODE(1, FST::RELATION('g', 6)), \
 FST::NODE()
 
-#define GRAPH_FUN string, LEX_FUNCTION, 9, \
+#define GRAPH_FUN string, 9, \
 FST::NODE(1, FST::RELATION('f', 1)), \
 FST::NODE(1, FST::RELATION('u', 2)), \
 FST::NODE(1, FST::RELATION('n', 3)), \
@@ -31,7 +29,7 @@ FST::NODE(1, FST::RELATION('o', 7)), \
 FST::NODE(1, FST::RELATION('n', 8)), \
 FST::NODE()
 
-#define GRAPH_DEC string, LEX_DECLARE, 8, \
+#define GRAPH_DEC string, 8, \
 FST::NODE(1, FST::RELATION('d', 1)), \
 FST::NODE(1, FST::RELATION('e', 2)), \
 FST::NODE(1, FST::RELATION('c', 3)), \
@@ -41,7 +39,7 @@ FST::NODE(1, FST::RELATION('r', 6)), \
 FST::NODE(1, FST::RELATION('e', 7)), \
 FST::NODE()
 
-#define GRAPH_RET string, LEX_RETURN, 7, \
+#define GRAPH_RET string, 7, \
 FST::NODE(1, FST::RELATION('r', 1)), \
 FST::NODE(1, FST::RELATION('e', 2)), \
 FST::NODE(1, FST::RELATION('t', 3)), \
@@ -50,7 +48,7 @@ FST::NODE(1, FST::RELATION('r', 5)), \
 FST::NODE(1, FST::RELATION('n', 6)), \
 FST::NODE()
 
-#define GRAPH_PRINT string, LEX_PRINT, 6, \
+#define GRAPH_PRINT string, 6, \
 FST::NODE(1, FST::RELATION('p', 1)), \
 FST::NODE(1, FST::RELATION('r', 2)), \
 FST::NODE(1, FST::RELATION('i', 3)), \
@@ -58,42 +56,42 @@ FST::NODE(1, FST::RELATION('n', 4)), \
 FST::NODE(1, FST::RELATION('t', 5)), \
 FST::NODE()
 
-#define GRAPH_MAIN string, LEX_MAIN, 5, \
+#define GRAPH_MAIN string, 5, \
 FST::NODE(1, FST::RELATION('m', 1)), \
 FST::NODE(1, FST::RELATION('a', 2)), \
 FST::NODE(1, FST::RELATION('i', 3)), \
 FST::NODE(1, FST::RELATION('n', 4)), \
 FST::NODE()
 
-#define GRAPH_SEMICOLON string, LEX_SEMICOLON, 1, \
+#define GRAPH_SEMICOLON string, 1, \
 FST::NODE(1, FST::RELATION(';', 0))
 
-#define GRAPH_COMMA string, LEX_COMMA, 1, \
+#define GRAPH_COMMA string, 1, \
 FST::NODE(1, FST::RELATION(',', 0))
 
-#define GRAPH_PARENTHESES_LEFT string, LEX_LEFTHESIS, 1, \
+#define GRAPH_PARENTHESES_LEFT string, 1, \
 FST::NODE(1, FST::RELATION('{', 0))
 
-#define GRAPH_PARENTHESES_RIGHT string, LEX_RIGHTHESIS, 1, \
+#define GRAPH_PARENTHESES_RIGHT string, 1, \
 FST::NODE(1, FST::RELATION('}', 0))
 
-#define GRAPH_BRACES_LEFT string, LEX_LEFTBRACE, 1, \
+#define GRAPH_BRACES_LEFT string, 1, \
 FST::NODE(1, FST::RELATION('(', 0))
 
-#define GRAPH_BRACES_RIGHT string, LEX_RIGHTBRACE, 1, \
+#define GRAPH_BRACES_RIGHT string, 1, \
 FST::NODE(1, FST::RELATION(')', 0))
 
-#define GRAPH_COMPUTATION string, LEX_COMPUTATION, 1, \
+#define GRAPH_COMPUTATION string, 1, \
 FST::NODE(4, \
 	FST::RELATION('+', 0), \
 	FST::RELATION('-', 0), \
 	FST::RELATION('/', 0), \
 	FST::RELATION('*', 0))
 
-#define GRAPH_ASSIGN string, LEX_EQUAL_SIGN, 1, \
+#define GRAPH_ASSIGN string, 1, \
 FST::NODE(1, FST::RELATION('=', 0))
 
-#define GRAPH_LTRL_INT string, LEX_LITERAL, 1, \
+#define GRAPH_LTRL_INT string, 1, \
 FST::NODE(10, \
 	FST::RELATION('1', 0), \
 	FST::RELATION('2', 0), \
@@ -106,7 +104,7 @@ FST::NODE(10, \
 	FST::RELATION('9', 0), \
 	FST::RELATION('0', 0))
 
-#define GRAPH_LTRL_STR string, LEX_LITERAL, 3, \
+#define GRAPH_LTRL_STR string, 3, \
 FST::NODE(1, FST::RELATION('\'', 1)), \
 FST::NODE(86, \
 	FST::RELATION(' ', 1), \
@@ -195,7 +193,7 @@ FST::NODE(86, \
 	FST::RELATION('\'', 2)), \
 	FST::NODE()
 
-#define GRAPH_IDENTIFY string, LEX_ID, 1, \
+#define GRAPH_IDENTIFY string, 1, \
 FST::NODE(27, \
 	FST::RELATION('a', 0), \
 	FST::RELATION('b', 0), \
@@ -244,9 +242,10 @@ FST::NODE(27, \
 #define ASSIGN_INDEX 16
 #define IDENTIFY_INDEX 17
 #define GRAPHS_SIZE 18
+#define GRAPH_SELECT_SIZE 49
 
-#define GRAPH_SELECT nothing, '\0', 1, \
-FST::NODE(50, \
+#define GRAPH_SELECT nullData, nothing, 1, \
+FST::NODE(GRAPH_SELECT_SIZE, \
 	FST::RELATION('i', INTEGER_INDEX), \
 	FST::RELATION('s', STRING_INDEX), \
 	FST::RELATION('f', FUNCTION_INDEX), \
@@ -273,7 +272,6 @@ FST::NODE(50, \
 	FST::RELATION('x', IDENTIFY_INDEX), \
 	FST::RELATION('y', IDENTIFY_INDEX), \
 	FST::RELATION('z', IDENTIFY_INDEX), \
-	FST::RELATION('_', IDENTIFY_INDEX), \
 	FST::RELATION(';', SEMICOLON_INDEX), \
 	FST::RELATION(',', COMMA_INDEX), \
 	FST::RELATION('{', PARENTHESES_LEFT_INDEX), \
@@ -299,22 +297,40 @@ FST::NODE(50, \
 	FST::RELATION('=', ASSIGN_INDEX))
 
 #define GRAPHES \
-FST::FST fst1(GRAPH_INT); \
-FST::FST fst2(GRAPH_STR); \
-FST::FST fst3(GRAPH_FUN); \
-FST::FST fst4(GRAPH_DEC); \
-FST::FST fst5(GRAPH_RET); \
-FST::FST fst6(GRAPH_PRINT); \
-FST::FST fst7(GRAPH_MAIN); \
-FST::FST fst8(GRAPH_SEMICOLON); \
-FST::FST fst9(GRAPH_COMMA); \
-FST::FST fst10(GRAPH_PARENTHESES_LEFT); \
-FST::FST fst11(GRAPH_PARENTHESES_RIGHT); \
-FST::FST fst12(GRAPH_BRACES_LEFT); \
-FST::FST fst13(GRAPH_BRACES_RIGHT); \
-FST::FST fst14(GRAPH_LTRL_INT); \
-FST::FST fst15(GRAPH_LTRL_STR); \
-FST::FST fst16(GRAPH_COMPUTATION); \
-FST::FST fst17(GRAPH_ASSIGN); \
-FST::FST fst18(GRAPH_IDENTIFY); \
-FST::FST graphArray[GRAPHS_SIZE] = { fst1, fst2, fst3, fst4, fst5, fst6, fst7, fst8, fst9, fst10, fst11, fst12, fst13, fst14, fst15, fst16, fst17, fst18};
+Analysis::INTERIM_DATA idata1  = { LEX_INTEGER,	   IT::INT,		IT::P };\
+Analysis::INTERIM_DATA idata2  = { LEX_STRING,	   IT::STR,		IT::P };\
+Analysis::INTERIM_DATA idata3  = { LEX_FUNCTION,	   IT::UNDEF,	IT::F };\
+Analysis::INTERIM_DATA idata4  = { LEX_DECLARE,	   IT::UNDEF,	IT::V };\
+Analysis::INTERIM_DATA idata5  = { LEX_RETURN,	   IT::UNDEF,	IT::U };\
+Analysis::INTERIM_DATA idata6  = { LEX_PRINT,	   IT::UNDEF,	IT::U };\
+Analysis::INTERIM_DATA idata7  = { LEX_MAIN,		   IT::UNDEF,	IT::U };\
+Analysis::INTERIM_DATA idata8  = { LEX_SEMICOLON,   IT::UNDEF,	IT::U };\
+Analysis::INTERIM_DATA idata9  = { LEX_COMMA,	   IT::UNDEF,	IT::U };\
+Analysis::INTERIM_DATA idata10 = { LEX_LEFTHESIS,   IT::UNDEF,	IT::U };\
+Analysis::INTERIM_DATA idata11 = { LEX_RIGHTHESIS,  IT::UNDEF,	IT::U };\
+Analysis::INTERIM_DATA idata12 = { LEX_LEFTBRACE,   IT::UNDEF,	IT::U };\
+Analysis::INTERIM_DATA idata13 = { LEX_RIGHTBRACE,  IT::UNDEF,	IT::U };\
+Analysis::INTERIM_DATA idata14 = { LEX_LITERAL,	   IT::UNDEF,	IT::L };\
+Analysis::INTERIM_DATA idata15 = { LEX_LITERAL,	   IT::UNDEF,	IT::L };\
+Analysis::INTERIM_DATA idata16 = { LEX_COMPUTATION, IT::UNDEF,	IT::U };\
+Analysis::INTERIM_DATA idata17 = { LEX_EQUAL_SIGN,  IT::UNDEF,	IT::U };\
+Analysis::INTERIM_DATA idata18 = { LEX_ID,		   IT::UNDEF,	IT::U };\
+FST::FST fst1(idata1, GRAPH_INT); \
+FST::FST fst2(idata2, GRAPH_STR); \
+FST::FST fst3(idata3, GRAPH_FUN); \
+FST::FST fst4(idata4, GRAPH_DEC); \
+FST::FST fst5(idata5, GRAPH_RET); \
+FST::FST fst6(idata6, GRAPH_PRINT); \
+FST::FST fst7(idata7, GRAPH_MAIN); \
+FST::FST fst8(idata8, GRAPH_SEMICOLON); \
+FST::FST fst9(idata9, GRAPH_COMMA); \
+FST::FST fst10(idata10, GRAPH_PARENTHESES_LEFT); \
+FST::FST fst11(idata11, GRAPH_PARENTHESES_RIGHT); \
+FST::FST fst12(idata12, GRAPH_BRACES_LEFT); \
+FST::FST fst13(idata13, GRAPH_BRACES_RIGHT); \
+FST::FST fst14(idata14, GRAPH_LTRL_INT); \
+FST::FST fst15(idata15, GRAPH_LTRL_STR); \
+FST::FST fst16(idata16, GRAPH_COMPUTATION); \
+FST::FST fst17(idata17, GRAPH_ASSIGN); \
+FST::FST fst18(idata18, GRAPH_IDENTIFY); \
+FST::FST graphArray[GRAPHS_SIZE] = { fst1, fst2, fst3, fst4, fst5, fst6, fst7, fst8, fst9, fst10, fst11, fst12, fst13, fst14, fst15, fst16, fst17, fst18 };
