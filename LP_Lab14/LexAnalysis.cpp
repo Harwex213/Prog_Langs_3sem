@@ -11,10 +11,21 @@ namespace LexAnalysis
 		//«аписываем полученные данные в таблицу лексем
 
 		char* string = NULL;
+		Automat::AUTOMAT automats;
+		GRAPHES;
+		automats.KeyWord = graphArray;
+		LT::Entry entry;
 
 		for (int i = 0; i < in.lexCounter; i++)
 		{
-			//in.alfaLxmTable[i];
+			string = in.alfaLxmTable[i].text;
+			entry.psn = in.alfaLxmTable[i].position;
+			entry.sn = in.alfaLxmTable[i].line;
+			entry.lexema[LEXEMA_FIXSIZE] = IN_NULL_STR;
+			if (true)
+			{
+
+			}
 		}
 	};
 

@@ -19,8 +19,9 @@ namespace FST
 		relations = new RELATION[n];
 		for (int i = 0; i < n; ++i, ptr++)relations[i] = *ptr;
 	}
-	FST::FST(char* &s, short ns, NODE n, ...)
+	FST::FST(const char lxm, char* &s, short ns, NODE n, ...)
 	{
+		lexema = lxm;
 		string = &s;
 		nstates = ns;
 		nodes = new NODE[ns];
