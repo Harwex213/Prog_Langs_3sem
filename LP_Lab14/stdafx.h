@@ -19,6 +19,6 @@
 #include "Parm.h"
 #include "Automat.h"
 #include "Graph.h"
-#include "Analysis.h"
+#include "LexAnalysis.h"
 
 using namespace std;

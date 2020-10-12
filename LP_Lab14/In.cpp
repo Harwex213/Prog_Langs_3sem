@@ -136,18 +136,18 @@ namespace In
 
 	void addword(IN& in, PARSED_WORDS entry)
 	{
-		if (in.lxmCounter > LT_MAXSIZE)
+		if (in.lexCounter > LT_MAXSIZE)
 			expandAlfaLxmTable(in);
-		in.alfaLxmTable[in.lxmCounter].line = entry.line;
-		in.alfaLxmTable[in.lxmCounter].position = entry.position;
+		in.alfaLxmTable[in.lexCounter].line = entry.line;
+		in.alfaLxmTable[in.lexCounter].position = entry.position;
 		if (entry.text != NULL)
 		{
-			in.alfaLxmTable[in.lxmCounter].text = new char[strlen(entry.text)];
-			strcpy(in.alfaLxmTable[in.lxmCounter].text, entry.text);
+			in.alfaLxmTable[in.lexCounter].text = new char[strlen(entry.text)];
+			strcpy(in.alfaLxmTable[in.lexCounter].text, entry.text);
 		}
 		else
 			cout << "\nFound NULL in function 'addword' while chek 'entry.text'\n";
-		in.lxmCounter++;
+		in.lexCounter++;
 	};
 
 	void expandAlfaLxmTable(IN& in)

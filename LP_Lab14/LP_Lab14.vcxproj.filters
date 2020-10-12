@@ -83,7 +83,7 @@
     <ClInclude Include="Automat.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="Analysis.h">
+    <ClInclude Include="LexAnalysis.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
   </ItemGroup>
