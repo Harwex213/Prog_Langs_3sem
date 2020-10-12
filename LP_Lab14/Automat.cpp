@@ -4,8 +4,7 @@ namespace Automat
 {
 	FST::FST& AUTOMAT::operator[] (const char index)
 	{
-		NULL_DATA;
-		NULL_STRING;
+		char* nothing = NULL;
 		FST::FST sample(GRAPH_SELECT); //можно сунуть в struct AUTOMAT
 		for (short j = 0; j < sample.nodes[0].n_relation; j++)
 		{

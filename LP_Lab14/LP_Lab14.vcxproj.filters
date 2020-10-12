@@ -42,10 +42,10 @@
     <ClCompile Include="Automat.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="Analysis.cpp">
+    <ClCompile Include="IT.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="IT.cpp">
+    <ClCompile Include="LexAnalysis.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
   </ItemGroup>

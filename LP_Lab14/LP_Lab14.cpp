@@ -15,9 +15,9 @@ int wmain(int argc, wchar_t* argv[])
 		Log::WriteParm(log, parm);
 		In::IN in = In::getin(parm.in);
 		LT::LexTable lexTable = LT::Create(in.lexCounter);
-		//LexAnalysis::FillLexTable(in, lexTable);
+		LexAnalysis::FillLexTable(in, lexTable);
 		IT::IdTable idTable = IT::Create(in.idCounter);
-		//LexAnalysis::FillIdTable(in, idTable);
+		LexAnalysis::FillIdTable(in, lexTable, idTable);
 		Log::WriteIn(log, in);
 		Out::OUT out = Out::getout(parm.out);
 		Out::WriteAnalyze(out, in, log);

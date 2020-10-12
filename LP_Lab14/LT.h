@@ -36,6 +36,7 @@ namespace LT							// таблица лексем
 		int current_size;				// текущий размер таблицы лексем < maxsize
 		Entry* table;					// массив строк таблицы лексем
 	};
+
 	LexTable Create(int size);					// создать таблицу лексем
 	void Add(LexTable& lextable, Entry entry);	// добавление лексем
 	Entry GetEntry(LexTable& lextable, int n);	// получить строку таблицы лексем

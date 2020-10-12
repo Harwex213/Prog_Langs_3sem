@@ -3,10 +3,6 @@
 #include <tchar.h>
 #include "IT.h"
 
-#define NULL_STRING	char* nothing = NULL;
-#define NULL_DATA	FST::UNIQUE_DATA nullData = { '\0', IT::UNDEF, IT::U };
-
-
 namespace FST
 {
 	struct RELATION								// ребро :символ->вершина графа переходов КА
@@ -28,24 +24,14 @@ namespace FST
 		);
 	};
 
-	struct UNIQUE_DATA
-	{
-		//lexema sector
-		char lexema;					//returnable lexema
-		IT::IDDATATYPE iddatatype;
-		IT::IDTYPE idtype;
-	};
-
 	struct FST
 	{
 		char** string;							//цепочка (строка, завершатся 0x00 )
-		UNIQUE_DATA interim_data;
 		short position = 0;						//текущая позиция в цепочке 
 		short nstates;							//количество состояний автомата
 		NODE* nodes;							//граф переходов: [0] -начальное состояние, [nstate-1]-конечное
 		short* rstates;							//возможные состояния автомата на данной позиции
 		FST(
-			UNIQUE_DATA idata,
 			char* &s,							//цепочка (строка, завершатся 0x00 )
 			short ns,							//количество состояний автомата 
 			NODE n, ...							//список состояний (граф переходов)

@@ -151,7 +151,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Analysis.cpp" />
+    <ClCompile Include="LexAnalysis.cpp" />
     <ClCompile Include="Automat.cpp" />
     <ClCompile Include="Error.cpp" />
     <ClCompile Include="FST.cpp" />
