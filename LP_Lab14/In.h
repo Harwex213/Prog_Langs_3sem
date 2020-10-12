@@ -6,7 +6,7 @@
 #define IN_CODE_ENDL	'\n'
 #define	IN_VERT_LINE	'|'
 #define	IN_WHITE_SPACE  ' '
-#define	PARM_NULL_STR	'\0'
+#define	IN_NULL_STR	'\0'
 
 /*	ALLOWED SYMBOLS:
 	a-Z A-Z _								- enum T (True)
@@ -41,26 +41,28 @@
 
 namespace In
 {
-	struct IN_WORD
+	struct PARSED_WORDS
 	{
-		char* text; //Записываем лексему
-		int position = 1;	 //Позиция
-		int line = 1;		 //Строка
+		char* text;			 //word
+		int position = 1;	 //Position of word
+		int line = 1;		 //Line of word
 	};
 
 	struct IN
 	{
-		int size = 0;
-		int ignor = 0;
-		int	lines = 1;
+		int size = 0;		//symbols amount of in_text
+		int ignor = 0;		//ingored symbols
+		int	lines = 1;		//how many lines in in_text
 		unsigned char* text;
 		enum { L = 64, A = 128, S = 256, W = 512, T = 1024, F = 2048, I = 4096 };
 		int code[256] = IN_CODE_TABLE;
+
+		int overageAmount = 0;
 		int lxmCounter = 0;
-		int idntCouner = 0;
-		std::vector<IN_WORD> AlfaLexTable;
+		PARSED_WORDS* alfaLxmTable;
 	};
 
 	IN getin(wchar_t* infile);
-	int getword(std::vector<IN_WORD>& table, char* intext, int position, int line, int counter);
+	void addword(IN& in, PARSED_WORDS entry);
+	void expandAlfaLxmTable(IN& in);
 }

@@ -14,15 +14,15 @@ int wmain(int argc, wchar_t* argv[])
 		Log::WriteLog(log);
 		Log::WriteParm(log, parm);
 		In::IN in = In::getin(parm.in);
-		LT::LexTable lexTable = LT::Create(in.lxmCounter);
-		IT::IdTable idTable = IT::Create(in.idntCouner);
-		Analysis::StartAnalysis(in, lexTable, idTable);
+		//LT::LexTable lexTable = LT::Create(in.lxmCounter);
+		//IT::IdTable idTable = IT::Create(in.idntCouner);
+		//Analysis::StartAnalysis(in, lexTable, idTable);
 		Log::WriteIn(log, in);
 		Out::OUT out = Out::getout(parm.out);
 		Out::WriteAnalyze(out, in, log);
 		Log::Close(log);
 		Out::OutClose(out);
-		Delete(lexTable);
+		//Delete(lexTable);
 		delete[] in.text;			//Удаляем использованную память
 	}
 	catch (Error::ERROR e)

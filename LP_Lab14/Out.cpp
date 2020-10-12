@@ -41,13 +41,13 @@ namespace Out
 		while (i < in.size)
 		{
 			start = (char*)(in.text+i);
-			while (!(in.text[i] == IN_VERT_LINE || in.text[i] == PARM_NULL_STR))
+			while (!(in.text[i] == IN_VERT_LINE || in.text[i] == IN_NULL_STR))
 			{
 				chain_size++;
 				i++;
 			}
 			out_text = new char[chain_size+1];
-			out_text[chain_size] = PARM_NULL_STR;
+			out_text[chain_size] = IN_NULL_STR;
 			strncpy(out_text, start, chain_size);
 			FST::NODE(1, FST::RELATION('a', 1));
 			/*fst = { 

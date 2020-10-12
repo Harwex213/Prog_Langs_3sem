@@ -4,30 +4,26 @@ namespace In
 {
 	IN getin(wchar_t* infile)
 	{
-		//Задаём параметры IN sample (общий размер, строки, игнорируемые, массив для записи кода)
+		//Set IN struct
 		IN sample;
 		sample.text = new unsigned char[IN_MAX_LEN_TEXT];
+		sample.alfaLxmTable = new PARSED_WORDS[LT_MAXSIZE];
 		ifstream file(infile);
 
-		//Блок временных переменных
-		char unsigned txt_temp;			//Посимвольное чтение
-		int  position = 0;				//Позиция (для вывода ошибок)
-		int	 counter  = 0;				//Счётчик для записи количества входных символов
+		//Block of temporary variables
+		char unsigned txt_temp;			//Character-by-character reading
+		int  position = 0;				//Position for ERRORs
+		int	 counter  = 0;				//Counter for in.text
 		
-		char* start = NULL;				//Переменная для разбивки слов
-		int word_size = 0;				//Подсчёт длины слова
-		char* out_text = NULL;
+		char* start = NULL;				//Pointer for split word
+		int word_size = 0;				//Counter of spliting word
+		PARSED_WORDS entry;				//Structure to add in alfaLxmTable
 
-		char compareINT[] = "integer";
-		char compareSTR[] = "string";
-		vector<IN_WORD> AlfaLexTable(sample.lxmCounter+1);	//Массив структур со словами (лексемами)
-		sample.AlfaLexTable = AlfaLexTable;
-
-		bool long_symbols = false;		//Много символов
-		bool single_symbols = false;	//Одиночный символ
-		bool space_symbol = false;		//Пробел
-		bool ltrl_in = false;			//Находимся ли в литерале
-		bool chek_file = false;			//Проверка пустоты файла
+		bool trueLongSmbl = false;		//There are many symbols
+		bool trueSignleSmbl = false;	//It's single symbols
+		bool space_symbol = false;		//Whitespace
+		bool ltrl_in = false;			//Are we in literal?
+		bool chek_file = false;			//Checking if the file is empty
 
 		if (file.is_open())
 		{
@@ -45,27 +41,27 @@ namespace In
 						sample.text[counter++] = IN_WHITE_SPACE;
 						sample.ignor--;
 					}
-					if (!long_symbols && !ltrl_in)
+					if (!trueLongSmbl && !ltrl_in)
 						start = (char*)(sample.text + counter);
 					if (txt_temp == '\'')
 						if (!ltrl_in)	ltrl_in = true;
 						else			ltrl_in = false;
 					word_size++;
-					long_symbols = true;
-					single_symbols = false;
+					trueLongSmbl = true;
+					trueSignleSmbl = false;
 					space_symbol = false;
 					sample.text[counter++] = txt_temp;
 					position++;
 					sample.size++; 
 					break;
 				case IN::W:
-					long_symbols = false;
-					single_symbols = false;
+					trueLongSmbl = false;
+					trueSignleSmbl = false;
 					space_symbol = true;
 					if (ltrl_in)
 					{
 						sample.text[counter++] = IN_WHITE_SPACE;
-						long_symbols = true;
+						trueLongSmbl = true;
 						word_size++;
 					}
 					else
@@ -74,8 +70,8 @@ namespace In
 					sample.size++;
 					break;
 				case IN::S:
-					long_symbols = false;
-					single_symbols = true;
+					trueLongSmbl = false;
+					trueSignleSmbl = true;
 					space_symbol = false;
 					sample.text[counter++] = txt_temp;
 					position++;
@@ -91,35 +87,36 @@ namespace In
 					sample.size++;
 					break;
 				default:
-					long_symbols = false;
-					single_symbols = false;
+					trueLongSmbl = false;
+					trueSignleSmbl = false;
 					space_symbol = false;
 					if (ltrl_in)
 						throw ERROR_THROW_IN(111, sample.lines, position)
 					else
 						sample.text[counter++] = sample.code[txt_temp];
 					position = 0;
-					
 					break;
 				}
-				if (!long_symbols && word_size != 0)
+				if (!trueLongSmbl && word_size != 0)
 				{
-					out_text = new char[word_size + 1];
-					out_text[word_size] = PARM_NULL_STR;
-					strncpy(out_text, start, word_size);
-					sample.lxmCounter = getword(sample.AlfaLexTable, out_text, position-word_size, sample.lines, sample.lxmCounter);
+					entry.line = sample.lines;
+					entry.position = position;
+					entry.text = new char[word_size+1];
+					entry.text[word_size] = IN_NULL_STR;
+					strncpy(entry.text, start, word_size);
+					addword(sample, entry);
+					delete[] entry.text;
 					word_size = 0;
-					if (!strcmp(out_text,compareINT) || !strcmp(out_text, compareSTR)) // BAD
-						sample.idntCouner++;
-					delete[] out_text;
 				}
-				if (single_symbols)
+				if (trueSignleSmbl)
 				{
-					out_text = new char[2];
-					out_text[1] = PARM_NULL_STR;
-					out_text[0] = txt_temp;
-					sample.lxmCounter = getword(sample.AlfaLexTable, out_text, position, sample.lines, sample.lxmCounter);
-					delete[] out_text;
+					entry.line = sample.lines;
+					entry.position = position;
+					entry.text = new char[2];
+					entry.text[1] = IN_NULL_STR;
+					entry.text[0] = txt_temp;
+					addword(sample, entry);
+					delete[] entry.text;
 				}
 				if (txt_temp == '\n')
 					sample.lines++;
@@ -132,21 +129,29 @@ namespace In
 			file.close();
 			throw ERROR_THROW(110);
 		}
-		sample.text[counter] = PARM_NULL_STR;
+		sample.text[counter] = IN_NULL_STR;
 		file.close();
 		return sample;
 	}
 
-	int getword(vector<IN_WORD>& table, char* intext, int position, int line, int counter)
+	void addword(IN& in, PARSED_WORDS entry)
 	{
-		table[counter].text = new char[strlen(intext)];
-		strcpy(table[counter].text, intext);
-		cout << table[counter].text << "\t\t";
-		table[counter].position = position;
-		cout << "position: " << table[counter].position << "\t\t";
-		table[counter].line = line;
-		cout << "line: " << table[counter].line << endl;
-		table.resize(++counter+1);
-		return counter;
-	}
+		if (in.lxmCounter > LT_MAXSIZE)
+			expandAlfaLxmTable(in);
+		in.alfaLxmTable[in.lxmCounter].line = entry.line;
+		in.alfaLxmTable[in.lxmCounter].position = entry.position;
+		if (entry.text != NULL)
+		{
+			in.alfaLxmTable[in.lxmCounter].text = new char[strlen(entry.text)];
+			strcpy(in.alfaLxmTable[in.lxmCounter].text, entry.text);
+		}
+		else
+			cout << "\nFound NULL in function 'addword' while chek 'entry.text'\n";
+		in.lxmCounter++;
+	};
+
+	void expandAlfaLxmTable(IN& in)
+	{
+		//dynamic expansion of array
+	};
 }

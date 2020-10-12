@@ -15,6 +15,7 @@ namespace IT
 	void Add(IdTable& idtable, Entry entry)
 	{
 		idtable.table[idtable.current_size].idxfirstLE = entry.idxfirstLE;
+		idtable.table[idtable.current_size].id = new char[strlen(entry.id)];
 		strcpy(idtable.table[idtable.current_size].id, entry.id);
 		idtable.table[idtable.current_size].iddatatype = entry.iddatatype;
 		idtable.table[idtable.current_size].idtype = entry.idtype;
@@ -34,6 +35,10 @@ namespace IT
 	}
 	void Delete(IdTable& idtable)
 	{
+		for (int i = 0; i < idtable.maxsize; i++)
+		{
+			delete[] idtable.table[i].id;
+		}
 		delete[] idtable.table;
 	}
 }

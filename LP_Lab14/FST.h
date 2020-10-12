@@ -4,7 +4,7 @@
 #include "IT.h"
 
 #define NULL_STRING	char* nothing = NULL;
-#define NULL_DATA	FST::INTERIM_DATA nullData = { '\0', IT::UNDEF, IT::U };
+#define NULL_DATA	FST::UNIQUE_DATA nullData = { '\0', IT::UNDEF, IT::U };
 
 
 namespace FST
@@ -28,28 +28,24 @@ namespace FST
 		);
 	};
 
-	struct INTERIM_DATA
+	struct UNIQUE_DATA
 	{
 		//lexema sector
 		char lexema;					//returnable lexema
-		int line;						//
-		int position;					//
-
-		//identificator sector
-		IT::IDDATATYPE iddatatype;		//
+		IT::IDDATATYPE iddatatype;
 		IT::IDTYPE idtype;
 	};
 
 	struct FST
 	{
 		char** string;							//цепочка (строка, завершатся 0x00 )
-		INTERIM_DATA interim_data;
+		UNIQUE_DATA interim_data;
 		short position = 0;						//текущая позиция в цепочке 
 		short nstates;							//количество состояний автомата
 		NODE* nodes;							//граф переходов: [0] -начальное состояние, [nstate-1]-конечное
 		short* rstates;							//возможные состояния автомата на данной позиции
 		FST(
-			INTERIM_DATA idata,
+			UNIQUE_DATA idata,
 			char* &s,							//цепочка (строка, завершатся 0x00 )
 			short ns,							//количество состояний автомата 
 			NODE n, ...							//список состояний (граф переходов)

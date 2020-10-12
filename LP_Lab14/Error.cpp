@@ -40,6 +40,7 @@ namespace Error
 		ERROR_ENTRY_NODEF10(130),
 		ERROR_ENTRY(140, "Ошибка при создании Таблицы Идентификаторов: Превышение максимального количества элементов в таблице"),
 		ERROR_ENTRY(141, "Ошибка при поиске нужного идентификатора. Фунцкция IsId"),
+		ERROR_ENTRY(142, "Ошибка при создании Таблицы Идентификаторов: Превышение максимального значения литерала"),
 		ERROR_ENTRY_NODEF10(150),	ERROR_ENTRY_NODEF10(160),
 		ERROR_ENTRY_NODEF10(170),	ERROR_ENTRY_NODEF10(180),	ERROR_ENTRY_NODEF10(190),
 		ERROR_ENTRY_NODEF100(200),	ERROR_ENTRY_NODEF100(300),	ERROR_ENTRY_NODEF100(400),

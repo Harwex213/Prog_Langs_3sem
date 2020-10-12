@@ -19,7 +19,7 @@ namespace FST
 		relations = new RELATION[n];
 		for (int i = 0; i < n; ++i, ptr++)relations[i] = *ptr;
 	}
-	FST::FST(INTERIM_DATA idata, char* &s, short ns, NODE n, ...)
+	FST::FST(UNIQUE_DATA idata, char* &s, short ns, NODE n, ...)
 	{
 		interim_data = idata;
 		string = &s;

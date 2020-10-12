@@ -12,6 +12,7 @@ namespace Automat
 			if (sample.nodes[0].relations[j].symbol == index)
 				return	KeyWord[sample.nodes[0].relations[j].nnode];
 		};
+		cout << index;
 		throw ERROR_THROW(121);
 	};
 }

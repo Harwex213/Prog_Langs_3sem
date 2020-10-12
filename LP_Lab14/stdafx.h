@@ -4,6 +4,7 @@
 #include <locale>
 #include <cwchar>
 #include <vector>
+#include <list>
 #include <fstream>
 #include <time.h>
 
