@@ -22,11 +22,16 @@ namespace LexAnalysis
 			entry.psn = in.alfaLxmTable[i].position;
 			entry.sn = in.alfaLxmTable[i].line;
 			entry.lexema[LEXEMA_FIXSIZE] = IN_NULL_STR;
-			if (true)
+			entry.lexema[LEXEMA_FIXSIZE - 1] = automats[string[0]].lexema;
+			if (!FST::execute(automats[string[0]]))
 			{
-
+				entry.lexema[LEXEMA_FIXSIZE - 1] = LEX_ID;
+				if (!FST::execute(automats['i']))
+					throw ERROR_THROW_IN(111, entry.sn, entry.psn);
 			}
+			Add(lextable, entry);
 		}
+
 	};
 
 	void FillIdTable(const In::IN& in, const LT::LexTable& lextable, IT::IdTable& idtable)

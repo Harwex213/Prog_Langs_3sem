@@ -19,6 +19,14 @@ namespace FST
 		relations = new RELATION[n];
 		for (int i = 0; i < n; ++i, ptr++)relations[i] = *ptr;
 	}
+	FST::FST()
+	{
+		lexema = '\0';
+		string = NULL;
+		nstates = 0;
+		nodes = NULL;
+		rstates = NULL;
+	}
 	FST::FST(const char lxm, char* &s, short ns, NODE n, ...)
 	{
 		lexema = lxm;

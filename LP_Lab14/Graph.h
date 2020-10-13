@@ -245,7 +245,7 @@ FST::NODE(27, \
 #define GRAPHS_SIZE 18
 #define GRAPH_SELECT_SIZE 49
 
-#define GRAPH_SELECT nothing, 1, \
+#define GRAPH_SELECT '\0', nothing, 1, \
 FST::NODE(GRAPH_SELECT_SIZE, \
 	FST::RELATION('i', INTEGER_INDEX), \
 	FST::RELATION('s', STRING_INDEX), \

@@ -16,8 +16,10 @@ int wmain(int argc, wchar_t* argv[])
 		In::IN in = In::getin(parm.in);
 		LT::LexTable lexTable = LT::Create(in.lexCounter);
 		LexAnalysis::FillLexTable(in, lexTable);
+		//WriteLexTable
 		IT::IdTable idTable = IT::Create(in.idCounter);
 		LexAnalysis::FillIdTable(in, lexTable, idTable);
+		//WriteIdTable
 		Log::WriteIn(log, in);
 		Out::OUT out = Out::getout(parm.out);
 		Out::WriteAnalyze(out, in, log);
