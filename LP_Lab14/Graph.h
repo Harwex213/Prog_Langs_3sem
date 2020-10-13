@@ -316,4 +316,4 @@ FST::FST fst15(GRAPH_LTRL_STR); \
 FST::FST fst16(GRAPH_COMPUTATION); \
 FST::FST fst17(GRAPH_ASSIGN); \
 FST::FST fst18(GRAPH_IDENTIFY); \
-FST::FST* graphArray = new FST::FST[GRAPHS_SIZE]{ fst1, fst2, fst3, fst4, fst5, fst6, fst7, fst8, fst9, fst10, fst11, fst12, fst13, fst14, fst15, fst16, fst17, fst18 };
+FST::FST graphArray[GRAPHS_SIZE] = { fst1, fst2, fst3, fst4, fst5, fst6, fst7, fst8, fst9, fst10, fst11, fst12, fst13, fst14, fst15, fst16, fst17, fst18 };

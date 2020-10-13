@@ -26,7 +26,7 @@ namespace IT
 	{
 		return idtable.table[n];
 	}
-	int IsId(IdTable& idtable, char id[ID_MAXSIZE])
+	int IsId(IdTable& idtable, char id[ID_MAXSIZE+1])
 	{
 		for (int i = 0; i < idtable.maxsize; i++)
 			if (strcmp(idtable.table[i].id, id) == 0)

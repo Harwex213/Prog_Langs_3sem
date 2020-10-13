@@ -1,4 +1,4 @@
-integer function fi(integer x, integer y)
+integer function fi(integer x31, integer y)
 {
 declare integer z;
 z= x*(x+y);
@@ -9,7 +9,7 @@ string function fs (string a, string b)
 declare string;
 declare string function substr(string a, integer p,
  integer n);
-c = substr(a, 1,3)+ b;
+c = substr(a, 1,331)+ b;
 return c;
 };
 main

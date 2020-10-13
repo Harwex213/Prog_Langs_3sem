@@ -43,6 +43,6 @@ namespace IT	// таблица идентификатов
 	IdTable Create(int size);
 	void Add(IdTable& idtable, Entry entry);
 	Entry GetEntry(IdTable& idtable, int n);
-	int IsId(IdTable& idtable, char id[ID_MAXSIZE]);
+	int IsId(IdTable& idtable, char id[ID_MAXSIZE+1]);
 	void Delete(IdTable& idtable);
 }

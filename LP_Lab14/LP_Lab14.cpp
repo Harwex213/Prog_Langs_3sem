@@ -6,6 +6,9 @@ int wmain(int argc, wchar_t* argv[])
 {
 	setlocale(LC_ALL, "rus");
 	Log::LOG log = Log::INITLOG;
+	//Нюансы:
+	//Теряется информация по v
+	//
 	try
 	{
 		Parm::PARM parm = Parm::getparm(argc, argv);

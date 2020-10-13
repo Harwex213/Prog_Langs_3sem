@@ -4,6 +4,7 @@
 #define	LT_TI_NULLXDX	0xffffffff	// нет элемента таблицы идентификаторов				
 #define	LEX_INTEGER		't'			// лексема для integer
 #define	LEX_STRING		't'			// лексема для string
+#define LEX_INTORSTR	't'
 #define	LEX_ID			'i'			// лексема для идентификатора
 #define	LEX_LITERAL		'l'			// лексема для литерала
 #define	LEX_FUNCTION	'f'			// лексема для function
