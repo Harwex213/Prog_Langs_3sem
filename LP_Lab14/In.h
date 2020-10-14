@@ -58,8 +58,7 @@ namespace In
 		int code[256] = IN_CODE_TABLE;
 
 		int overageAmount = 0;
-		int lexCounter = 0;
-		int idCounter = 0;
+		int wordCounter = 0;
 		PARSED_WORDS* alfaLxmTable;
 	};
 

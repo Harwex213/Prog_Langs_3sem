@@ -26,6 +26,7 @@ namespace FST
 
 	struct FST
 	{
+		IT::IDDATATYPE idatatype = IT::UNDEF;
 		char** string;							//цепочка (строка, завершатся 0x00 )
 		char lexema;
 		short position = 0;						//текущая позиция в цепочке 

@@ -26,16 +26,21 @@ namespace IT
 	{
 		return idtable.table[n];
 	}
-	int IsId(IdTable& idtable, char id[ID_MAXSIZE+1])
+	int IsId(IdTable& idtable, char* id)
 	{
-		for (int i = 0; i < idtable.maxsize; i++)
-			if (strcmp(idtable.table[i].id, id) == 0)
-				return idtable.table[i].idxfirstLE;
-		throw ERROR_THROW(141);
+		if (id)
+			for (int i = 0; i < idtable.current_size; i++)
+			{
+				if (strcmp(idtable.table[i].id, id) == 0)
+					return i;
+				if (strncmp(idtable.table[i].id, id, strlen(idtable.table[i].id)) == 0)
+					return i;
+			}
+		return LT_TI_NULLXDX;
 	}
 	void Delete(IdTable& idtable)
 	{
-		for (int i = 0; i < idtable.maxsize; i++)
+		for (int i = 0; i < idtable.current_size; i++)
 		{
 			delete[] idtable.table[i].id;
 		}

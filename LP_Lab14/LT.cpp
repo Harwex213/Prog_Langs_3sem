@@ -18,6 +18,7 @@ namespace LT							// таблица лексем
 		strcpy(lextable.table[lextable.current_size].lexema, entry.lexema);
 		lextable.table[lextable.current_size].psn = entry.psn;
 		lextable.table[lextable.current_size].sn = entry.sn;
+		lextable.table[lextable.current_size].idxTI = entry.idxTI;
 		lextable.current_size++;
 	};
 
