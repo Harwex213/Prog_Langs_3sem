@@ -7,6 +7,7 @@
 #include <list>
 #include <fstream>
 #include <time.h>
+#include <chrono>
 
 #include "Error.h"
 #include "FST.h"

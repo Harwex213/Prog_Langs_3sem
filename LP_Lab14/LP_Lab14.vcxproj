@@ -179,6 +179,9 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="Graphes.txt" />
+    <Text Include="in\in.txt" />
+    <Text Include="in\log.txt" />
+    <Text Include="in\out.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

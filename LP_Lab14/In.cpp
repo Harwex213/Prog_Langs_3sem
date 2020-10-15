@@ -100,7 +100,12 @@ namespace In
 				if (!trueLongSmbl && word_size != 0)
 				{
 					entry.line = sample.lines;
-					entry.position = position - word_size;
+					int i = position;
+					if (i == 0)
+						i++;
+					if (i >= word_size)
+						i = i - word_size;
+					entry.position = i;
 					entry.text = new char[word_size+1];
 					entry.text[word_size] = IN_NULL_STR;
 					strncpy(entry.text, start, word_size);
@@ -111,7 +116,12 @@ namespace In
 				if (trueSignleSmbl)
 				{
 					entry.line = sample.lines;
-					entry.position = position - word_size;
+					int i = position;
+					if (i == 0)
+						i++;
+					if (i >= word_size)
+						i = i -  word_size;
+					entry.position = i;
 					entry.text = new char[2];
 					entry.text[1] = IN_NULL_STR;
 					entry.text[0] = txt_temp;

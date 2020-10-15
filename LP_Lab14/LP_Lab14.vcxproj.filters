@@ -91,5 +91,14 @@
     <Text Include="Graphes.txt">
       <Filter>Файлы ресурсов</Filter>
     </Text>
+    <Text Include="in\in.txt">
+      <Filter>Файлы ресурсов</Filter>
+    </Text>
+    <Text Include="in\log.txt">
+      <Filter>Файлы ресурсов</Filter>
+    </Text>
+    <Text Include="in\out.txt">
+      <Filter>Файлы ресурсов</Filter>
+    </Text>
   </ItemGroup>
 </Project>

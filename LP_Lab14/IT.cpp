@@ -15,28 +15,68 @@ namespace IT
 	void Add(IdTable& idtable, Entry entry)
 	{
 		idtable.table[idtable.current_size].idxfirstLE = entry.idxfirstLE;
-		idtable.table[idtable.current_size].id = new char[strlen(entry.id)];
+		idtable.table[idtable.current_size].id = new char[strlen(entry.id)+1];
 		strcpy(idtable.table[idtable.current_size].id, entry.id);
-		idtable.table[idtable.current_size].iddatatype = entry.iddatatype;
+		if ((idtable.table[idtable.current_size].iddatatype = entry.iddatatype) == IT::STR)
+			idtable.table[idtable.current_size].value.vstr = entry.value.vstr;
+		else
+			idtable.table[idtable.current_size].value.vint = entry.value.vint;
 		idtable.table[idtable.current_size].idtype = entry.idtype;
-		idtable.table[idtable.current_size].value = entry.value;
+		idtable.table[idtable.current_size].prefix = entry.prefix;
 		idtable.current_size++;
 	}
 	Entry GetEntry(IdTable& idtable, int n)
 	{
 		return idtable.table[n];
 	}
-	int IsId(IdTable& idtable, char* id)
+	int GetId(IdTable& idtable, char* id, std::list<std::string> prefix, int sn, int psn)
 	{
-		if (id)
+		for (int i = 0; i < idtable.current_size; i++)
+		{
+			switch (idtable.table[i].idtype)
+			{
+			case L:
+				if (strcmp(idtable.table[i].id, id) == 0 ||
+					strncmp(idtable.table[i].id, id, LITERAL_MAXSIZE) == 0)
+					return i;
+				break;
+			default:
+				if (strcmp(idtable.table[i].id, id) == 0 ||
+					strncmp(idtable.table[i].id, id, ID_MAXSIZE) == 0)
+				{
+					if (idtable.table[i].idtype == F)
+						if (!idtable.table[i].isGlobalFunction)
+							return i;
+					if (*idtable.table[i].prefix.rbegin() == *prefix.rbegin())
+						return i;
+				}
+				break;
+			}
+		}
+		return LT_TI_NULLXDX;
+	}
+	bool IsId(IdTable& idtable, Entry entry)
+	{
+		switch (entry.idtype)
+		{
+		case L:
 			for (int i = 0; i < idtable.current_size; i++)
 			{
-				if (strcmp(idtable.table[i].id, id) == 0)
-					return i;
-				if (strncmp(idtable.table[i].id, id, strlen(idtable.table[i].id)) == 0)
-					return i;
+				if (strncmp(idtable.table[i].id, entry.id, LITERAL_MAXSIZE) == 0)
+					return false;
 			}
-		return LT_TI_NULLXDX;
+			break;
+		default:
+			for (int i = 0; i < idtable.current_size; i++)
+			{
+				if (*idtable.table[i].prefix.rbegin() == *entry.prefix.rbegin())
+					if (strcmp(idtable.table[i].id, entry.id) == 0 ||
+						strncmp(idtable.table[i].id, entry.id, ID_MAXSIZE) == 0)
+						return false;
+			}
+			break;
+		}
+		return true;
 	}
 	void Delete(IdTable& idtable)
 	{
