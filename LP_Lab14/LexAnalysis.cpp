@@ -26,10 +26,6 @@ namespace LexAnalysis
 					throw ERROR_THROW_IN(122, entryLex.sn, entryLex.psn);
 			}
 			entryLex.idxTI = LT_TI_NULLXDX;
-			//1) Теряется инфа по v
-			//2)
-			//3) Проверять значение литерала:
-			//	 - Смотреть отрицательное значение?
 			switch (entryLex.lexema[LEXEMA_FIXSIZE - 1])
 			{
 			case LEX_FUNCTION:
@@ -173,7 +169,13 @@ namespace LexAnalysis
 			cout << lexTable.table[counter].sn << ' ';
 			while (lexTable.table[counter].sn == i + 1)
 			{
-				cout << lexTable.table[counter++].lexema;
+				cout << lexTable.table[counter].lexema;
+				if (lexTable.table[counter].lexema[LEXEMA_FIXSIZE - 1] == LEX_ID ||
+					lexTable.table[counter].lexema[LEXEMA_FIXSIZE - 1] == LEX_LITERAL)
+				{
+					cout << "(" << lexTable.table[counter].idxTI << ")";
+				}
+				counter++;
 			}
 			cout << endl;
 		}

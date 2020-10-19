@@ -7,8 +7,10 @@ int wmain(int argc, wchar_t* argv[])
 	setlocale(LC_ALL, "rus");
 	Log::LOG log = Log::INITLOG;
 	//Нюансы:
-	//Теряется информация по v
-	//Должно ли быть (заполняться) значение у функции?
+	// 1) Теряется инфа по v
+	// 2) Уйти от константных значений
+	// 3) Проверять значение литерала:
+	//	 - Смотреть отрицательное значение?
 	try
 	{
 		std::chrono::high_resolution_clock::time_point t1 = std::chrono::high_resolution_clock::now();
