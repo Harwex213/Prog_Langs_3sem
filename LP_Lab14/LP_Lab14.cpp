@@ -7,7 +7,7 @@ int wmain(int argc, wchar_t* argv[])
 	setlocale(LC_ALL, "rus");
 	Log::LOG log = Log::INITLOG;
 	//Нюансы:
-	// 1) Теряется инфа по v
+	//
 	// 2) Уйти от константных значений
 	// 3) Проверять значение литерала:
 	//	 - Смотреть отрицательное значение?
@@ -25,6 +25,7 @@ int wmain(int argc, wchar_t* argv[])
 		LexAnalysis::FillTables(in, lexTable, idTable);
 		//WriteLexTable
 		//WriteIdTable
+		PolishNotation::TransformToPolishNotation(lexTable, idTable);
 		Log::WriteIn(log, in);
 		Out::OUT out = Out::getout(parm.out);
 		Out::WriteAnalyze(out, in, log);

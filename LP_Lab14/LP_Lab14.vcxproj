@@ -162,6 +162,7 @@
     <ClCompile Include="LT.cpp" />
     <ClCompile Include="Out.cpp" />
     <ClCompile Include="Parm.cpp" />
+    <ClCompile Include="PolishNotation.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="LexAnalysis.h" />
@@ -175,6 +176,7 @@
     <ClInclude Include="LT.h" />
     <ClInclude Include="Out.h" />
     <ClInclude Include="Parm.h" />
+    <ClInclude Include="PolishNotation.h" />
     <ClInclude Include="stdafx.h" />
   </ItemGroup>
   <ItemGroup>

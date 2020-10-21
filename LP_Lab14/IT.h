@@ -44,7 +44,7 @@ namespace IT	// таблица идентификатов
 
 	IdTable Create(int size);
 	void Add(IdTable& idtable, Entry entry);
-	Entry GetEntry(IdTable& idtable, int n);
+	Entry GetEntry(const IdTable& idtable, int n);
 	int GetId(
 		IdTable& idtable,
 		char* id,

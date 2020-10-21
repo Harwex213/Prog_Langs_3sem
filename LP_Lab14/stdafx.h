@@ -5,6 +5,7 @@
 #include <cwchar>
 #include <vector>
 #include <list>
+#include <stack>
 #include <fstream>
 #include <time.h>
 #include <chrono>
@@ -21,5 +22,6 @@
 #include "Automat.h"
 #include "Graph.h"
 #include "LexAnalysis.h"
+#include "PolishNotation.h"
 
 using namespace std;

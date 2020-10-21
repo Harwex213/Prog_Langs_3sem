@@ -22,7 +22,7 @@
 /* 0  | 1-a | 2-b | 3-c | 4-d | 5-e |  6  |  7  | 8-h |  9  |  A  |  B  |  C  |  D  |  E  |  F  |    */\
  IN::F,IN::F,IN::F,IN::F,IN::F,IN::F,IN::F,IN::F,IN::F,IN::W,'|'  ,IN::F,IN::F,IN::F,IN::F,IN::F, /*0*/\
  IN::F,IN::F,IN::F,IN::F,IN::F,IN::F,IN::F,IN::F,IN::F,IN::F,IN::F,IN::F,IN::F,IN::F,IN::F,IN::F, /*1*/\
- IN::W,IN::F,IN::T,IN::F,IN::F,IN::F,IN::S,IN::L,IN::S,IN::S,IN::S,IN::S,IN::S,IN::A,IN::A,IN::S, /*2*/\
+ IN::W,IN::F,IN::T,IN::F,IN::F,IN::F,IN::S,IN::L,IN::S,IN::S,IN::S,IN::S,IN::S,IN::S,IN::A,IN::S, /*2*/\
  IN::L,IN::L,IN::L,IN::L,IN::L,IN::L,IN::L,IN::L,IN::L,IN::L,IN::A,IN::S,IN::S,IN::S,IN::S,IN::S, /*3*/\
  IN::A,IN::T,IN::T,IN::T,IN::T,IN::T,IN::T,IN::T,IN::T,IN::T,IN::T,IN::T,IN::T,IN::T,IN::T,IN::T, /*4*/\
  IN::T,IN::T,IN::T,IN::T,IN::T,IN::T,IN::T,IN::T,IN::T,IN::T,IN::T,IN::S,IN::F,IN::S,IN::A,IN::T, /*5*/\

@@ -16,6 +16,8 @@
 #define	LEX_COMMA		','			// лексема для ,
 #define	LEX_LEFTHESIS	'{'			// лексема для (
 #define	LEX_RIGHTHESIS	'}'	
+#define	LEX_LEFTBRACKETS  '['
+#define	LEX_RIGHTBRACKETS ']'	
 #define	LEX_LEFTBRACE	'('			// лексема для {
 #define	LEX_RIGHTBRACE	')'			// лексема для }		// лексема для )
 #define	LEX_COMPUTATION	'v'			// лексема для + - / *
@@ -23,12 +25,14 @@
 
 namespace LT							// таблица лексем
 {
+	enum ArithmeticSymbol {UNDEFINED = 0, PLUS = 1, MINUS = 2, MULTIPLY = 3, FISSION = 4};
 	struct Entry						// строка таблицы лексем
 	{
 		char lexema[LEXEMA_FIXSIZE+1];	// лексема
 		int sn;							// номер строки в исходном тексте
 		int psn;
 		int idxTI;						// индекс в таблице идентификаторов или LT_TI_NULLIDX
+		ArithmeticSymbol arithmeticdata = UNDEFINED;
 	};
 
 	struct LexTable						// экземпляр таблицы лексем

@@ -19,6 +19,7 @@ namespace LexAnalysis
 			entryLex.sn = in.alfaLxmTable[i].line;
 			entryLex.lexema[LEXEMA_FIXSIZE] = IN_NULL_STR;
 			entryLex.lexema[LEXEMA_FIXSIZE - 1] = automats[string[0]].lexema;
+
 			if (!FST::execute(automats[string[0]]))
 			{
 				entryLex.lexema[LEXEMA_FIXSIZE - 1] = LEX_ID;
@@ -26,8 +27,27 @@ namespace LexAnalysis
 					throw ERROR_THROW_IN(122, entryLex.sn, entryLex.psn);
 			}
 			entryLex.idxTI = LT_TI_NULLXDX;
+			entryLex.arithmeticdata = LT::UNDEFINED;
+
 			switch (entryLex.lexema[LEXEMA_FIXSIZE - 1])
 			{
+			case LEX_COMPUTATION:
+				switch (string[0])
+				{
+				case LEX_PLUS:
+					entryLex.arithmeticdata = LT::PLUS;
+					break;
+				case LEX_MINUS:
+					entryLex.arithmeticdata = LT::MINUS;
+					break;
+				case LEX_MULTIPLY:
+					entryLex.arithmeticdata = LT::MULTIPLY;
+					break;
+				case LEX_FISSION:
+					entryLex.arithmeticdata = LT::FISSION;
+					break;
+				}
+				break;
 			case LEX_FUNCTION:
 				if (entryId.idtype == IT::V)
 					isItGlobalFunction = true;
@@ -141,9 +161,10 @@ namespace LexAnalysis
 					strncpy(entryId.value.vstr.str, string + 1, entryId.value.vstr.len);
 				}
 
-
 				if (IT::IsId(idTable, entryId))
 					IT::Add(idTable, entryId);
+
+				entryLex.idxTI = GetId(idTable, string, entryId.prefix, entryLex.sn, entryLex.psn);
 
 				if (entryId.id)
 				{
@@ -175,6 +196,10 @@ namespace LexAnalysis
 				{
 					cout << "(" << lexTable.table[counter].idxTI << ")";
 				}
+				if (lexTable.table[counter].lexema[LEXEMA_FIXSIZE - 1] == LEX_COMPUTATION)
+				{
+					cout << "(" << lexTable.table[counter].arithmeticdata << ")";
+				}
 				counter++;
 			}
 			cout << endl;
@@ -189,7 +214,7 @@ namespace LexAnalysis
 				cout << lexTable.table[i].lexema << "\tPosition: ";
 				cout << lexTable.table[i].psn << "\tLine: ";
 				cout << lexTable.table[i].sn << "\tID: ";
-				cout << lexTable.table[i].idxTI << endl;
+				cout << lexTable.table[i].idxTI <<  endl;
 			}
 		}
 

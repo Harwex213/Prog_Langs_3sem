@@ -25,7 +25,7 @@ namespace IT
 		idtable.table[idtable.current_size].prefix = entry.prefix;
 		idtable.current_size++;
 	}
-	Entry GetEntry(IdTable& idtable, int n)
+	Entry GetEntry(const IdTable& idtable, int n)
 	{
 		return idtable.table[n];
 	}
