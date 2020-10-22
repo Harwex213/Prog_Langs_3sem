@@ -3,7 +3,8 @@ namespace PolishNotation
 {
 	void TransformToPolishNotation(const LT::LexTable& lextable, const IT::IdTable& idtable)
 	{
-		//Больше 9 параметров - сломается
+		// Больше 9 параметров - сломается
+		// Если в параметрах поставить просто арифмитическое действие, то сломается
 		// Зачем нам [] для функций? (144 строчка)
 
 		vector<int> expressionsPos;
@@ -31,10 +32,13 @@ namespace PolishNotation
 	{
 		list<char> resultString;
 		stack<Operator> stack;
-		std::stack<int> stackParams;
 		bool transformDone = false;
+
+		vector<int> stackParams(1, 0);
+		int countFunction = 0;
 		bool isParams = false;
-		int countParams = 0;
+
+		char temp;
 
 		while (LEXEMA != LEX_SEMICOLON)
 		{
@@ -43,26 +47,28 @@ namespace PolishNotation
 				case LEX_LITERAL:
 				case LEX_ID:
 				{
-					char temp;
 					if (isParams)
-						countParams++;
+						stackParams[countFunction]++;
+
 					IT::Entry entry = IT::GetEntry(idtable, lextable.table[lextable_pos].idxTI);
 					if (entry.idtype == IT::F)
 					{
 						isParams = true;
-						if (countParams > 0)
+						if (stackParams[countFunction] > 0)
 						{
-							stackParams.push(countParams);
-							countParams = 0;
+							stackParams.push_back(0);
+							countFunction++;
 						}
 					}
 					else
 						resultString.push_back(LEXEMA);
+
 					break;
 				}
 				case LEX_COMPUTATION:
 				{
 					transformDone = true;
+
 					Operator tempOperation = { LEXEMA, -1 };
 					switch (lextable.table[lextable_pos].arithmeticdata)
 					{
@@ -83,17 +89,15 @@ namespace PolishNotation
 							tempOperation.priority = 2;
 							break;
 					}
+
 					if (stack.empty() || stack.top().operation == LEX_LEFTBRACE || stack.top().operation == LEX_LEFTBRACKETS)
 					{
 						stack.push(tempOperation);
 					}
 					else 
 					{
-						char temp;
 						while (!stack.empty() &&
-							stack.top().priority >= tempOperation.priority &&
-							stack.top().operation != LEX_LEFTBRACE			  &&
-							stack.top().operation != LEX_LEFTBRACKETS)
+							stack.top().priority >= tempOperation.priority)
 						{
 							temp = stack.top().operation;
 							stack.pop();						
@@ -102,11 +106,13 @@ namespace PolishNotation
 						stack.push(tempOperation);
 					}
 					if (isParams)
-						countParams--;
+						stackParams[countFunction]--;
 					break;
 				}
 				case LEX_LEFTBRACE:
 				{
+					//if (isParams)
+					//	goto LeftBrackets;
 
 					Operator tempOperation = { LEXEMA, 0 };
 					stack.push(tempOperation);
@@ -114,7 +120,6 @@ namespace PolishNotation
 				}
 				case LEX_RIGHTBRACE:
 				{
-					char temp;
 					while (stack.top().operation != LEX_LEFTBRACE)
 					{
 						temp = stack.top().operation;
@@ -124,33 +129,19 @@ namespace PolishNotation
 					stack.pop();							//Убираем левую скобку
 
 					if (isParams)
-					{
-						temp = countParams + 48;
-						resultString.push_back(LEX_PARAMS_COUNT);
-						resultString.push_back(temp);
+						goto RightBrackets;
 
-						while (!stackParams.empty())
-						{
-							temp = stackParams.top() + 48;
-							resultString.push_back(LEX_PARAMS_COUNT);
-							resultString.push_back(temp);
-							stackParams.pop();
-						}
-
-						isParams = false;
-						countParams = 0;
-					}
 					break;
 				}
 				case LEX_LEFTBRACKETS:
 				{
+					//LeftBrackets:
 					Operator tempOperation = { LEXEMA, 4 };
 					stack.push(tempOperation);
 					break;
 				}
 				case LEX_RIGHTBRACKETS:
 				{
-					char temp;
 					while (stack.top().operation != LEX_LEFTBRACKETS)
 					{
 						temp = stack.top().operation;
@@ -159,25 +150,26 @@ namespace PolishNotation
 					}
 					stack.pop();
 
-					// Зачем нам [] для функций?
 					if (isParams)
 					{
-						temp = countParams + 48;
+					RightBrackets:
+						temp = stackParams[countFunction--] + 48;
 						resultString.push_back(LEX_PARAMS_COUNT);
 						resultString.push_back(temp);
 
-						isParams = false;
-						countParams = 0;
+						if (stackParams.empty())
+							isParams = false;
+						if (isParams)
+							stackParams.pop_back();
 					}
 					break;
 				}
 				case LEX_COMMA:
 				{
-					char temp;
 					bool check = true;
 					while (check)
 					{
-						if (stack.top().operation == LEX_LEFTBRACE || stack.top().operation != LEX_LEFTBRACKETS)
+						if (stack.top().operation == LEX_LEFTBRACE || stack.top().operation == LEX_LEFTBRACKETS)
 							check = false;
 						else
 						{
@@ -192,25 +184,20 @@ namespace PolishNotation
 			lextable_pos++;
 		}
 
+		while (!stack.empty())
 		{
-			char temp;
-			while (!stack.empty())
-			{
-				temp = stack.top().operation;
-				stack.pop();						//Вносим все операции стека в результ. строку
-				resultString.push_back(temp);
-			}
+			temp = stack.top().operation;
+			stack.pop();						//Вносим все операции стека в результ. строку
+			resultString.push_back(temp);
 		}
 
+		int count = resultString.size();
+		for (int i = 0; i < count; i++)
 		{
-			int count = resultString.size();
-			for (int i = 0; i < count; i++)
-			{
-				cout << resultString.front();
-				resultString.pop_front();
-			}
-			cout << endl;
+			cout << resultString.front();
+			resultString.pop_front();
 		}
+		cout << endl;
 
 		return transformDone;
 	}

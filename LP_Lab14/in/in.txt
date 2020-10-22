@@ -1,7 +1,7 @@
 integer function fi(integer x, integer y)
 {
 declare integer z;
-
+z = -2;
 return z;
 };
 string function fs (string a, string b)
@@ -12,8 +12,8 @@ declare string x;
 declare string y;
 declare string function substr(string a, integer p,
  integer n);
- c = (12+49)/(244-324)*(432+43)-86;
-c= 1*substr(a, substr(a, 8-9, 1));
+ c = (12+49)/(244-324)*(432+43)*7-86;
+c= 1*substr(substr(a, 8-9, 1), a, 8+9, substr(a,c));
 
 return c;
 };

@@ -182,155 +182,155 @@ namespace LexAnalysis
 			LT::Add(lexTable, entryLex);
 		}
 
-		cout << endl << endl;
+		//cout << endl << endl;
 
-		int counter = 0;
-		for (int i = 0; i < in.lines; i++)
-		{
-			cout << lexTable.table[counter].sn << ' ';
-			while (lexTable.table[counter].sn == i + 1)
-			{
-				cout << lexTable.table[counter].lexema;
-				if (lexTable.table[counter].lexema[LEXEMA_FIXSIZE - 1] == LEX_ID ||
-					lexTable.table[counter].lexema[LEXEMA_FIXSIZE - 1] == LEX_LITERAL)
-				{
-					cout << "(" << lexTable.table[counter].idxTI << ")";
-				}
-				if (lexTable.table[counter].lexema[LEXEMA_FIXSIZE - 1] == LEX_COMPUTATION)
-				{
-					cout << "(" << lexTable.table[counter].arithmeticdata << ")";
-				}
-				counter++;
-			}
-			cout << endl;
-		}
+		//int counter = 0;
+		//for (int i = 0; i < in.lines; i++)
+		//{
+		//	cout << lexTable.table[counter].sn << ' ';
+		//	while (lexTable.table[counter].sn == i + 1)
+		//	{
+		//		cout << lexTable.table[counter].lexema;
+		//		if (lexTable.table[counter].lexema[LEXEMA_FIXSIZE - 1] == LEX_ID ||
+		//			lexTable.table[counter].lexema[LEXEMA_FIXSIZE - 1] == LEX_LITERAL)
+		//		{
+		//			cout << "(" << lexTable.table[counter].idxTI << ")";
+		//		}
+		//		if (lexTable.table[counter].lexema[LEXEMA_FIXSIZE - 1] == LEX_COMPUTATION)
+		//		{
+		//			cout << "(" << lexTable.table[counter].arithmeticdata << ")";
+		//		}
+		//		counter++;
+		//	}
+		//	cout << endl;
+		//}
 
-		cout << endl << endl;
+		//cout << endl << endl;
 
-		for (int i = 0; i < lexTable.current_size; i++)
-		{
-			if (lexTable.table[i].lexema[LEXEMA_FIXSIZE-1] == LEX_ID)
-			{
-				cout << lexTable.table[i].lexema << "\tPosition: ";
-				cout << lexTable.table[i].psn << "\tLine: ";
-				cout << lexTable.table[i].sn << "\tID: ";
-				cout << lexTable.table[i].idxTI <<  endl;
-			}
-		}
+		//for (int i = 0; i < lexTable.current_size; i++)
+		//{
+		//	if (lexTable.table[i].lexema[LEXEMA_FIXSIZE-1] == LEX_ID)
+		//	{
+		//		cout << lexTable.table[i].lexema << "\tPosition: ";
+		//		cout << lexTable.table[i].psn << "\tLine: ";
+		//		cout << lexTable.table[i].sn << "\tID: ";
+		//		cout << lexTable.table[i].idxTI <<  endl;
+		//	}
+		//}
 
-		cout << endl << endl;
+		//cout << endl << endl;
 
-		int StringLength = 25;
-		cout.setf(ios::left);
-		cout << "|Params|\n";
-		cout.width(StringLength); cout << "Name";
-		cout.width(StringLength); cout << "Prefix";
-		cout.width(StringLength); cout << "DataType";
-		cout.width(StringLength); cout << "Value STR";
-		cout.width(StringLength); cout << "Value INT";
-		cout << endl;
-		for (int i = 0; i < idTable.current_size; i++)
-		{
-			if (idTable.table[i].idtype == IT::P)
-			{
-				cout.width(StringLength); cout << idTable.table[i].id;
-				cout.width(StringLength); cout << *idTable.table[i].prefix.rbegin();
-				cout.width(StringLength); cout << idTable.table[i].iddatatype;
-				if (idTable.table[i].iddatatype == IT::STR)
-				{
-					cout.width(StringLength); cout << (int)idTable.table[i].value.vstr.len;
-					cout.width(StringLength); cout << idTable.table[i].value.vstr.str;
-					cout.width(StringLength); cout << "-";
-				}
-				else
-				{
-					cout.width(StringLength); cout << "-";
-					cout.width(StringLength); cout << "-";
-					cout.width(StringLength); cout << idTable.table[i].value.vint;
-				}
-				cout << endl;
-			}
-		}
-		cout << "|Functions|\n";
-		cout.width(StringLength); cout << "Name";
-		cout.width(StringLength); cout << "Prefix";
-		cout.width(StringLength); cout << "DataType";
-		cout.width(StringLength);
-		cout.width(StringLength);
-		cout.width(StringLength);
-		cout << endl;
-		for (int i = 0; i < idTable.current_size; i++)
-		{
-			if (idTable.table[i].idtype == IT::F)
-			{
-				cout.width(StringLength); cout << idTable.table[i].id;
-				cout.width(StringLength); cout << *idTable.table[i].prefix.rbegin();
-				cout.width(StringLength); cout << idTable.table[i].iddatatype;
-				cout.width(StringLength); cout << "-";
-				cout.width(StringLength); cout << "-";
-				cout.width(StringLength); cout << "-";
-				cout << endl;
-			}
-		}
-		cout << "|Variables|\n";
-		cout.width(StringLength); cout << "Name";
-		cout.width(StringLength); cout << "Prefix";
-		cout.width(StringLength); cout << "DataType";
-		cout.width(StringLength); cout << "STR length";
-		cout.width(StringLength); cout << "Value STR";
-		cout.width(StringLength); cout << "Value INT";
-		cout << endl;
-		for (int i = 0; i < idTable.current_size; i++)
-		{
-			if (idTable.table[i].idtype == IT::V)
-			{
-				cout.width(StringLength); cout << idTable.table[i].id;
-				cout.width(StringLength); cout << *idTable.table[i].prefix.rbegin();
-				cout.width(StringLength); cout << idTable.table[i].iddatatype;
-				if (idTable.table[i].iddatatype == IT::STR)
-				{
-					cout.width(StringLength); cout << (int)idTable.table[i].value.vstr.len;
-					cout.width(StringLength); cout << idTable.table[i].value.vstr.str;
-					cout.width(StringLength); cout << "-";
-				}
-				else
-				{
-					cout.width(StringLength); cout << "-";
-					cout.width(StringLength); cout << "-";
-					cout.width(StringLength); cout << idTable.table[i].value.vint;
-				}
-				cout << endl;
-			}
-		}
-		cout << "|Literals|\n";
-		cout.width(StringLength); cout << "Name";
-		cout.width(StringLength); cout << "Prefix";
-		cout.width(StringLength); cout << "DataType";
-		cout.width(StringLength); cout << "STR length";
-		cout.width(StringLength); cout << "Value STR";
-		cout.width(StringLength); cout << "Value INT";
-		cout << endl;
-		for (int i = 0; i < idTable.current_size; i++)
-		{
-			if (idTable.table[i].idtype == IT::L)
-			{
-				cout.width(StringLength); cout << idTable.table[i].id;
-				cout.width(StringLength); cout << *idTable.table[i].prefix.rbegin();
-				cout.width(StringLength); cout << idTable.table[i].iddatatype;
-				if (idTable.table[i].iddatatype == IT::STR)
-				{
-					cout.width(StringLength); cout << (int)idTable.table[i].value.vstr.len;
-					cout.width(StringLength); cout << idTable.table[i].value.vstr.str;
-					cout.width(StringLength); cout << "-";
-				}
-				else
-				{
-					cout.width(StringLength); cout << "-";
-					cout.width(StringLength); cout << "-";
-					cout.width(StringLength); cout << idTable.table[i].value.vint;
-				}
-				cout << endl;
-			}
-		}
+		//int StringLength = 25;
+		//cout.setf(ios::left);
+		//cout << "|Params|\n";
+		//cout.width(StringLength); cout << "Name";
+		//cout.width(StringLength); cout << "Prefix";
+		//cout.width(StringLength); cout << "DataType";
+		//cout.width(StringLength); cout << "Value STR";
+		//cout.width(StringLength); cout << "Value INT";
+		//cout << endl;
+		//for (int i = 0; i < idTable.current_size; i++)
+		//{
+		//	if (idTable.table[i].idtype == IT::P)
+		//	{
+		//		cout.width(StringLength); cout << idTable.table[i].id;
+		//		cout.width(StringLength); cout << *idTable.table[i].prefix.rbegin();
+		//		cout.width(StringLength); cout << idTable.table[i].iddatatype;
+		//		if (idTable.table[i].iddatatype == IT::STR)
+		//		{
+		//			cout.width(StringLength); cout << (int)idTable.table[i].value.vstr.len;
+		//			cout.width(StringLength); cout << idTable.table[i].value.vstr.str;
+		//			cout.width(StringLength); cout << "-";
+		//		}
+		//		else
+		//		{
+		//			cout.width(StringLength); cout << "-";
+		//			cout.width(StringLength); cout << "-";
+		//			cout.width(StringLength); cout << idTable.table[i].value.vint;
+		//		}
+		//		cout << endl;
+		//	}
+		//}
+		//cout << "|Functions|\n";
+		//cout.width(StringLength); cout << "Name";
+		//cout.width(StringLength); cout << "Prefix";
+		//cout.width(StringLength); cout << "DataType";
+		//cout.width(StringLength);
+		//cout.width(StringLength);
+		//cout.width(StringLength);
+		//cout << endl;
+		//for (int i = 0; i < idTable.current_size; i++)
+		//{
+		//	if (idTable.table[i].idtype == IT::F)
+		//	{
+		//		cout.width(StringLength); cout << idTable.table[i].id;
+		//		cout.width(StringLength); cout << *idTable.table[i].prefix.rbegin();
+		//		cout.width(StringLength); cout << idTable.table[i].iddatatype;
+		//		cout.width(StringLength); cout << "-";
+		//		cout.width(StringLength); cout << "-";
+		//		cout.width(StringLength); cout << "-";
+		//		cout << endl;
+		//	}
+		//}
+		//cout << "|Variables|\n";
+		//cout.width(StringLength); cout << "Name";
+		//cout.width(StringLength); cout << "Prefix";
+		//cout.width(StringLength); cout << "DataType";
+		//cout.width(StringLength); cout << "STR length";
+		//cout.width(StringLength); cout << "Value STR";
+		//cout.width(StringLength); cout << "Value INT";
+		//cout << endl;
+		//for (int i = 0; i < idTable.current_size; i++)
+		//{
+		//	if (idTable.table[i].idtype == IT::V)
+		//	{
+		//		cout.width(StringLength); cout << idTable.table[i].id;
+		//		cout.width(StringLength); cout << *idTable.table[i].prefix.rbegin();
+		//		cout.width(StringLength); cout << idTable.table[i].iddatatype;
+		//		if (idTable.table[i].iddatatype == IT::STR)
+		//		{
+		//			cout.width(StringLength); cout << (int)idTable.table[i].value.vstr.len;
+		//			cout.width(StringLength); cout << idTable.table[i].value.vstr.str;
+		//			cout.width(StringLength); cout << "-";
+		//		}
+		//		else
+		//		{
+		//			cout.width(StringLength); cout << "-";
+		//			cout.width(StringLength); cout << "-";
+		//			cout.width(StringLength); cout << idTable.table[i].value.vint;
+		//		}
+		//		cout << endl;
+		//	}
+		//}
+		//cout << "|Literals|\n";
+		//cout.width(StringLength); cout << "Name";
+		//cout.width(StringLength); cout << "Prefix";
+		//cout.width(StringLength); cout << "DataType";
+		//cout.width(StringLength); cout << "STR length";
+		//cout.width(StringLength); cout << "Value STR";
+		//cout.width(StringLength); cout << "Value INT";
+		//cout << endl;
+		//for (int i = 0; i < idTable.current_size; i++)
+		//{
+		//	if (idTable.table[i].idtype == IT::L)
+		//	{
+		//		cout.width(StringLength); cout << idTable.table[i].id;
+		//		cout.width(StringLength); cout << *idTable.table[i].prefix.rbegin();
+		//		cout.width(StringLength); cout << idTable.table[i].iddatatype;
+		//		if (idTable.table[i].iddatatype == IT::STR)
+		//		{
+		//			cout.width(StringLength); cout << (int)idTable.table[i].value.vstr.len;
+		//			cout.width(StringLength); cout << idTable.table[i].value.vstr.str;
+		//			cout.width(StringLength); cout << "-";
+		//		}
+		//		else
+		//		{
+		//			cout.width(StringLength); cout << "-";
+		//			cout.width(StringLength); cout << "-";
+		//			cout.width(StringLength); cout << idTable.table[i].value.vint;
+		//		}
+		//		cout << endl;
+		//	}
+		//}
 	};
 }
