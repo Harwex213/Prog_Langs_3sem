@@ -27,7 +27,7 @@ namespace GRB
 			static bool isT(GRBALPHABET s) { return s > 0; };			// терминал?
 			static bool isN(GRBALPHABET s) { return !isT(s); };			// нетерминал?
 			static char alphabet_to_char(GRBALPHABET s) { return isT(s) ? char(s) : char(-s); };	// GRBALPHABET->char
-		}*chains;		// массив цепочек - правых частей правила
+		}* chains;		// массив цепочек - правых частей правила
 
 		Rule() { nn = 0x00, size = 0; };
 		Rule(
@@ -46,7 +46,7 @@ namespace GRB
 			Chain& pchain,					// возвращаемая цепочка
 			short j							// номер цепочки
 		);
-	};
+	}; 
 
 	struct Greibach						// грамматика Грейбах
 	{
@@ -59,13 +59,13 @@ namespace GRB
 		Greibach(
 			GRBALPHABET pstartN,		// стартовый символ
 			GRBALPHABET pstbottomT,		// дно стека
-			short size,					// количество правил
+			short psize,				// количество правил
 			Rule r, ...					// правила
 		);
 
-		short GetRule(					// получить правило, возвращается номер правила или -1
+		short getRule(					// получить правило, возвращается номер правила или -1
 			GRBALPHABET pnn,			// левый символ правила
-			Rule& rule					// возвращаемое правило грамматики
+			Rule& prule					// возвращаемое правило грамматики
 		);
 		Rule getRule(short n);			// получить правило по номеру
 	};

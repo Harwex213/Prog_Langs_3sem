@@ -23,5 +23,6 @@
 #include "Graph.h"
 #include "LexAnalysis.h"
 #include "PolishNotation.h"
+#include "GRB.h"
 
 using namespace std;
