@@ -4,6 +4,9 @@ typedef short GRBALPHABET;		//символы алфавита грамматики. Терминалы > 0, нетерм
 
 namespace GRB
 {
+//#define NS(n)	Rule::Chain::N(n)
+//#define TS(n)	Rule::Chain::T(n)
+
 	struct Rule					// правило в грамматике Грейбах
 	{
 		GRBALPHABET nn;			// нетерминал (левый символ правила) < 0
