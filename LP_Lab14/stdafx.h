@@ -6,9 +6,11 @@
 #include <vector>
 #include <list>
 #include <stack>
-#include <fstream>
 #include <time.h>
 #include <chrono>
+#include <tchar.h>
+#include <wchar.h>
+#include <iomanip>
 
 #include "Error.h"
 #include "FST.h"
@@ -24,5 +26,6 @@
 #include "LexAnalysis.h"
 #include "PolishNotation.h"
 #include "GRB.h"
+#include "MFST.h"
 
 using namespace std;

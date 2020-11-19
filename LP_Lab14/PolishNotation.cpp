@@ -47,7 +47,7 @@ namespace PolishNotation
 				case LEX_LITERAL:
 				case LEX_ID:
 				{
-					if (isParams)
+					if (isParams && !stackParams.empty())
 						stackParams[countFunction]++;
 
 					IT::Entry entry = IT::GetEntry(idtable, lextable.table[lextable_pos].idxTI);
@@ -105,7 +105,7 @@ namespace PolishNotation
 						}
 						stack.push(tempOperation);
 					}
-					if (isParams)
+					if (isParams && !stackParams.empty())
 						stackParams[countFunction]--;
 					break;
 				}

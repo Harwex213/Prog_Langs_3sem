@@ -6,7 +6,7 @@ namespace Error
 	//				 100-109 - ошибки параметров
 	//				 110-119 - ошибки открытия и чтения файлов
 	//				 120-XXX - ошибки определения лексем
-	ERROR errors[ERROR_MAX_ENTRY] =
+	ERROR errors[ERROR_MAX_ENTRY+1] =
 	{
 		ERROR_ENTRY(0, "Недопустимый код ошибки"),
 		ERROR_ENTRY(1, "Системный сбой"),
@@ -51,6 +51,11 @@ namespace Error
 		ERROR_ENTRY(142, "Ошибка при создании Таблицы Идентификаторов: Превышение максимального (минимального) значения литерала"),
 		ERROR_ENTRY(143, "Объявление (Использование) идентификатора вне программной конструкции"),
 		ERROR_ENTRY(144, "Переобъявление идентификатора"),
+		ERROR_ENTRY_NODEF(145),
+		ERROR_ENTRY_NODEF(146),
+		ERROR_ENTRY_NODEF(147),
+		ERROR_ENTRY_NODEF(148),
+		ERROR_ENTRY_NODEF(149),
 		ERROR_ENTRY_NODEF10(150),	ERROR_ENTRY_NODEF10(160),
 		ERROR_ENTRY_NODEF10(170),	ERROR_ENTRY_NODEF10(180),	ERROR_ENTRY_NODEF10(190),
 		ERROR_ENTRY_NODEF100(200),	ERROR_ENTRY_NODEF100(300),	ERROR_ENTRY_NODEF100(400),

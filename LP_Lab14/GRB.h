@@ -1,12 +1,12 @@
 #pragma once
 #include "Error.h"
 typedef short GRBALPHABET;		//символы алфавита грамматики. Терминалы > 0, нетерминалы < 0
+#define NS(n)	GRB::Rule::Chain::N(n)
+#define TS(n)	GRB::Rule::Chain::T(n)
+#define ISNS(n) GRB::Rule::Chain::isN(n)
 
 namespace GRB
 {
-//#define NS(n)	Rule::Chain::N(n)
-//#define TS(n)	Rule::Chain::T(n)
-
 	struct Rule					// правило в грамматике Грейбах
 	{
 		GRBALPHABET nn;			// нетерминал (левый символ правила) < 0
@@ -58,7 +58,7 @@ namespace GRB
 		GRBALPHABET stbottomT;			// дно стека
 		Rule* rules;					// множество правил
 
-		Greibach() { short size = 0; startN = 0; stbottomT = 0; rules = 0; };
+		Greibach() { size = 0; startN = 0; stbottomT = 0; rules = 0; };
 		Greibach(
 			GRBALPHABET pstartN,		// стартовый символ
 			GRBALPHABET pstbottomT,		// дно стека

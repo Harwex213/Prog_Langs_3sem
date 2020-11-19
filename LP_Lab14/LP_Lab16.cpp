@@ -20,12 +20,18 @@ int wmain(int argc, wchar_t* argv[])
 		LexAnalysis::FillTables(in, lexTable, idTable);
 		//WriteLexTable
 		//WriteIdTable
-		PolishNotation::TransformToPolishNotation(lexTable, idTable);
 		Log::WriteIn(log, in);
 		Out::OUT out = Out::getout(parm.out);
 		Out::WriteAnalyze(out, in, log);
 		Log::Close(log);
 		Out::OutClose(out);
+
+		MFST_TRACE_START;									//	отладка
+		MFST::Mfst mfst(lexTable, GRB::getGreibach());		//	автомат
+		mfst.start();										//	старт синтаксического	анализа
+		mfst.printRules();
+
+		PolishNotation::TransformToPolishNotation(lexTable, idTable);
 		LT::Delete(lexTable);
 		IT::Delete(idTable);
 		delete[] in.text;
