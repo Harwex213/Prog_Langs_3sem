@@ -39,9 +39,9 @@ START:
 	push lengthof arr
 	push OFFSET arr
 	call getmax
-	sub eax, min
+	sub min, eax
 	; result var to char
-	invoke IntToChar, OFFSET resultIntToChar, eax
+	invoke IntToChar, OFFSET resultIntToChar, min
 	invoke CPrint, OFFSET msg
 	invoke CPrint, OFFSET resultIntToChar
 
