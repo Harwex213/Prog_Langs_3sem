@@ -18,8 +18,6 @@ namespace Out
 	}
 	void WriteAnalyze(OUT out, In::IN in, Log::LOG log)
 	{
-		*out.stream << in.text << endl << endl;
-
 		time_t rawtime;
 		struct tm timeinfo;								//структура хранящая текущее время
 		char buffer[PARM_MAX_SIZE];

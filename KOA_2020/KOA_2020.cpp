@@ -45,7 +45,6 @@ int wmain(int argc, wchar_t* argv[])
 		// Clear RAM Stage.
 		LT::Delete(lexTable);
 		IT::Delete(idTable);
-		delete[] in.text;
 
 		// Time optimization chek.
 		//std::chrono::high_resolution_clock::time_point t2 = std::chrono::high_resolution_clock::now();
