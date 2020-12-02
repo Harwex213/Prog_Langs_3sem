@@ -26,12 +26,12 @@ namespace In
 
 				AnalyzeLetter(sample.code[txt_temp], txt_temp, interimData, sample);
 
-				entry.position = interimData.positionNumber;
 				entry.line = interimData.lineNumber;
 
 				while (!sample.symbolCounter.empty())
 				{
 					int tempCounter = sample.symbolCounter.front();
+					entry.position = interimData.positionNumber - tempCounter;
 					sample.symbolCounter.pop_front();
 					entry.text = new char[tempCounter + 1];
 					entry.text[tempCounter] = NULL;
@@ -68,7 +68,7 @@ namespace In
 		}
 		else
 			cout << "\nFound NULL in function 'addword' while chek 'entry.text'\n";
-		cout << entry.text << "\t\tposition: " << entry.position << endl;
+		cout << entry.text << "\t\tposition: " << entry.position << "\t" << entry.line << endl;
 		in.wordCounter++;
 	};
 
@@ -106,6 +106,8 @@ namespace In
 		default:
 			interimData.lineNumber++;
 			interimData.positionNumber = 1;
+			if (interimData.literalIn)
+				throw ERROR_THROW_IN(111, interimData.lineNumber, interimData.positionNumber);
 		case IN::W:
 			if (interimData.wasTrueSymbol && !interimData.literalIn)
 				interimData.WasTrueSymbol(in);

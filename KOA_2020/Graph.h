@@ -1,22 +1,44 @@
 #pragma once
 #include "LT.h"
-#define GRAPH_INT LEX_INTEGER, string, 8, \
-FST::NODE(1, FST::RELATION('i', 1)), \
-FST::NODE(1, FST::RELATION('n', 2)), \
-FST::NODE(1, FST::RELATION('t', 3)), \
-FST::NODE(1, FST::RELATION('e', 4)), \
-FST::NODE(1, FST::RELATION('g', 5)), \
-FST::NODE(1, FST::RELATION('e', 6)), \
-FST::NODE(1, FST::RELATION('r', 7)), \
+#define GRAPH_UINT LEX_UINT, string, 5, \
+FST::NODE(1, FST::RELATION('u', 1)), \
+FST::NODE(1, FST::RELATION('i', 2)), \
+FST::NODE(1, FST::RELATION('n', 3)), \
+FST::NODE(1, FST::RELATION('t', 4)), \
 FST::NODE()
 
-#define GRAPH_STR LEX_INTEGER, string, 7, \
+#define GRAPH_STRING LEX_STRING, string, 7, \
 FST::NODE(1, FST::RELATION('s', 1)), \
 FST::NODE(1, FST::RELATION('t', 2)), \
 FST::NODE(1, FST::RELATION('r', 3)), \
 FST::NODE(1, FST::RELATION('i', 4)), \
 FST::NODE(1, FST::RELATION('n', 5)), \
 FST::NODE(1, FST::RELATION('g', 6)), \
+FST::NODE()
+
+#define GRAPH_BOOL LEX_BOOL, string, 5, \
+FST::NODE(1, FST::RELATION('b', 1)), \
+FST::NODE(1, FST::RELATION('o', 2)), \
+FST::NODE(1, FST::RELATION('o', 3)), \
+FST::NODE(1, FST::RELATION('l', 4)), \
+FST::NODE()
+
+#define GRAPH_FLOAT LEX_FLOAT, string, 6, \
+FST::NODE(1, FST::RELATION('f', 1)), \
+FST::NODE(1, FST::RELATION('l', 2)), \
+FST::NODE(1, FST::RELATION('o', 3)), \
+FST::NODE(1, FST::RELATION('a', 4)), \
+FST::NODE(1, FST::RELATION('t', 5)), \
+FST::NODE()
+
+#define GRAPH_INCLUDE LEX_INCLUDE, string, 9, \
+FST::NODE(1, FST::RELATION('i', 1)), \
+FST::NODE(1, FST::RELATION('n', 2)), \
+FST::NODE(1, FST::RELATION('c', 3)), \
+FST::NODE(1, FST::RELATION('l', 4)), \
+FST::NODE(1, FST::RELATION('u', 6)), \
+FST::NODE(1, FST::RELATION('d', 7)), \
+FST::NODE(1, FST::RELATION('e', 8)), \
 FST::NODE()
 
 #define GRAPH_FUN LEX_FUNCTION, string, 9, \
@@ -30,14 +52,24 @@ FST::NODE(1, FST::RELATION('o', 7)), \
 FST::NODE(1, FST::RELATION('n', 8)), \
 FST::NODE()
 
-#define GRAPH_DEC LEX_DECLARE, string, 8, \
-FST::NODE(1, FST::RELATION('d', 1)), \
-FST::NODE(1, FST::RELATION('e', 2)), \
-FST::NODE(1, FST::RELATION('c', 3)), \
+#define GRAPH_IF LEX_IF, string, 3, \
+FST::NODE(1, FST::RELATION('i', 1)), \
+FST::NODE(1, FST::RELATION('f', 2)), \
+FST::NODE()
+
+#define GRAPH_WHILE LEX_WHILE, string, 6, \
+FST::NODE(1, FST::RELATION('w', 1)), \
+FST::NODE(1, FST::RELATION('h', 2)), \
+FST::NODE(1, FST::RELATION('i', 3)), \
 FST::NODE(1, FST::RELATION('l', 4)), \
-FST::NODE(1, FST::RELATION('a', 5)), \
-FST::NODE(1, FST::RELATION('r', 6)), \
-FST::NODE(1, FST::RELATION('e', 7)), \
+FST::NODE(1, FST::RELATION('e', 5)), \
+FST::NODE()
+
+#define GRAPH_MAIN LEX_MAIN, string, 5, \
+FST::NODE(1, FST::RELATION('m', 1)), \
+FST::NODE(1, FST::RELATION('a', 2)), \
+FST::NODE(1, FST::RELATION('i', 3)), \
+FST::NODE(1, FST::RELATION('n', 4)), \
 FST::NODE()
 
 #define GRAPH_RET LEX_RETURN, string, 7, \
@@ -49,48 +81,200 @@ FST::NODE(1, FST::RELATION('r', 5)), \
 FST::NODE(1, FST::RELATION('n', 6)), \
 FST::NODE()
 
-#define GRAPH_PRINT LEX_PRINT, string, 6, \
-FST::NODE(1, FST::RELATION('p', 1)), \
-FST::NODE(1, FST::RELATION('r', 2)), \
-FST::NODE(1, FST::RELATION('i', 3)), \
-FST::NODE(1, FST::RELATION('n', 4)), \
-FST::NODE(1, FST::RELATION('t', 5)), \
-FST::NODE()
+#define GRAPH_PARENTHESES_LEFT LEX_PARENTHESES_LEFT, string, 1, \
+FST::NODE(1, FST::RELATION('(', 0))
 
-#define GRAPH_MAIN LEX_MAIN, string, 5, \
-FST::NODE(1, FST::RELATION('m', 1)), \
-FST::NODE(1, FST::RELATION('a', 2)), \
-FST::NODE(1, FST::RELATION('i', 3)), \
-FST::NODE(1, FST::RELATION('n', 4)), \
-FST::NODE()
+#define GRAPH_PARENTHESES_RIGHT LEX_PARENTHESES_RIGHT, string, 1, \
+FST::NODE(1, FST::RELATION(')', 0))
 
-#define GRAPH_SEMICOLON LEX_SEMICOLON, string, 1, \
-FST::NODE(1, FST::RELATION(';', 0))
+#define GRAPH_BRACKETS_LEFT LEX_BRACKETS_LEFT, string, 1, \
+FST::NODE(1, FST::RELATION('[', 0))
+
+#define GRAPH_BRACKETS_RIGHT LEX_BRACKETS_RIGHT, string, 1, \
+FST::NODE(1, FST::RELATION(']', 0))
+
+#define GRAPH_BRACES_LEFT LEX_BRACES_LEFT, string, 1, \
+FST::NODE(1, FST::RELATION('{', 0))
+
+#define GRAPH_BRACES_RIGHT LEX_BRACES_RIGHT, string, 1, \
+FST::NODE(1, FST::RELATION('}', 0))
+
+#define GRAPH_BRACES_RIGHT LEX_BRACES_RIGHT, string, 1, \
+FST::NODE(1, FST::RELATION('+', 0))
+
+#define GRAPH_BRACES_RIGHT LEX_BRACES_RIGHT, string, 1, \
+FST::NODE(1, FST::RELATION('-', 0))
+
+#define GRAPH_BRACES_RIGHT LEX_BRACES_RIGHT, string, 1, \
+FST::NODE(1, FST::RELATION('*', 0))
+
+#define GRAPH_BRACES_RIGHT LEX_BRACES_RIGHT, string, 1, \
+FST::NODE(1, FST::RELATION('/', 0))
+
+#define GRAPH_EQUALLY LEX_EQUALLY, string, 1, \
+FST::NODE(2, \
+	FST::RELATION('=', 0), \
+	FST::RELATION('=', 0))
+
+#define GRAPH_NON_EQUALLY LEX_NON_EQUALLY, string, 1, \
+FST::NODE(2, \
+	FST::RELATION('!', 0), \
+	FST::RELATION('=', 0))
+
+#define GRAPH_MORE LEX_MORE, string, 1, \
+FST::NODE(1, FST::RELATION('>', 0))
+
+#define GRAPH_LESS LEX_LESS, string, 1, \
+FST::NODE(1, FST::RELATION('<', 0))
+
+#define GRAPH_MORE_OR_EQUAL LEX_MORE_OR_EQUAL, string, 1, \
+FST::NODE(2, \
+	FST::RELATION('>', 0), \
+	FST::RELATION('=', 0))
+
+#define GRAPH_LESS_OR_EQUAL LEX_LESS_OR_EQUAL, string, 1, \
+FST::NODE(2, \
+	FST::RELATION('<', 0), \
+	FST::RELATION('=', 0))
+
+#define GRAPH_OR LEX_OR, string, 1, \
+FST::NODE(1, FST::RELATION('|', 0))
+
+#define GRAPH_AND LEX_AND, string, 1, \
+FST::NODE(1, FST::RELATION('&', 0))
+
+#define GRAPH_INVERSION LEX_INVERSION, string, 1, \
+FST::NODE(1, FST::RELATION('~', 0))
+
+#define GRAPH_ASSIGNMENT LEX_ASSIGNMENT, string, 1, \
+FST::NODE(1, FST::RELATION('=', 0))
 
 #define GRAPH_COMMA LEX_COMMA, string, 1, \
 FST::NODE(1, FST::RELATION(',', 0))
 
-#define GRAPH_PARENTHESES_LEFT LEX_LEFTHESIS, string, 1, \
-FST::NODE(1, FST::RELATION('{', 0))
+#define GRAPH_SEMICOLON LEX_SEMICOLON, string, 1, \
+FST::NODE(1, FST::RELATION(';', 0))
 
-#define GRAPH_PARENTHESES_RIGHT LEX_RIGHTHESIS, string, 1, \
-FST::NODE(1, FST::RELATION('}', 0))
+#define GRAPH_IDENTIFY LEX_ID, string, 1, \
+FST::NODE(52, \
+	FST::RELATION('a', 0), \
+	FST::RELATION('b', 0), \
+	FST::RELATION('c', 0), \
+	FST::RELATION('d', 0), \
+	FST::RELATION('e', 0), \
+	FST::RELATION('f', 0), \
+	FST::RELATION('g', 0), \
+	FST::RELATION('h', 0), \
+	FST::RELATION('i', 0), \
+	FST::RELATION('j', 0), \
+	FST::RELATION('k', 0), \
+	FST::RELATION('l', 0), \
+	FST::RELATION('m', 0), \
+	FST::RELATION('n', 0), \
+	FST::RELATION('o', 0), \
+	FST::RELATION('p', 0), \
+	FST::RELATION('q', 0), \
+	FST::RELATION('r', 0), \
+	FST::RELATION('s', 0), \
+	FST::RELATION('t', 0), \
+	FST::RELATION('u', 0), \
+	FST::RELATION('v', 0), \
+	FST::RELATION('w', 0), \
+	FST::RELATION('x', 0), \
+	FST::RELATION('y', 0), \
+	FST::RELATION('z', 0), \
+	FST::RELATION('A', 0), \
+	FST::RELATION('B', 0), \
+	FST::RELATION('C', 0), \
+	FST::RELATION('D', 0), \
+	FST::RELATION('E', 0), \
+	FST::RELATION('F', 0), \
+	FST::RELATION('G', 0), \
+	FST::RELATION('H', 0), \
+	FST::RELATION('I', 0), \
+	FST::RELATION('J', 0), \
+	FST::RELATION('K', 0), \
+	FST::RELATION('L', 0), \
+	FST::RELATION('M', 0), \
+	FST::RELATION('N', 0), \
+	FST::RELATION('O', 0), \
+	FST::RELATION('P', 0), \
+	FST::RELATION('Q', 0), \
+	FST::RELATION('R', 0), \
+	FST::RELATION('S', 0), \
+	FST::RELATION('T', 0), \
+	FST::RELATION('U', 0), \
+	FST::RELATION('V', 0), \
+	FST::RELATION('W', 0), \
+	FST::RELATION('X', 0), \
+	FST::RELATION('Y', 0), \
+	FST::RELATION('Z', 0)), \
+FST::NODE(63, \
+	FST::RELATION('a', 0), \
+	FST::RELATION('b', 0), \
+	FST::RELATION('c', 0), \
+	FST::RELATION('d', 0), \
+	FST::RELATION('e', 0), \
+	FST::RELATION('f', 0), \
+	FST::RELATION('g', 0), \
+	FST::RELATION('h', 0), \
+	FST::RELATION('i', 0), \
+	FST::RELATION('j', 0), \
+	FST::RELATION('k', 0), \
+	FST::RELATION('l', 0), \
+	FST::RELATION('m', 0), \
+	FST::RELATION('n', 0), \
+	FST::RELATION('o', 0), \
+	FST::RELATION('p', 0), \
+	FST::RELATION('q', 0), \
+	FST::RELATION('r', 0), \
+	FST::RELATION('s', 0), \
+	FST::RELATION('t', 0), \
+	FST::RELATION('u', 0), \
+	FST::RELATION('v', 0), \
+	FST::RELATION('w', 0), \
+	FST::RELATION('x', 0), \
+	FST::RELATION('y', 0), \
+	FST::RELATION('z', 0), \
+	FST::RELATION('A', 0), \
+	FST::RELATION('B', 0), \
+	FST::RELATION('C', 0), \
+	FST::RELATION('D', 0), \
+	FST::RELATION('E', 0), \
+	FST::RELATION('F', 0), \
+	FST::RELATION('G', 0), \
+	FST::RELATION('H', 0), \
+	FST::RELATION('I', 0), \
+	FST::RELATION('J', 0), \
+	FST::RELATION('K', 0), \
+	FST::RELATION('L', 0), \
+	FST::RELATION('M', 0), \
+	FST::RELATION('N', 0), \
+	FST::RELATION('O', 0), \
+	FST::RELATION('P', 0), \
+	FST::RELATION('Q', 0), \
+	FST::RELATION('R', 0), \
+	FST::RELATION('S', 0), \
+	FST::RELATION('T', 0), \
+	FST::RELATION('U', 0), \
+	FST::RELATION('V', 0), \
+	FST::RELATION('W', 0), \
+	FST::RELATION('X', 0), \
+	FST::RELATION('Y', 0), \
+	FST::RELATION('Z', 0), \
+	FST::RELATION('_', 0), \
+	FST::RELATION('0', 0), \
+	FST::RELATION('1', 0), \
+	FST::RELATION('2', 0), \
+	FST::RELATION('3', 0), \
+	FST::RELATION('4', 0), \
+	FST::RELATION('5', 0), \
+	FST::RELATION('6', 0), \
+	FST::RELATION('7', 0), \
+	FST::RELATION('8', 0), \
+	FST::RELATION('9', 0)), \
+FST::NODE()
 
-#define GRAPH_BRACES_LEFT LEX_LEFTBRACE, string, 1, \
-FST::NODE(1, FST::RELATION('(', 0))
-
-#define GRAPH_BRACES_RIGHT LEX_RIGHTBRACE, string, 1, \
-FST::NODE(1, FST::RELATION(')', 0))
-
-#define GRAPH_COMPUTATION LEX_COMPUTATION, string, 1, \
-FST::NODE(4, \
-	FST::RELATION('+', 0), \
-	FST::RELATION('-', 0), \
-	FST::RELATION('/', 0), \
-	FST::RELATION('*', 0))
-
-#define GRAPH_ASSIGN LEX_EQUAL_SIGN, string, 1, \
-FST::NODE(1, FST::RELATION('=', 0))
 
 #define GRAPH_LTRL_INT LEX_LITERAL, string, 1, \
 FST::NODE(10, \
@@ -321,3 +505,11 @@ FST::FST fst16(GRAPH_COMPUTATION); \
 FST::FST fst17(GRAPH_ASSIGN); \
 FST::FST fst18(GRAPH_IDENTIFY); \
 FST::FST graphArray[GRAPHS_SIZE] = { fst1, fst2, fst3, fst4, fst5, fst6, fst7, fst8, fst9, fst10, fst11, fst12, fst13, fst14, fst15, fst16, fst17, fst18 };
+
+namespace Graphes
+{
+	FST::FST* graphes[256] = 
+	{
+
+	};
+}

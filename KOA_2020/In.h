@@ -9,26 +9,26 @@
 #define	IN_NULL_STR	'\0'
 
 /*	SYMBOLS:
-	[a-z] [A-Z] [0-9] _	! .	:				TRUE SYMBOLS/Long Symbols	(T)
+	[a-z] [A-Z] [0-9] _	! .	: " #			TRUE SYMBOLS/Long Symbols	(T)
 	пробел табул€ци€						WHITESPACE/Wait				(W)
 	+ - * / () {} [] ; , | & ~ = <>	~ ^		SEPARATORS/					(S)
 	F										FALSE SYMBOLS/Error			(F)
 */
 #define IN_CODE_TABLE {\
 /* 0  | 1-a | 2-b | 3-c | 4-d | 5-e |  6  |  7  | 8-h |  9  |  A  |  B  |  C  |  D  |  E  |  F  |    */\
- IN::F,IN::F,IN::F,IN::F,IN::F,IN::F,IN::F,IN::F,IN::F,IN::W,  '|',IN::F,IN::F,IN::F,IN::F,IN::F, /*0*/\
+ IN::T,IN::F,IN::F,IN::F,IN::F,IN::F,IN::F,IN::F,IN::F,IN::W,  '|',IN::F,IN::F,IN::F,IN::F,IN::F, /*0*/\
  IN::F,IN::F,IN::F,IN::F,IN::F,IN::F,IN::F,IN::F,IN::F,IN::F,IN::F,IN::F,IN::F,IN::F,IN::F,IN::F, /*1*/\
- IN::W,IN::T,IN::F,IN::F,IN::F,IN::F,IN::S,IN::T,IN::S,IN::S,IN::S,IN::S,IN::S,IN::S,IN::T,IN::S, /*2*/\
+ IN::W,IN::T,IN::T,IN::T,IN::F,IN::T,IN::S,IN::T,IN::S,IN::S,IN::S,IN::S,IN::S,IN::S,IN::T,IN::S, /*2*/\
  IN::T,IN::T,IN::T,IN::T,IN::T,IN::T,IN::T,IN::T,IN::T,IN::T,IN::T,IN::S,IN::S,IN::S,IN::S,IN::S, /*3*/\
- IN::F,IN::T,IN::T,IN::T,IN::T,IN::T,IN::T,IN::T,IN::T,IN::T,IN::T,IN::T,IN::T,IN::T,IN::T,IN::T, /*4*/\
- IN::T,IN::T,IN::T,IN::T,IN::T,IN::T,IN::T,IN::T,IN::T,IN::T,IN::T,IN::S,IN::F,IN::S,IN::S,IN::T, /*5*/\
- IN::F,IN::T,IN::T,IN::T,IN::T,IN::T,IN::T,IN::T,IN::T,IN::T,IN::T,IN::T,IN::T,IN::T,IN::T,IN::T, /*6*/\
+ IN::T,IN::T,IN::T,IN::T,IN::T,IN::T,IN::T,IN::T,IN::T,IN::T,IN::T,IN::T,IN::T,IN::T,IN::T,IN::T, /*4*/\
+ IN::T,IN::T,IN::T,IN::T,IN::T,IN::T,IN::T,IN::T,IN::T,IN::T,IN::T,IN::S,IN::T,IN::S,IN::S,IN::T, /*5*/\
+ IN::T,IN::T,IN::T,IN::T,IN::T,IN::T,IN::T,IN::T,IN::T,IN::T,IN::T,IN::T,IN::T,IN::T,IN::T,IN::T, /*6*/\
  IN::T,IN::T,IN::T,IN::T,IN::T,IN::T,IN::T,IN::T,IN::T,IN::T,IN::T,IN::S,IN::S,IN::S,IN::S,IN::F, /*7*/\
      																								   \
  IN::F,IN::F,IN::F,IN::F,IN::F,IN::F,IN::F,IN::F,IN::F,IN::F,IN::F,IN::F,IN::F,IN::F,IN::F,IN::F, /*8*/\
  IN::F,IN::F,IN::F,IN::F,IN::F,IN::F,IN::F,IN::F,IN::F,IN::F,IN::F,IN::F,IN::F,IN::F,IN::F,IN::F, /*9*/\
- IN::F,IN::F,IN::F,IN::F,IN::F,IN::F,IN::F,IN::F,IN::F,IN::F,IN::F,IN::F,IN::F,IN::F,IN::F,IN::F, /*A*/\
- IN::F,IN::F,IN::F,IN::F,IN::F,IN::F,IN::F,IN::F,IN::F,IN::F,IN::F,IN::F,IN::F,IN::F,IN::F,IN::F, /*B*/\
+ IN::F,IN::F,IN::F,IN::F,IN::F,IN::F,IN::F,IN::F,IN::T,IN::F,IN::F,IN::F,IN::F,IN::F,IN::F,IN::F, /*A*/\
+ IN::F,IN::F,IN::F,IN::F,IN::F,IN::F,IN::F,IN::F,IN::T,IN::T,IN::F,IN::F,IN::F,IN::F,IN::F,IN::F, /*B*/\
  IN::T,IN::T,IN::T,IN::T,IN::T,IN::T,IN::T,IN::T,IN::T,IN::T,IN::T,IN::T,IN::T,IN::T,IN::T,IN::T, /*C*/\
  IN::T,IN::T,IN::T,IN::T,IN::T,IN::T,IN::T,IN::T,IN::T,IN::T,IN::T,IN::T,IN::T,IN::T,IN::T,IN::T, /*D*/\
  IN::T,IN::T,IN::T,IN::T,IN::T,IN::T,IN::T,IN::T,IN::T,IN::T,IN::T,IN::T,IN::T,IN::T,IN::T,IN::T, /*E*/\
@@ -64,7 +64,7 @@ namespace In
 	struct ANALYSIS_DATA
 	{
 		int symbolCounter = 0;
-		int positionNumber = 1;
+		int positionNumber = 0;
 		int lineNumber = 1;
 		bool literalIn = false;
 		bool wasTrueSymbol = false;

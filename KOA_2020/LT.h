@@ -1,27 +1,42 @@
 #pragma once
-#define LEXEMA_FIXSIZE	1			// фиксированный размер лексемы
-#define	LT_MAXSIZE		4096		// максимальное количество строк в таблице лексем	
-#define	LT_TI_NULLXDX	0xffffffff	// нет элемента таблицы идентификаторов				
-#define	LEX_INTEGER		't'			// лексема для integer
-#define	LEX_STRING		't'			// лексема для string
-#define LEX_INTORSTR	't'			// 
-#define	LEX_ID			'i'			// лексема для идентификатора
-#define	LEX_LITERAL		'l'			// лексема для литерала
-#define	LEX_FUNCTION	'f'			// лексема для function
-#define	LEX_DECLARE		'd'			// лексема для declare
-#define	LEX_RETURN		'r'			// лексема для return
-#define	LEX_PRINT		'p'			// лексема для print
-#define	LEX_MAIN		'm'			// лексема для main
-#define	LEX_SEMICOLON	';'			// лексема для ;
-#define	LEX_COMMA		','			// лексема для ,
-#define	LEX_LEFTHESIS	'{'			// лексема для (
-#define	LEX_RIGHTHESIS	'}'	
-#define	LEX_LEFTBRACKETS  '['
-#define	LEX_RIGHTBRACKETS ']'	
-#define	LEX_LEFTBRACE	'('			// лексема для {
-#define	LEX_RIGHTBRACE	')'			// лексема для }		// лексема для )
-#define	LEX_COMPUTATION	'v'			// лексема для + - / *
-#define	LEX_EQUAL_SIGN	'='			// лексема для =
+
+#define LEXEMA_FIXSIZE	1
+#define	LT_MAXSIZE		4096
+#define	LT_TI_NULLXDX	0xffffffff
+#define	LEX_UINT					't'
+#define	LEX_STRING					't'
+#define	LEX_BOOL					't'
+#define	LEX_FLOAT					't'
+#define	LEX_INCLUDE					'd'
+#define	LEX_FUNCTION				'f'
+#define	LEX_IF						'q'
+#define	LEX_WHILE					'w'
+#define	LEX_MAIN					'm'
+#define	LEX_RETURN					'r'
+#define	LEX_PARENTHESES_LEFT		'('
+#define	LEX_PARENTHESES_RIGHT		')'
+#define	LEX_BRACKETS_LEFT			'['
+#define	LEX_BRACKETS_RIGHT			']'
+#define	LEX_BRACES_LEFT				'{'
+#define	LEX_BRACES_RIGHT			'}'
+#define	LEX_PLUS					'v'
+#define	LEX_MINUS					'v'
+#define	LEX_MULTIPLY				'v'
+#define	LEX_DIVISION				'v'
+#define	LEX_EQUALLY					'v'
+#define	LEX_NON_EQUALLY				'v'
+#define	LEX_MORE					'v'
+#define	LEX_LESS					'v'
+#define	LEX_MORE_OR_EQUAL			'v'
+#define	LEX_LESS_OR_EQUAL			'v'
+#define	LEX_OR						'v'
+#define	LEX_AND						'v'
+#define	LEX_INVERSION				'v'
+#define	LEX_ASSIGNMENT				'='
+#define	LEX_COMMA					','
+#define	LEX_SEMICOLON				';'
+#define	LEX_IDENTIFICATOR			'i'
+#define	LEX_LITERAL					'l'
 
 namespace LT							// таблица лексем
 {
