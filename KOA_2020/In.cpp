@@ -5,7 +5,6 @@ namespace In
 	IN getin(wchar_t* infile)
 	{
 		IN sample;
-		sample.alfaLxmTable = new PARSED_WORDS[LT_MAXSIZE];
 		ifstream file(infile);
 
 		char unsigned txt_temp;
@@ -18,27 +17,27 @@ namespace In
 			while ((txt_temp = file.get()) && !file.eof())
 			{
 				chek_file = true;
-					
+ 				AnalyzeLetter(sample.code[txt_temp], txt_temp, interimData, sample);
 				sample.size++;
 				interimData.positionNumber++;
-
- 				AnalyzeLetter(sample.code[txt_temp], txt_temp, interimData, sample);
-
-				entry.line = interimData.lineNumber;
-
-				while (!sample.symbolCounter.empty())
+			}
+			int counter_temp = 0;
+			sample.alfaLxmTable = new PARSED_WORDS[interimData.specialSymbolCounter];
+			for (int i = 0; i < sample.symbolsNew.size(); i++)
+			{
+				if (sample.symbolsNew[i] == interimData.specialSymbol)
 				{
-					int tempCounter = sample.symbolCounter.front();
-					entry.position = interimData.positionNumber - tempCounter;
-					sample.symbolCounter.pop_front();
-					entry.text = new char[tempCounter + 1];
-					entry.text[tempCounter] = NULL;
-					for (int i = 0; i < tempCounter; i++)
-					{
-						entry.text[i] = sample.symbols.front();
-						sample.symbols.pop_front();
-					}
-					AddWord(sample, entry);
+					if (i != 0)
+						AddWord(sample, entry);
+					entry.text = new char[sample.symbolsNew[++i] + 1];
+					entry.text[sample.symbolsNew[i++]] = NULL;
+					counter_temp = 0;
+					entry.position = sample.symbolsNew[i++];
+					entry.line = sample.symbolsNew[i];
+				}
+				else
+				{
+					entry.text[counter_temp++] = sample.symbolsNew[i];
 				}
 			}
 			if (!chek_file)
@@ -75,12 +74,17 @@ namespace In
 		switch (symbol_type)
 		{
 		case IN::T:
-			if (symbol == IN_EXCLAMATION_MARK)
-				interimData.doubleSeparator = true;
+			if (interimData.doubleSeparator)
+			{
+				interimData.ResealWord(in);
+				interimData.doubleSeparator = false;
+			}
+			if (symbol == IN_POINT && !interimData.literalIn)
+				symbol = IN_COMMA;
 			interimData.tempVector.push_back(symbol);
 			interimData.symbolCounter++;
 			interimData.wasTrueSymbol = true;
-			if (symbol == '\'')
+			if (symbol == IN_SINGLE_QUOTE)
 			{
 				if (interimData.literalIn)
 				{
@@ -95,39 +99,48 @@ namespace In
 		case IN::F:
 			throw ERROR_THROW_IN(111, interimData.lineNumber, interimData.positionNumber);
 			break;
-		case IN::S:
-			if (interimData.wasTrueSymbol)
-				interimData.ResealWord(in);
-			if (interimData.doubleSeparator)
-			{
-				if (symbol == IN_ASSIGNMENT)
-					in.symbols.push_back(symbol);
-				interimData.doubleSeparator = false;
-			}
-			if (symbol == IN_ASSIGNMENT || symbol == IN_MORE || symbol == IN_LESS)
-				interimData.doubleSeparator = true;
-
-			in.symbols.push_back(symbol);
-			interimData.symbolCounter = 1;
-			in.symbolCounter.push_back(interimData.symbolCounter);
-			interimData.symbolCounter = 0;
-			break;
-		default:
-			if (interimData.wasTrueSymbol && !interimData.literalIn)
-				interimData.ResealWord(in);
-			if (interimData.literalIn)
-				throw ERROR_THROW_IN(111, interimData.lineNumber, interimData.positionNumber);
-			interimData.lineNumber++;
-			interimData.positionNumber = 0;
-			break;
 		case IN::W:
-			if (interimData.wasTrueSymbol && !interimData.literalIn)
-				interimData.ResealWord(in);
 			if (interimData.literalIn)
 			{
 				interimData.symbolCounter++;
-				in.symbols.push_back(symbol);
+				interimData.tempVector.push_back(symbol);
 			}
+			else if (interimData.wasTrueSymbol)
+				interimData.ResealWord(in);
+			break;
+		case IN::S:
+			if (!interimData.literalIn)
+			{
+				if (interimData.doubleSeparator)
+				{
+					if (symbol != IN_ASSIGNMENT)
+						interimData.ResealWord(in);
+					interimData.doubleSeparator = false;
+				}
+				else if (symbol == IN_ASSIGNMENT || symbol == IN_MORE || symbol == IN_LESS || symbol == IN_EXCLAMATION_MARK)
+					interimData.doubleSeparator = true;
+
+				if (interimData.wasTrueSymbol)
+					interimData.ResealWord(in);
+
+				if (symbol == IN_MINUS && !in.symbolsNew.empty() && *in.symbolsNew.rbegin() == IN_ASSIGNMENT)
+					interimData.wasMinus = true;
+				else
+					interimData.wasMinus = false;
+			}
+
+			interimData.tempVector.push_back(symbol);
+			interimData.symbolCounter++;
+			if (!(interimData.doubleSeparator || interimData.wasMinus) && !interimData.literalIn)
+				interimData.ResealWord(in);
+			break;
+		default:
+			if (interimData.literalIn)
+				throw ERROR_THROW_IN(111, interimData.lineNumber, interimData.positionNumber)
+			else if (interimData.wasTrueSymbol)
+				interimData.ResealWord(in);
+			interimData.lineNumber++;
+			interimData.positionNumber = 0;
 			break;
 		}
 	}
