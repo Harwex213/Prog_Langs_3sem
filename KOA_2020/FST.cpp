@@ -26,6 +26,7 @@ namespace FST
 		nstates = 0;
 		nodes = NULL;
 		rstates = NULL;
+		nextFST = NULL;
 	}
 	FST::FST(const char lxm, char* &s, short ns, NODE n, ...)
 	{
@@ -39,6 +40,7 @@ namespace FST
 		memset(rstates, 0xff, sizeof(short) * nstates);
 		rstates[0] = 0;
 		position = -1;
+		nextFST = NULL;
 	}
 
 	bool step(FST& fst, short*& rstates)						// один шаг автомата

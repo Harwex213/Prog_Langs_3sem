@@ -5,8 +5,12 @@
 #define IN_MAX_LEN_TEXT 1024*1024
 #define IN_CODE_ENDL	'\n'
 #define	IN_VERT_LINE	'|'
-#define	IN_WHITE_SPACE  ' '
 #define	IN_NULL_STR	'\0'
+#define IN_EXCLAMATION_MARK '!'
+#define IN_SINGLE_QUOTE '\''
+#define IN_ASSIGNMENT '='
+#define IN_MORE '>'
+#define IN_LESS '<'
 
 /*	SYMBOLS:
 	[a-z] [A-Z] [0-9] _	! .	: " #			TRUE SYMBOLS/Long Symbols	(T)
@@ -56,6 +60,8 @@ namespace In
 		std::list<char> symbols;
 		std::list<int>  symbolCounter;
 
+		std::vector<char> temp;
+
 		int overageAmount = 0;
 		int wordCounter = 0;
 		PARSED_WORDS* alfaLxmTable;
@@ -68,10 +74,17 @@ namespace In
 		int lineNumber = 1;
 		bool literalIn = false;
 		bool wasTrueSymbol = false;
+		bool doubleSeparator = false;
+		bool wasAssignment = false;
+		std::vector<char> tempVector;
+		char specialSymbol = 1;
 
-		void WasTrueSymbol(IN& in)
+		void ResealWord(IN& in)
 		{
-			in.symbolCounter.push_back(symbolCounter);
+			tempVector.insert(tempVector.begin(), lineNumber);
+			tempVector.insert(tempVector.begin(), positionNumber);
+			tempVector.insert(tempVector.begin(), symbolCounter);
+			tempVector.insert(tempVector.begin(), specialSymbol);
 			symbolCounter = 0;
 			wasTrueSymbol = false;
 		}

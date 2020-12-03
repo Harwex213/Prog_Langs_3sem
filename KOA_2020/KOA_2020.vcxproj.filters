@@ -18,9 +18,6 @@
     <ClCompile Include="KOA_2020.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="Automat.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
     <ClCompile Include="Error.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
@@ -59,9 +56,6 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Automat.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
     <ClInclude Include="Error.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>

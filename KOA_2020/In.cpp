@@ -4,12 +4,10 @@ namespace In
 {
 	IN getin(wchar_t* infile)
 	{
-		// Set IN struct
 		IN sample;
 		sample.alfaLxmTable = new PARSED_WORDS[LT_MAXSIZE];
 		ifstream file(infile);
 
-		//Block of temporary variables
 		char unsigned txt_temp;
 		bool chek_file = false;
 		PARSED_WORDS entry;
@@ -20,11 +18,11 @@ namespace In
 			while ((txt_temp = file.get()) && !file.eof())
 			{
 				chek_file = true;
-
+					
 				sample.size++;
 				interimData.positionNumber++;
 
-				AnalyzeLetter(sample.code[txt_temp], txt_temp, interimData, sample);
+ 				AnalyzeLetter(sample.code[txt_temp], txt_temp, interimData, sample);
 
 				entry.line = interimData.lineNumber;
 
@@ -77,40 +75,59 @@ namespace In
 		switch (symbol_type)
 		{
 		case IN::T:
-			interimData.wasTrueSymbol = true;
+			if (symbol == IN_EXCLAMATION_MARK)
+				interimData.doubleSeparator = true;
+			interimData.tempVector.push_back(symbol);
 			interimData.symbolCounter++;
-			in.symbols.push_back(symbol);
+			interimData.wasTrueSymbol = true;
 			if (symbol == '\'')
 			{
 				if (interimData.literalIn)
 				{
 					if (interimData.wasTrueSymbol)
-						interimData.WasTrueSymbol(in);
+						interimData.ResealWord(in);
 					interimData.literalIn = false;
 				}
 				else
 					interimData.literalIn = true;
 			}
 			break;
+		case IN::F:
+			throw ERROR_THROW_IN(111, interimData.lineNumber, interimData.positionNumber);
+			break;
 		case IN::S:
 			if (interimData.wasTrueSymbol)
-				interimData.WasTrueSymbol(in);
+				interimData.ResealWord(in);
+			if (interimData.doubleSeparator)
+			{
+				if (symbol == IN_ASSIGNMENT)
+					in.symbols.push_back(symbol);
+				interimData.doubleSeparator = false;
+			}
+			if (symbol == IN_ASSIGNMENT || symbol == IN_MORE || symbol == IN_LESS)
+				interimData.doubleSeparator = true;
+
 			in.symbols.push_back(symbol);
 			interimData.symbolCounter = 1;
 			in.symbolCounter.push_back(interimData.symbolCounter);
 			interimData.symbolCounter = 0;
 			break;
-		case IN::F:
-			throw ERROR_THROW_IN(111, interimData.lineNumber, interimData.positionNumber);
-			break;
 		default:
-			interimData.lineNumber++;
-			interimData.positionNumber = 1;
+			if (interimData.wasTrueSymbol && !interimData.literalIn)
+				interimData.ResealWord(in);
 			if (interimData.literalIn)
 				throw ERROR_THROW_IN(111, interimData.lineNumber, interimData.positionNumber);
+			interimData.lineNumber++;
+			interimData.positionNumber = 0;
+			break;
 		case IN::W:
 			if (interimData.wasTrueSymbol && !interimData.literalIn)
-				interimData.WasTrueSymbol(in);
+				interimData.ResealWord(in);
+			if (interimData.literalIn)
+			{
+				interimData.symbolCounter++;
+				in.symbols.push_back(symbol);
+			}
 			break;
 		}
 	}

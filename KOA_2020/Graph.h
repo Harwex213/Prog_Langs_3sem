@@ -310,22 +310,45 @@ FST::NODE(63, \
 	FST::RELATION('8', 1), \
 	FST::RELATION('9', 1))
 
-#define GRAPH_LITERAL_INT LEX_LITERAL, string, 1, \
+#define GRAPH_LITERAL_INT LEX_LITERAL, string, 3, \
 FST::NODE(10, \
-	FST::RELATION('1', 0), \
-	FST::RELATION('2', 0), \
-	FST::RELATION('3', 0), \
-	FST::RELATION('4', 0), \
-	FST::RELATION('5', 0), \
-	FST::RELATION('6', 0), \
-	FST::RELATION('7', 0), \
-	FST::RELATION('8', 0), \
-	FST::RELATION('9', 0), \
-	FST::RELATION('0', 0))
+	FST::RELATION('1', 1), \
+	FST::RELATION('2', 1), \
+	FST::RELATION('3', 1), \
+	FST::RELATION('4', 1), \
+	FST::RELATION('5', 1), \
+	FST::RELATION('6', 1), \
+	FST::RELATION('7', 1), \
+	FST::RELATION('8', 1), \
+	FST::RELATION('9', 1), \
+	FST::RELATION('0', 1)), \
+FST::NODE(11, \
+	FST::RELATION('1', 1), \
+	FST::RELATION('2', 1), \
+	FST::RELATION('3', 1), \
+	FST::RELATION('4', 1), \
+	FST::RELATION('5', 1), \
+	FST::RELATION('6', 1), \
+	FST::RELATION('7', 1), \
+	FST::RELATION('8', 1), \
+	FST::RELATION('9', 1), \
+	FST::RELATION('0', 1), \
+	FST::RELATION('.', 2)), \
+FST::NODE(10, \
+	FST::RELATION('1', 2), \
+	FST::RELATION('2', 2), \
+	FST::RELATION('3', 2), \
+	FST::RELATION('4', 2), \
+	FST::RELATION('5', 2), \
+	FST::RELATION('6', 2), \
+	FST::RELATION('7', 2), \
+	FST::RELATION('8', 2), \
+	FST::RELATION('9', 2), \
+	FST::RELATION('0', 2))
 
 #define GRAPH_LITERAL_STRING LEX_LITERAL, string, 3, \
 FST::NODE(1, FST::RELATION('\"', 1)), \
-FST::NODE(86, \
+FST::NODE(158, \
 	FST::RELATION(' ', 1), \
 	FST::RELATION('a', 1), \
 	FST::RELATION('b', 1), \
@@ -486,7 +509,29 @@ FST::NODE(86, \
 	FST::RELATION('\"', 2)), \
 FST::NODE()
 
-#define GRAPH_INITILIZATION \
+#define GRAPH_TRUE LEX_TRUE, string, 5, \
+FST::NODE(1, FST::RELATION('t', 1)), \
+FST::NODE(1, FST::RELATION('r', 2)), \
+FST::NODE(1, FST::RELATION('u', 3)), \
+FST::NODE(1, FST::RELATION('e', 4)), \
+FST::NODE()
+
+#define GRAPH_FALSE LEX_FALSE, string, 6, \
+FST::NODE(1, FST::RELATION('f', 1)), \
+FST::NODE(1, FST::RELATION('a', 2)), \
+FST::NODE(1, FST::RELATION('l', 3)), \
+FST::NODE(1, FST::RELATION('s', 4)), \
+FST::NODE(1, FST::RELATION('e', 5)), \
+FST::NODE()
+
+#define GRAPHS_AMOUNT	37
+#define FILL_NULES_10	NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL
+#define FILL_NULES_100	FILL_NULES_10, FILL_NULES_10, FILL_NULES_10, FILL_NULES_10, FILL_NULES_10, \
+						FILL_NULES_10, FILL_NULES_10, FILL_NULES_10, FILL_NULES_10, FILL_NULES_10
+#define FILL_NULES_256	FILL_NULES_100, FILL_NULES_100, FILL_NULES_10, FILL_NULES_10, FILL_NULES_10, FILL_NULES_10, FILL_NULES_10, \
+						NULL, NULL, NULL, NULL, NULL, NULL
+
+#define GRAPHS_INITILIZATION \
 FST::FST fst1(GRAPH_UINT); \
 FST::FST fst2(GRAPH_STRING); \
 FST::FST fst3(GRAPH_BOOL); \
@@ -521,21 +566,41 @@ FST::FST fst31(GRAPH_COMMA); \
 FST::FST fst32(GRAPH_SEMICOLON); \
 FST::FST fst33(GRAPH_IDENTIFICATOR); \
 FST::FST fst34(GRAPH_LITERAL_INT); \
-FST::FST fst35(GRAPH_LITERAL_STRING);
+FST::FST fst35(GRAPH_LITERAL_STRING); \
+FST::FST fst36(GRAPH_TRUE); \
+FST::FST fst37(GRAPH_FALSE);
 
 namespace Graphs
 {
 	struct GRAPHS
 	{
 		char* string = NULL;
-		FST::FST* graphs[256];
+		FST::FST* graphs[256]= { FILL_NULES_256 };
 
 		GRAPHS()
 		{
-			GRAPH_INITILIZATION;
+			GRAPHS_INITILIZATION;
+			FST::FST* fstArray = new FST::FST[GRAPHS_AMOUNT] { fst1, fst2, fst3, fst4, fst5, fst6, fst7, fst8, fst9, fst10,
+						fst11, fst12, fst13, fst14, fst15, fst16, fst17, fst18, fst19, fst20,
+						fst21, fst22, fst23, fst24, fst25, fst26, fst27, fst28, fst29, fst30,
+						fst31, fst32, fst33, fst34, fst35, fst36, fst37};
 
-			graphs[LEX_UINT] = &fst_uint1;
-
+			for (int i = 0; i < GRAPHS_AMOUNT; i++)
+			{
+				for (int j = 0; j < fstArray[i].nodes[0].n_relation; j++)
+				{
+					unsigned char tempSymbol = static_cast<unsigned char>(fstArray[i].nodes[0].relations[j].symbol);
+					if (graphs[tempSymbol] == NULL)
+						graphs[tempSymbol] = &fstArray[i];
+					else
+					{
+						FST::FST* temp = graphs[tempSymbol];
+						while (temp->nextFST != NULL)
+							temp = temp->nextFST;
+						temp->nextFST = &fstArray[i];
+					}
+				}
+			}
 		};
 	};
 }

@@ -1,6 +1,7 @@
 #pragma once
 #include <iostream>
 #include <tchar.h>
+#include <vector>
 #include "IT.h"
 
 namespace FST
@@ -27,12 +28,14 @@ namespace FST
 	struct FST
 	{
 		IT::IDDATATYPE idatatype = IT::UNDEF;
-		char** string;							//цепочка (строка, завершатся 0x00 )
 		char lexema;
-		short position = 0;						//текущая позиция в цепочке 
-		short nstates;							//количество состояний автомата
-		NODE* nodes;							//граф переходов: [0] -начальное состояние, [nstate-1]-конечное
-		short* rstates;							//возможные состояния автомата на данной позиции
+		char** string;
+		short position = 0;
+		short nstates;
+		NODE* nodes;
+		short* rstates;
+		FST* nextFST;
+
 		FST();
 		FST(
 			const char lxm,

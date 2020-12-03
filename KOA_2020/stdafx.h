@@ -21,7 +21,6 @@
 #include "IT.h"
 #include "Out.h"
 #include "Parm.h"
-#include "Automat.h"
 #include "Graph.h"
 #include "LexAnalysis.h"
 #include "PolishNotation.h"

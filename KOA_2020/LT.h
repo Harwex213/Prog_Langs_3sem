@@ -37,6 +37,8 @@
 #define	LEX_SEMICOLON				';'
 #define	LEX_IDENTIFICATOR			'i'
 #define	LEX_LITERAL					'l'
+#define	LEX_TRUE					'l'
+#define	LEX_FALSE					'l'
 
 namespace LT							// таблица лексем
 {

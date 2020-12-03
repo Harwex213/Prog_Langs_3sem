@@ -4,6 +4,7 @@ namespace LexAnalysis
 {
 	void FillTables(const In::IN& in, LT::LexTable& lexTable, IT::IdTable& idTable)
 	{
+		Graphs::GRAPHS automat;
 	//	char* string = NULL;
 	//	Automat::AUTOMAT automats;
 	//	GRAPHES;
