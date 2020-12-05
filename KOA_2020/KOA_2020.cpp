@@ -18,7 +18,7 @@ int wmain(int argc, wchar_t* argv[])
 		// Lex Analysis Stage.
 		LT::LexTable lexTable = LT::Create(LT_MAXSIZE);
 		IT::IdTable idTable = IT::Create(TI_MAXSIZE);
-		LexAnalysis::FillTables(in, lexTable, idTable);
+		LexAnalysis::Lexer(in, lexTable, idTable);
 
 		// Write results Stage.
 		//WriteLexTable()

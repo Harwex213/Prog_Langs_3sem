@@ -17,28 +17,25 @@ namespace In
 			while ((txt_temp = file.get()) && !file.eof())
 			{
 				chek_file = true;
- 				AnalyzeLetter(sample.code[txt_temp], txt_temp, interimData, sample);
 				sample.size++;
 				interimData.positionNumber++;
+ 				AnalyzeLetter(sample.code[txt_temp], txt_temp, interimData, sample);
 			}
 			int counter_temp = 0;
 			sample.alfaLxmTable = new PARSED_WORDS[interimData.specialSymbolCounter];
-			for (int i = 0; i < sample.symbolsNew.size(); i++)
+			for (int i = 0, j = 0; i < interimData.specialSymbolCounter; i++)
 			{
-				if (sample.symbolsNew[i] == interimData.specialSymbol)
+				entry.text = new char[sample.symbolsNew[++j] + 1];
+				entry.text[sample.symbolsNew[j++]] = NULL;
+				counter_temp = 0;
+				entry.position = sample.symbolsNew[j++];
+				entry.line = sample.symbolsNew[j++];
+				while (j != sample.symbolsNew.size() && sample.symbolsNew[j] != interimData.specialSymbol)
 				{
-					if (i != 0)
-						AddWord(sample, entry);
-					entry.text = new char[sample.symbolsNew[++i] + 1];
-					entry.text[sample.symbolsNew[i++]] = NULL;
-					counter_temp = 0;
-					entry.position = sample.symbolsNew[i++];
-					entry.line = sample.symbolsNew[i];
+					entry.text[counter_temp++] = sample.symbolsNew[j];
+					j++;
 				}
-				else
-				{
-					entry.text[counter_temp++] = sample.symbolsNew[i];
-				}
+				AddWord(sample, entry);
 			}
 			if (!chek_file)
 				throw ERROR_THROW(113)
@@ -54,8 +51,6 @@ namespace In
 
 	void AddWord(IN& in, PARSED_WORDS entry)
 	{
-		if (in.wordCounter > LT_MAXSIZE)
-			ExpandAlfaLxmTable(in);
 		in.alfaLxmTable[in.wordCounter].line = entry.line;
 		in.alfaLxmTable[in.wordCounter].position = entry.position;
 		if (entry.text != NULL)
@@ -84,7 +79,7 @@ namespace In
 			interimData.tempVector.push_back(symbol);
 			interimData.symbolCounter++;
 			interimData.wasTrueSymbol = true;
-			if (symbol == IN_SINGLE_QUOTE)
+			if (symbol == IN_DOUBLE_QUOTE)
 			{
 				if (interimData.literalIn)
 				{
@@ -144,9 +139,4 @@ namespace In
 			break;
 		}
 	}
-
-	void ExpandAlfaLxmTable(IN& in)
-	{
-		// dynamic expansion of array
-	};
 }

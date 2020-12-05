@@ -8,6 +8,7 @@ getmin		PROTO : DWORD, : DWORD
 
 .DATA                                               ; сегмент данных 
 arr			DWORD   3, 5, -17, 3, 2, 8, -7, 0, 13, 32
+SUKA		DWORD	0.311
 
 .CODE												; сегмент кода  
 getmin PROC array : DWORD, len : DWORD
@@ -30,6 +31,7 @@ getmin ENDP
 
 main PROC 
 START:
+	mov eax, SUKA
 	invoke getmin, OFFSET Arr, lengthof Arr
 
 	push 0

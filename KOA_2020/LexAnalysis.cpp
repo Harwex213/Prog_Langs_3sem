@@ -2,9 +2,14 @@
 
 namespace LexAnalysis
 {
-	void FillTables(const In::IN& in, LT::LexTable& lexTable, IT::IdTable& idTable)
+	void Lexer(const In::IN& in, LT::LexTable& lexTable, IT::IdTable& idTable)
 	{
 		Graphs::GRAPHS automat;
+
+		for (int i = 0; i < in.wordCounter; i++)
+		{
+			automat.string = in.alfaLxmTable[i].text;
+		}
 	//	char* string = NULL;
 	//	Automat::AUTOMAT automats;
 	//	GRAPHES;

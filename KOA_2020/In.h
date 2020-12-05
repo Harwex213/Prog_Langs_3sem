@@ -7,7 +7,7 @@
 #define	IN_VERT_LINE	'|'
 #define	IN_NULL_STR	'\0'
 #define IN_EXCLAMATION_MARK '!'
-#define IN_SINGLE_QUOTE '\''
+#define IN_DOUBLE_QUOTE '"'
 #define IN_ASSIGNMENT '='
 #define IN_MORE '>'
 #define IN_LESS '<'
@@ -61,8 +61,6 @@ namespace In
 		int code[256] = IN_CODE_TABLE;
 
 		std::vector<char> symbolsNew;
-
-		int overageAmount = 0;
 		int wordCounter = 0;
 		PARSED_WORDS* alfaLxmTable;
 	};
@@ -77,14 +75,20 @@ namespace In
 		bool wasTrueSymbol = false;
 		bool wasAssignment = false;
 		bool wasMinus = false;
+		bool shiftPosition = false;
 		std::vector<char> tempVector;
-		char specialSymbol = 1;
+		char specialSymbol = -1;
 		int specialSymbolCounter = 0;
 
 		void ResealWord(IN& in)
 		{
 			tempVector.insert(tempVector.begin(), lineNumber);
-			tempVector.insert(tempVector.begin(), positionNumber - symbolCounter + 1);
+			int temp = positionNumber;
+			if (symbolCounter > 1)
+				temp = temp - symbolCounter;
+			if (shiftPosition)
+				temp--;
+			tempVector.insert(tempVector.begin(), temp);
 			tempVector.insert(tempVector.begin(), symbolCounter);
 			tempVector.insert(tempVector.begin(), specialSymbol);
 			specialSymbolCounter++;
@@ -92,11 +96,11 @@ namespace In
 			tempVector.clear();
 			symbolCounter = 0;
 			wasTrueSymbol = false;
+			shiftPosition = false;
 		}
 	};
 
 	IN getin(wchar_t* infile);
 	void AddWord(IN& in, PARSED_WORDS entry);
 	void AnalyzeLetter(int symbol_type, char symbol, ANALYSIS_DATA& interimData, IN& in);
-	void ExpandAlfaLxmTable(IN& in);
 }

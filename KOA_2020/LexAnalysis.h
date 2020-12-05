@@ -6,5 +6,5 @@
 
 namespace LexAnalysis
 {
-	void FillTables(const In::IN& in, LT::LexTable& lextable, IT::IdTable& idtable);
+	void Lexer(const In::IN& in, LT::LexTable& lextable, IT::IdTable& idtable);
 }
