@@ -1,4 +1,12 @@
-include "date.lib"
+1231
+0
+()
+uint
+float
+function
+FindMax
+include
+"date.lib"
 float function FindMax(float arr[], uint i)
 {
  	float retValue;

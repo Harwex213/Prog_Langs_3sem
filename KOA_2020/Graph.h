@@ -1,6 +1,6 @@
 #pragma once
 #include "LT.h"
-#define GRAPH_UINT LEX_UINT, string, 5, \
+#define GRAPH_UINT LEX_UINT, string, 4, \
 FST::NODE(1, FST::RELATION('u', 1)), \
 FST::NODE(1, FST::RELATION('i', 2)), \
 FST::NODE(1, FST::RELATION('n', 3)), \
@@ -36,9 +36,9 @@ FST::NODE(1, FST::RELATION('i', 1)), \
 FST::NODE(1, FST::RELATION('n', 2)), \
 FST::NODE(1, FST::RELATION('c', 3)), \
 FST::NODE(1, FST::RELATION('l', 4)), \
-FST::NODE(1, FST::RELATION('u', 6)), \
-FST::NODE(1, FST::RELATION('d', 7)), \
-FST::NODE(1, FST::RELATION('e', 8)), \
+FST::NODE(1, FST::RELATION('u', 5)), \
+FST::NODE(1, FST::RELATION('d', 6)), \
+FST::NODE(1, FST::RELATION('e', 7)), \
 FST::NODE()
 
 #define GRAPH_FUNCTION LEX_FUNCTION, string, 9, \
@@ -82,47 +82,47 @@ FST::NODE(1, FST::RELATION('n', 6)), \
 FST::NODE()
 
 #define GRAPH_PARENTHESES_LEFT LEX_PARENTHESES_LEFT, string, 2, \
-FST::NODE(1, FST::RELATION('(', 0)), \
+FST::NODE(1, FST::RELATION('(', 1)), \
 FST::NODE()
 
 
 #define GRAPH_PARENTHESES_RIGHT LEX_PARENTHESES_RIGHT, string, 2, \
-FST::NODE(1, FST::RELATION(')', 0)), \
+FST::NODE(1, FST::RELATION(')', 1)), \
 FST::NODE()
 
 
 #define GRAPH_BRACKETS_LEFT LEX_BRACKETS_LEFT, string, 2, \
-FST::NODE(1, FST::RELATION('[', 0)), \
+FST::NODE(1, FST::RELATION('[', 1)), \
 FST::NODE()
 
 
 #define GRAPH_BRACKETS_RIGHT LEX_BRACKETS_RIGHT, string, 2, \
-FST::NODE(1, FST::RELATION(']', 0)), \
+FST::NODE(1, FST::RELATION(']', 1)), \
 FST::NODE()
 
 
 #define GRAPH_BRACES_LEFT LEX_BRACES_LEFT, string, 2, \
-FST::NODE(1, FST::RELATION('{', 0)), \
+FST::NODE(1, FST::RELATION('{', 1)), \
 FST::NODE()
 
 
 #define GRAPH_BRACES_RIGHT LEX_BRACES_RIGHT, string, 2, \
-FST::NODE(1, FST::RELATION('}', 0)), \
+FST::NODE(1, FST::RELATION('}', 1)), \
 FST::NODE()
 
 
 #define GRAPH_PLUS LEX_PLUS, string, 2, \
-FST::NODE(1, FST::RELATION('+', 0)), \
+FST::NODE(1, FST::RELATION('+', 1)), \
 FST::NODE()
 
 
 #define GRAPH_MINUS LEX_MINUS, string, 2, \
-FST::NODE(1, FST::RELATION('-', 0)), \
+FST::NODE(1, FST::RELATION('-', 1)), \
 FST::NODE()
 
 
 #define GRAPH_MULTIPLY LEX_MULTIPLY, string, 2, \
-FST::NODE(1, FST::RELATION('*', 0)), \
+FST::NODE(1, FST::RELATION('*', 1)), \
 FST::NODE()
 
 
@@ -142,12 +142,12 @@ FST::NODE(1, FST::RELATION('=', 2)), \
 FST::NODE()
 
 #define GRAPH_MORE LEX_MORE, string, 2, \
-FST::NODE(1, FST::RELATION('>', 0)), \
+FST::NODE(1, FST::RELATION('>', 1)), \
 FST::NODE()
 
 
 #define GRAPH_LESS LEX_LESS, string, 2, \
-FST::NODE(1, FST::RELATION('<', 0)), \
+FST::NODE(1, FST::RELATION('<', 1)), \
 FST::NODE()
 
 
@@ -162,32 +162,32 @@ FST::NODE(1, FST::RELATION('=', 2)), \
 FST::NODE()
 
 #define GRAPH_OR LEX_OR, string, 2, \
-FST::NODE(1, FST::RELATION('|', 0)), \
+FST::NODE(1, FST::RELATION('|', 1)), \
 FST::NODE()
 
 
 #define GRAPH_AND LEX_AND, string, 2, \
-FST::NODE(1, FST::RELATION('&', 0)), \
+FST::NODE(1, FST::RELATION('&', 1)), \
 FST::NODE()
 
 
 #define GRAPH_INVERSION LEX_INVERSION, string, 2, \
-FST::NODE(1, FST::RELATION('~', 0)), \
+FST::NODE(1, FST::RELATION('~', 1)), \
 FST::NODE()
 
 
 #define GRAPH_ASSIGNMENT LEX_ASSIGNMENT, string, 2, \
-FST::NODE(1, FST::RELATION('=', 0)), \
+FST::NODE(1, FST::RELATION('=', 1)), \
 FST::NODE()
 
 
 #define GRAPH_COMMA LEX_COMMA, string, 2, \
-FST::NODE(1, FST::RELATION(',', 0)), \
+FST::NODE(1, FST::RELATION(',', 1)), \
 FST::NODE()
 
 
 #define GRAPH_SEMICOLON LEX_SEMICOLON, string, 2, \
-FST::NODE(1, FST::RELATION(';', 0)), \
+FST::NODE(1, FST::RELATION(';', 1)), \
 FST::NODE()
 
 
@@ -310,18 +310,33 @@ FST::NODE(63, \
 	FST::RELATION('8', 1), \
 	FST::RELATION('9', 1))
 
-#define GRAPH_LITERAL_INT LEX_LITERAL, string, 3, \
+#define GRAPH_LITERAL_INT LEX_LITERAL, string, 1, \
 FST::NODE(10, \
-	FST::RELATION('1', 1), \
-	FST::RELATION('2', 1), \
-	FST::RELATION('3', 1), \
-	FST::RELATION('4', 1), \
-	FST::RELATION('5', 1), \
-	FST::RELATION('6', 1), \
-	FST::RELATION('7', 1), \
-	FST::RELATION('8', 1), \
-	FST::RELATION('9', 1), \
-	FST::RELATION('0', 1)), \
+	FST::RELATION('1', 0), \
+	FST::RELATION('2', 0), \
+	FST::RELATION('3', 0), \
+	FST::RELATION('4', 0), \
+	FST::RELATION('5', 0), \
+	FST::RELATION('6', 0), \
+	FST::RELATION('7', 0), \
+	FST::RELATION('8', 0), \
+	FST::RELATION('9', 0), \
+	FST::RELATION('0', 0))
+
+#define GRAPH_LITERAL_FLOAT LEX_LITERAL, string, 3, \
+FST::NODE(12, \
+	FST::RELATION('-', 1), \
+	FST::RELATION('1', 0), \
+	FST::RELATION('2', 0), \
+	FST::RELATION('3', 0), \
+	FST::RELATION('4', 0), \
+	FST::RELATION('5', 0), \
+	FST::RELATION('6', 0), \
+	FST::RELATION('7', 0), \
+	FST::RELATION('8', 0), \
+	FST::RELATION('9', 0), \
+	FST::RELATION('0', 0), \
+	FST::RELATION(',', 1)), \
 FST::NODE(11, \
 	FST::RELATION('1', 1), \
 	FST::RELATION('2', 1), \
@@ -333,7 +348,7 @@ FST::NODE(11, \
 	FST::RELATION('8', 1), \
 	FST::RELATION('9', 1), \
 	FST::RELATION('0', 1), \
-	FST::RELATION('.', 2)), \
+	FST::RELATION(',', 2)), \
 FST::NODE(10, \
 	FST::RELATION('1', 2), \
 	FST::RELATION('2', 2), \
@@ -348,7 +363,7 @@ FST::NODE(10, \
 
 #define GRAPH_LITERAL_STRING LEX_LITERAL, string, 3, \
 FST::NODE(1, FST::RELATION('\"', 1)), \
-FST::NODE(158, \
+FST::NODE(159, \
 	FST::RELATION(' ', 1), \
 	FST::RELATION('a', 1), \
 	FST::RELATION('b', 1), \
@@ -506,6 +521,7 @@ FST::NODE(158, \
 	FST::RELATION('~', 1), \
 	FST::RELATION('|', 1), \
 	FST::RELATION('?', 1), \
+	FST::RELATION('.', 1), \
 	FST::RELATION('\"', 2)), \
 FST::NODE()
 
@@ -524,7 +540,7 @@ FST::NODE(1, FST::RELATION('s', 4)), \
 FST::NODE(1, FST::RELATION('e', 5)), \
 FST::NODE()
 
-#define GRAPHS_AMOUNT	37
+#define GRAPHS_AMOUNT	38
 #define FILL_NULES_10	NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL
 #define FILL_NULES_100	FILL_NULES_10, FILL_NULES_10, FILL_NULES_10, FILL_NULES_10, FILL_NULES_10, \
 						FILL_NULES_10, FILL_NULES_10, FILL_NULES_10, FILL_NULES_10, FILL_NULES_10
@@ -532,73 +548,61 @@ FST::NODE()
 						NULL, NULL, NULL, NULL, NULL, NULL
 
 #define GRAPHS_INITILIZATION \
-FST::FST fst1(GRAPH_UINT); \
-FST::FST fst2(GRAPH_STRING); \
-FST::FST fst3(GRAPH_BOOL); \
-FST::FST fst4(GRAPH_FLOAT); \
-FST::FST fst5(GRAPH_INCLUDE); \
-FST::FST fst6(GRAPH_FUNCTION); \
-FST::FST fst7(GRAPH_IF); \
-FST::FST fst8(GRAPH_WHILE); \
-FST::FST fst9(GRAPH_MAIN); \
-FST::FST fst10(GRAPH_RETURN); \
-FST::FST fst11(GRAPH_PARENTHESES_LEFT); \
-FST::FST fst12(GRAPH_PARENTHESES_RIGHT); \
-FST::FST fst13(GRAPH_BRACKETS_LEFT); \
-FST::FST fst14(GRAPH_BRACKETS_RIGHT); \
-FST::FST fst15(GRAPH_BRACES_LEFT); \
-FST::FST fst16(GRAPH_BRACES_RIGHT); \
-FST::FST fst17(GRAPH_PLUS); \
-FST::FST fst18(GRAPH_MINUS); \
-FST::FST fst19(GRAPH_MULTIPLY); \
-FST::FST fst20(GRAPH_DIVISION); \
-FST::FST fst21(GRAPH_EQUALLY); \
-FST::FST fst22(GRAPH_NON_EQUALLY); \
-FST::FST fst23(GRAPH_MORE); \
-FST::FST fst24(GRAPH_LESS); \
-FST::FST fst25(GRAPH_MORE_OR_EQUAL); \
-FST::FST fst26(GRAPH_LESS_OR_EQUAL); \
-FST::FST fst27(GRAPH_OR); \
-FST::FST fst28(GRAPH_AND); \
-FST::FST fst29(GRAPH_INVERSION); \
-FST::FST fst30(GRAPH_ASSIGNMENT); \
-FST::FST fst31(GRAPH_COMMA); \
-FST::FST fst32(GRAPH_SEMICOLON); \
-FST::FST fst33(GRAPH_IDENTIFICATOR); \
-FST::FST fst34(GRAPH_LITERAL_INT); \
-FST::FST fst35(GRAPH_LITERAL_STRING); \
-FST::FST fst36(GRAPH_TRUE); \
-FST::FST fst37(GRAPH_FALSE);
+FST::FST(GRAPH_UINT), \
+FST::FST(GRAPH_STRING), \
+FST::FST(GRAPH_BOOL), \
+FST::FST(GRAPH_FLOAT), \
+FST::FST(GRAPH_INCLUDE), \
+FST::FST(GRAPH_FUNCTION), \
+FST::FST(GRAPH_IF), \
+FST::FST(GRAPH_WHILE), \
+FST::FST(GRAPH_MAIN), \
+FST::FST(GRAPH_RETURN), \
+FST::FST(GRAPH_PARENTHESES_LEFT), \
+FST::FST(GRAPH_PARENTHESES_RIGHT), \
+FST::FST(GRAPH_BRACKETS_LEFT), \
+FST::FST(GRAPH_BRACKETS_RIGHT), \
+FST::FST(GRAPH_BRACES_LEFT), \
+FST::FST(GRAPH_BRACES_RIGHT), \
+FST::FST(GRAPH_PLUS), \
+FST::FST(GRAPH_MINUS), \
+FST::FST(GRAPH_MULTIPLY), \
+FST::FST(GRAPH_DIVISION), \
+FST::FST(GRAPH_EQUALLY), \
+FST::FST(GRAPH_NON_EQUALLY), \
+FST::FST(GRAPH_MORE), \
+FST::FST(GRAPH_LESS), \
+FST::FST(GRAPH_MORE_OR_EQUAL), \
+FST::FST(GRAPH_LESS_OR_EQUAL), \
+FST::FST(GRAPH_OR), \
+FST::FST(GRAPH_AND), \
+FST::FST(GRAPH_INVERSION), \
+FST::FST(GRAPH_ASSIGNMENT), \
+FST::FST(GRAPH_COMMA), \
+FST::FST(GRAPH_SEMICOLON), \
+FST::FST(GRAPH_IDENTIFICATOR), \
+FST::FST(GRAPH_LITERAL_INT), \
+FST::FST(GRAPH_LITERAL_FLOAT), \
+FST::FST(GRAPH_LITERAL_STRING), \
+FST::FST(GRAPH_TRUE), \
+FST::FST(GRAPH_FALSE)
 
 namespace Graphs
 {
 	struct GRAPHS
 	{
 		char* string = NULL;
-		FST::FST* graphs[256]= { FILL_NULES_256 };
+		std::vector<FST::FST*> tests[256];
 
 		GRAPHS()
 		{
-			GRAPHS_INITILIZATION;
-			FST::FST* fstArray = new FST::FST[GRAPHS_AMOUNT] { fst1, fst2, fst3, fst4, fst5, fst6, fst7, fst8, fst9, fst10,
-						fst11, fst12, fst13, fst14, fst15, fst16, fst17, fst18, fst19, fst20,
-						fst21, fst22, fst23, fst24, fst25, fst26, fst27, fst28, fst29, fst30,
-						fst31, fst32, fst33, fst34, fst35, fst36, fst37};
-
+			FST::FST* fstArray = new FST::FST[GRAPHS_AMOUNT] { GRAPHS_INITILIZATION };
 			for (int i = 0; i < GRAPHS_AMOUNT; i++)
 			{
 				for (int j = 0; j < fstArray[i].nodes[0].n_relation; j++)
 				{
 					unsigned char tempSymbol = static_cast<unsigned char>(fstArray[i].nodes[0].relations[j].symbol);
-					if (graphs[tempSymbol] == NULL)
-						graphs[tempSymbol] = &fstArray[i];
-					else
-					{
-						FST::FST* temp = graphs[tempSymbol];
-						while (temp->nextFST != NULL)
-							temp = temp->nextFST;
-						temp->nextFST = &fstArray[i];
-					}
+					tests[tempSymbol].push_back(&fstArray[i]);
 				}
 			}
 		};

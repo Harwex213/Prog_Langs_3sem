@@ -27,7 +27,6 @@ namespace FST
 
 	struct FST
 	{
-		IT::IDDATATYPE idatatype = IT::UNDEF;
 		char lexema;
 		char** string;
 		short position = 0;

@@ -7,6 +7,7 @@
 #define	LEX_STRING					't'
 #define	LEX_BOOL					't'
 #define	LEX_FLOAT					't'
+#define LEX_DATATYPE				't'
 #define	LEX_INCLUDE					'd'
 #define	LEX_FUNCTION				'f'
 #define	LEX_IF						'q'
@@ -39,6 +40,8 @@
 #define	LEX_LITERAL					'l'
 #define	LEX_TRUE					'l'
 #define	LEX_FALSE					'l'
+
+#define PARM_LEX_DEFAULT_EXT L".lex.txt" //для файла с итогом лексического анализa(идентификаторы и литералы)
 
 namespace LT							// таблица лексем
 {
