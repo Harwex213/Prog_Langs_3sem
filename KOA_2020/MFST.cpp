@@ -53,7 +53,7 @@ namespace MFST
 		lenta = new short[lenta_size = lex.current_size];
 
 		for (int k = 0; k < lenta_size; k++)
-			lenta[k] = TS(lex.table[k].lexema[0]);
+			lenta[k] = TS(lex.table[k].lexema);
 
 		lenta_position = 0;
 		st.push(grebach.stbottomT);
@@ -263,7 +263,7 @@ namespace MFST
 		{
 			errId = grebach.getRule(diagnosis[n].nrule).idError;
 			Error::ERROR err = Error::geterror(errId);
-			sprintf_s(buf, MFST_DIAGN_MAXSIZE, "%d: строка %d,	%s", err.id, lex.table[lpos].sn, err.message);
+			sprintf_s(buf, MFST_DIAGN_MAXSIZE, "%d: строка %d,	%s", err.id, lex.table[lpos].position, err.message);
 			rc = buf;
 		}
 

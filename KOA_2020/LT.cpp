@@ -13,13 +13,12 @@ namespace LT							// таблица лексем
 		return sample;
 	};
 
-	void Add(LexTable& lextable, Entry entry)
+	void AddEntry(LexTable& lextable, Entry entry)
 	{
-		strcpy(lextable.table[lextable.current_size].lexema, entry.lexema);
-		lextable.table[lextable.current_size].psn = entry.psn;
-		lextable.table[lextable.current_size].sn = entry.sn;
+		lextable.table[lextable.current_size].lexema = entry.lexema;
+		lextable.table[lextable.current_size].position = entry.position;
+		lextable.table[lextable.current_size].line = entry.line;
 		lextable.table[lextable.current_size].idxTI = entry.idxTI;
-		lextable.table[lextable.current_size].arithmeticdata = entry.arithmeticdata;
 		lextable.current_size++;
 	};
 

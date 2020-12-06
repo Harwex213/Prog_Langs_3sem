@@ -45,14 +45,12 @@
 
 namespace LT							// таблица лексем
 {
-	enum ArithmeticSymbol {UNDEFINED = 0, PLUS = 1, MINUS = 2, MULTIPLY = 3, FISSION = 4};
 	struct Entry						// строка таблицы лексем
 	{
-		char lexema[LEXEMA_FIXSIZE+1];	// лексема
-		int sn;							// номер строки в исходном тексте
-		int psn;
-		int idxTI;						// индекс в таблице идентификаторов или LT_TI_NULLIDX
-		ArithmeticSymbol arithmeticdata = UNDEFINED;
+		char lexema = '\0';
+		int line = 0;
+		int position = 0;
+		int idxTI = LT_TI_NULLXDX;
 	};
 
 	struct LexTable						// экземпл€р таблицы лексем

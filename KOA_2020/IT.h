@@ -1,8 +1,7 @@
 #pragma once
 #include <list>
 
-#define ID_MAXSIZE		5				// максимальное количество сиволов в идентификаторе
-#define LITERAL_MAXSIZE	20
+#define ID_MAXSIZE		30				// максимальное количество сиволов в идентификаторе
 #define TI_MAXSIZE		4096			// максимальное количество эл-ов в таблице идентификаторов 
 #define TI_INT_DEFAULT	0x00000000		// значение по умолчанию дл€ типа integer 
 #define TI_STR_DEFAULT	0x00			// значение по умолчанию дл€ типа string
@@ -10,19 +9,18 @@
 
 #define PARM_ID_DEFAULT_EXT L".id.txt" //дл€ файла с итогом лексического анализa(идентификаторы и литералы)
 
-namespace IT	// таблица идентификатов
+namespace IT
 {
-	enum IDDATATYPE { UNDEF = 0, INT = 1, STR = 2 };			// 0 - UNDEF, 1 - INTEGER,  2 - STRING
-	enum IDTYPE { U = 0, P = 1, V = 2, F = 3, L = 4 };	// 0 - UNDEF, 1 - PARAMETR, 2 - VALUE, 3 - FUNCTION, 4 - GLOBAL FUNCTION, 5 - LITERAL
+	enum IDDATATYPE { UNDEF = 0, UINT = 1, STRING = 2, BOOL = 3, FLOAT = 4 };
+	enum IDTYPE { U = 0, PARAM = 1, VARIABLE = 2, FUNCTION = 3, LITERAL = 4 };
 
-	struct Entry						// строка таблицы идентификаторов
+	struct Entry
 	{
 		int idxfirstLE;
-		char* id = NULL;			// идентификатор (автоматически усекаетс€ до ID_MAXSIZE)
-		std::list<std::string> prefix;
-		bool isGlobalFunction = false;
-		IDDATATYPE	iddatatype = UNDEF;		// тип данных
-		IDTYPE	idtype  = U;				// тип идентикатора
+		char* idName = NULL;
+		std::list<std::string> visibility;
+		IDDATATYPE	idDataType = UNDEF;
+		IDTYPE	idType = U;
 		union
 		{
 			int vint;					// значение integer
@@ -35,11 +33,11 @@ namespace IT	// таблица идентификатов
 
 	};
 
-	struct IdTable // экземпл€р таблицы идентификаторов
+	struct IdTable
 	{
-		int maxsize;				// емкость таблицы идентификаторов < TI_MAXSIZE
-		int current_size;			// текущий размер таблицы идентификаторов < maxsize
-		Entry* table;				// массив строк таблицы идентификаторов
+		int maxsize;
+		int current_size;
+		Entry* table;
 	};
 
 	IdTable Create(int size);

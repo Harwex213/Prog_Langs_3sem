@@ -1,12 +1,4 @@
-1231
-0
-()
-uint
-float
-function
-FindMax
-include
-"date.lib"
+include "date.lib"
 float function FindMax(float arr[], uint i)
 {
  	float retValue;
@@ -30,7 +22,7 @@ uint main
  		arrTest[i] = i++;
  	}
  	float retValue = FindMax(arrTest[], 10);
- 	cWriteLine(FindMax(arrTest[], 10);
+ 	cWriteLine(FindMax(arrTest[], 10));
  	cWriteLine(retValue);
  	
  	return 0;
