@@ -11,6 +11,7 @@
 #define	LEX_INCLUDE					'd'
 #define	LEX_FUNCTION				'f'
 #define	LEX_IF						'q'
+#define	LEX_ELSE					'e'
 #define	LEX_WHILE					'w'
 #define	LEX_MAIN					'm'
 #define	LEX_RETURN					'r'

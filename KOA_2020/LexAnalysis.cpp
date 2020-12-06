@@ -20,6 +20,7 @@ namespace LexAnalysis
 			{
 				if (temp->lexema == LEX_IDENTIFICATOR || temp->lexema == LEX_LITERAL)
 				{
+					SetIdTypeAndIdDataType(*temp, analysisData, entryId);
 					SetName(*temp, analysisData, entryId);
 					SetVisibility(*temp, analysisData, entryId);
 					SetValue(*temp, analysisData, entryId);
@@ -88,15 +89,34 @@ namespace LexAnalysis
 		}
 	}
 
+	void SetIdTypeAndIdDataType(const FST::FST& temp, AnalysisData& analysisData, IT::Entry& entry)
+	{
+		if (temp.lexema == LEX_LITERAL)
+		{
+			analysisData.idType = IT::LITERAL;
+			analysisData.idDataType = temp.idDataType;
+		}
+		entry.idType = analysisData.idType;
+		entry.idDataType = analysisData.idDataType;
+	}
+
 	void SetName(const FST::FST& temp, AnalysisData& analysisData, IT::Entry& entry)
 	{
-		int length = strlen(*temp.string);
-		if (analysisData.idType == IT::LITERAL)
+		int length = 0;
+		if (entry.idType == IT::LITERAL)
 		{
-			entry.idName = (char*)"LITERAL";
+			char idNumber[ID_MAXSIZE - 1];
+			itoa(analysisData.literalId++, idNumber, 10);
+			strcat(analysisData.literalIdChar, idNumber);
+			length = strlen(analysisData.literalIdChar);
+			entry.idName = new char[length + 1];
+			entry.idName[length] = IN_NULL_STR;
+			strncpy(entry.idName, analysisData.literalIdChar, length);
+			analysisData.literalIdChar[1] = IN_NULL_STR;
 		}
 		else
 		{
+			length = strlen(*temp.string);
 			if (length > ID_MAXSIZE)
 			{
 				cout << "Произошло усечение идентификатора: " << *temp.string << endl;
@@ -110,11 +130,14 @@ namespace LexAnalysis
 
 	void SetVisibility(const FST::FST& temp, AnalysisData& analysisData, IT::Entry& entry)
 	{
-		if (analysisData.idType == IT::FUNCTION)
+		if (entry.idType != IT::LITERAL)
 		{
-			analysisData.visibility.push_back(entry.idName);
 			entry.visibility = analysisData.visibility;
+			if (analysisData.idType == IT::FUNCTION)
+				analysisData.visibility.push_back(entry.idName);
 		}
+		else
+			entry.visibility.push_back(LITERAL_VISIBILITY);
 	}
 
 	void SetValue(const FST::FST& temp, AnalysisData& analysisData, IT::Entry& entry)

@@ -1,3 +1,4 @@
+uint k = -10.123;
 include "date.lib"
 float function FindMax(float arr[], uint i)
 {
