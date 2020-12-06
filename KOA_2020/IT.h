@@ -41,16 +41,8 @@ namespace IT
 	};
 
 	IdTable Create(int size);
-	void Add(IdTable& idtable, Entry entry);
+	void AddEntry(IdTable& idtable, Entry entry);
 	Entry GetEntry(const IdTable& idtable, int n);
-	int GetId(
-		IdTable& idtable,
-		char* id,
-		std::list<std::string> prefix,
-		int sn, int psn);
-	bool IsId(
-		IdTable& idtable,
-		Entry entry
-	);
+	int GetId(const IdTable& idTable, char* id, std::list<std::string> visibility);
 	void Delete(IdTable& idtable);
 }

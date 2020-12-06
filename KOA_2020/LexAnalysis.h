@@ -11,11 +11,18 @@ namespace LexAnalysis
 {
 	struct AnalysisData
 	{
+		// See that we are in Function.
 		bool functionIn = false;
+		// Counter main. If > 1 ==> Error.
+		int mainWas = 0;
+		// Counter braces. If % 2 != 0 ==> Error.
 		int bracesCounter = 0;
+		// Vars for name-generator for literals.
 		char literalIdChar[ID_MAXSIZE] = "L";
 		int literalId = 0;
+		// Visibility of Identificators.
 		std::list<std::string> visibility;
+		// IdType and IdDataType
 		IT::IDDATATYPE idDataType = IT::UNDEF;
 		IT::IDTYPE idType = IT::U;
 
@@ -32,5 +39,8 @@ namespace LexAnalysis
 	void SetName(const FST::FST& temp, AnalysisData& analysisData, IT::Entry& entry);
 	void SetVisibility(const FST::FST& temp, AnalysisData& analysisData, IT::Entry& entry);
 	void SetValue(const FST::FST& temp, AnalysisData& analysisData, IT::Entry& entry);
-	void ResetAnalysisData(AnalysisData& analysisData);
+	bool CheckForIdentificator(const IT::IdTable& idTable, IT::Entry& entryId);
+	bool SetIdxTI(const IT::IdTable& idTable, const IT::Entry& entryId, LT::Entry& entryLex);
+	void SetLexEntry(LT::Entry& entry, char lexema, int line, int position);
+	void ResetAnalysisData(AnalysisData& analysisData, IT::Entry& entry);
 }

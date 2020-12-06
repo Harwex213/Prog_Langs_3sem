@@ -1,4 +1,6 @@
 #include "stdafx.h"
+#define LEX_ERROR_SERIES 120
+#define SEMANTICS_ERROR_SERIES 400
 
 namespace LexAnalysis
 {
@@ -24,15 +26,22 @@ namespace LexAnalysis
 					SetName(*temp, analysisData, entryId);
 					SetVisibility(*temp, analysisData, entryId);
 					SetValue(*temp, analysisData, entryId);
+					if (CheckForIdentificator(idTable, entryId))
+						IT::AddEntry(idTable, entryId);
+					else
+						throw ERROR_THROW_IN(SEMANTICS_ERROR_SERIES + 1, in.alfaLxmTable[i].line, in.alfaLxmTable[i].position)
+					if (!SetIdxTI(idTable, entryId, entryLex))
+						throw ERROR_THROW_IN(SEMANTICS_ERROR_SERIES, in.alfaLxmTable[i].line, in.alfaLxmTable[i].position)
+					IT::AddEntry(idTable, entryId);
+					ResetAnalysisData(analysisData, entryId);
 				}
 				else
-				{
 					CheckLexema(*temp, analysisData);
-					LT::AddEntry(lexTable, entryLex);
-				}
+				SetLexEntry(entryLex, temp->lexema, in.alfaLxmTable[i].line, in.alfaLxmTable[i].position);
+				LT::AddEntry(lexTable, entryLex);
 			}
 			else
-				throw ERROR_THROW_IN(122, in.alfaLxmTable[i].line, in.alfaLxmTable[i].position)
+				throw ERROR_THROW_IN(LEX_ERROR_SERIES + 1, in.alfaLxmTable[i].line, in.alfaLxmTable[i].position)
 		}
 		cout << "DONE";
 	}
@@ -75,6 +84,7 @@ namespace LexAnalysis
 		case LEX_MAIN:
 			// Устанавливаем видимость "main"
 			analysisData.visibility.push_back(*temp.string);
+			analysisData.mainWas++;
 			break;
 		case LEX_BRACES_RIGHT:
 			if (!analysisData.visibility.empty())
@@ -120,7 +130,7 @@ namespace LexAnalysis
 			if (length > ID_MAXSIZE)
 			{
 				cout << "Произошло усечение идентификатора: " << *temp.string << endl;
-				length -= ID_MAXSIZE;
+				length = ID_MAXSIZE;
 			}
 			entry.idName = new char[length + 1];
 			entry.idName[length] = IN_NULL_STR;
@@ -145,8 +155,41 @@ namespace LexAnalysis
 
 	}
 
-	void ResetAnalysisData(AnalysisData& analysisData)
+	bool CheckForIdentificator(const IT::IdTable& idTable, IT::Entry& entryId)
 	{
+		auto tempVisibility = entryId.visibility.rbegin();
+		// Проверяем не объявлена ли переменная вне функции.
+		if (*tempVisibility == MAIN_VISIBILITY && entryId.idType == IT::VARIABLE)
+			return false;
+		for (int i = 0; i < idTable.current_size; i++)
+		{
+			if (*tempVisibility == *idTable.table[i].visibility.rbegin() && (strcmp(entryId.idName, idTable.table[i].idName) == 0) && entryId.idType != IT::U)
+				return false;
+		}
+		return true;
+	}
+
+	bool SetIdxTI(const IT::IdTable& idTable, const IT::Entry& entryId, LT::Entry& entryLex)
+	{
+		// Выставляем у лексемы ссылку на id в таблице идентификаторов.
+		entryLex.idxTI = IT::GetId(idTable, entryId.idName, entryId.visibility);
+		// Проверка семантики: Необъявленная переменная.
+		if (entryLex.idxTI == LT_TI_NULLXDX)
+			return false;
+		return true;
+	}
+
+	void SetLexEntry(LT::Entry& entry, char lexema, int line, int position)
+	{	
+		entry.lexema = lexema;
+		entry.line = line;
+		entry.position = position;
+	}
+
+	void ResetAnalysisData(AnalysisData& analysisData, IT::Entry& entry)
+	{
+		entry.visibility.clear();
+		delete[] entry.idName;
 		analysisData.idDataType = IT::UNDEF;
 		analysisData.idType = IT::U;
 	}
