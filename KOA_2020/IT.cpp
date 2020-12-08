@@ -20,6 +20,7 @@ namespace IT
 		idtable.table[idtable.current_size].idDataType = entry.idDataType;
 		idtable.table[idtable.current_size].idxfirstLE = entry.idxfirstLE;
 		idtable.table[idtable.current_size].visibility = entry.visibility;
+		idtable.table[idtable.current_size].value = entry.value;
 		idtable.current_size++;
 	}
 	Entry GetEntry(const IdTable& idtable, int n)

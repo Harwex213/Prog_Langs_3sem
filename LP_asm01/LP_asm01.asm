@@ -9,6 +9,7 @@ getmin		PROTO : DWORD, : DWORD
 .DATA                                               ; сегмент данных 
 arr			DWORD   3, 5, -17, 3, 2, 8, -7, 0, 13, 32
 SUKA		DWORD	0.311
+J1234567890123456789012345678901234567890			dword	?
 
 .CODE												; сегмент кода  
 getmin PROC array : DWORD, len : DWORD

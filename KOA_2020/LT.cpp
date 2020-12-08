@@ -31,4 +31,9 @@ namespace LT							// таблица лексем
 	{
 		delete[] lextable.table;
 	};
+
+	void PrintLexTable(LexTable lextable)
+	{
+
+	}
 }

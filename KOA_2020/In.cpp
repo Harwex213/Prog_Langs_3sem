@@ -74,8 +74,6 @@ namespace In
 				interimData.ResealWord(in);
 				interimData.doubleSeparator = false;
 			}
-			if (symbol == IN_POINT && !interimData.literalIn)
-				symbol = IN_COMMA;
 			interimData.tempVector.push_back(symbol);
 			interimData.symbolCounter++;
 			interimData.wasTrueSymbol = true;

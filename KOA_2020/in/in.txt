@@ -1,17 +1,20 @@
-uint k = -10.123;
 include "date.lib"
 float function FindMax(float arr[], uint i)
 {
- 	float retValue;
  	uint k = 0;
+    uint s = 0;
+    uint a = 1;
+ 	float retValue;
 	while(k > i)
 	{
+    uint j;
 		if(arr[k] > retValue)
 		{
-			retValue = arr[k]
+			retValue = arr[k];
 		}
-		k++;
+		k = k + 1;
 	}
+    j = 100;
 	return retValue;
 }
 uint main
@@ -20,7 +23,8 @@ uint main
  	uint i = 0;
  	while(i > 10)
  	{
- 		arrTest[i] = i++;
+ 		arrTest[i] = i;
+        i = i + 1;
  	}
  	float retValue = FindMax(arrTest[], 10);
  	cWriteLine(FindMax(arrTest[], 10));

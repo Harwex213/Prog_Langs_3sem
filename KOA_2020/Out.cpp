@@ -26,8 +26,6 @@ namespace Out
 		*out.stream << endl << "----- Анализ ----- ";
 		strftime(buffer, 300, " Дата: %d.%m.%Y %H:%M:%S", &timeinfo);
 		*out.stream << buffer << " ----- " << endl;
-
-
 	}
 	void Close(OUT out)
 	{
