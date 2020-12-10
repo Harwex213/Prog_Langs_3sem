@@ -1,12 +1,49 @@
 include "date.lib"
 float function FindMax(float arr[], uint i)
 {
-    float retValue = 100;
+    float retValue = 10;
+    bool ass = true;
+    uint k = 10;
+    while(k == i)
+    {
+        if(k > 100)
+        {
+            k = 100;
+            while(true)
+            {
+                retValue = 1031;
+            }
+        }
+    }
 	return retValue;
 }
 uint main
 {
     float arrTest[];
- 	float retValue = FindMax(arrTest[], 10);
+    float retValue;
+    uint k;
+    while(k > 0)
+    {
+        if(k > 100)
+        {
+            k = 100;
+            while(true)
+            {
+                retValue = 1031;
+            }
+        }
+    }
+    while(k > 0)
+    {
+        if(k > 100)
+        {
+            k = 100;
+            while(true)
+            {
+                retValue = 1031;
+            }
+        }
+    }
+ 	retValue = FindMax(arrTest[], 10);
  	return 0;
 }

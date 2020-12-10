@@ -2,17 +2,25 @@
 
 namespace Log
 {
-	LOG getlog(wchar_t logfile[])
+	LOG getlog(wchar_t logfile[], wchar_t logLexTableFile[], wchar_t logIdTableFile[])
 	{
 		LOG temp;
 		temp.stream = new ofstream;
+		temp.streamLexTable = new ofstream;
+		temp.streamIdTable = new ofstream;
 		temp.stream->open(logfile);
-		if (!temp.stream->is_open())
+		temp.streamLexTable->open(logLexTableFile);
+		temp.streamIdTable->open(logIdTableFile);
+		if (!temp.stream->is_open() && !temp.streamLexTable->is_open() && !temp.streamIdTable->is_open())
 		{
 			temp.stream->close();
+			temp.streamLexTable->close();
+			temp.streamIdTable->close();
 			throw ERROR_THROW(112);
 		}
 		wcscpy_s(temp.logfile, logfile);
+		wcscpy_s(temp.logLexTableFile, logLexTableFile);
+		wcscpy_s(temp.logIdTableFile, logIdTableFile);
 
 		return temp;
 	}
@@ -47,9 +55,53 @@ namespace Log
 		time(&rawtime);					//текуща€ дата в секундах
 		localtime_s(&timeinfo, &rawtime);	//текущее локальное врем€, представленное в структуре
 
-		*log.stream << endl << "----- ѕротокол ----- ";
+		*log.stream << "----- ѕротокол ----- ";
 		strftime(buffer, 300, " ƒата: %d.%m.%Y %H:%M:%S", &timeinfo);
 		*log.stream << buffer << " ----- " << endl;
+	}
+	void WriteLogLexTable(LOG log, LT::LexTable lexTable)
+	{
+		time_t rawtime;
+		struct tm timeinfo;			//структура хран€ща€ текущее врем€
+		char buffer[PARM_MAX_SIZE];
+
+		time(&rawtime);					//текуща€ дата в секундах
+		localtime_s(&timeinfo, &rawtime);	//текущее локальное врем€, представленное в структуре
+
+		*log.streamLexTable << "----- ѕротокол ----- ";
+		strftime(buffer, 300, " ƒата: %d.%m.%Y %H:%M:%S", &timeinfo);
+		*log.streamLexTable << buffer << " ----- " << endl;
+
+		int counter = 0;
+		for (int i = 0; i < lexTable.table[lexTable.current_size - 1].line; i++)
+		{
+			*log.streamLexTable << lexTable.table[counter].line << ' ';
+			while (lexTable.table[counter].line == i + 1)
+			{
+				*log.streamLexTable << lexTable.table[counter].lexema;
+				if (lexTable.table[counter].lexema == LEX_IDENTIFICATOR || lexTable.table[counter].lexema== LEX_LITERAL)
+				{
+					*log.streamLexTable << "(" << lexTable.table[counter].idxTI << ")";
+				}
+				counter++;
+			}
+			*log.streamLexTable << endl;
+		}
+	}
+	void WriteLogIdTable(LOG log, IT::IdTable idTable)
+	{
+		time_t rawtime;
+		struct tm timeinfo;			//структура хран€ща€ текущее врем€
+		char buffer[PARM_MAX_SIZE];
+
+		time(&rawtime);					//текуща€ дата в секундах
+		localtime_s(&timeinfo, &rawtime);	//текущее локальное врем€, представленное в структуре
+
+		*log.streamIdTable << "----- ѕротокол ----- ";
+		strftime(buffer, 300, " ƒата: %d.%m.%Y %H:%M:%S", &timeinfo);
+		*log.streamIdTable << buffer << " ----- " << endl;
+
+
 	}
 	void WriteParm(LOG log, Parm::PARM parm)
 	{

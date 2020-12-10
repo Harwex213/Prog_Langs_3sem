@@ -112,5 +112,11 @@
     <Text Include="in\out.txt">
       <Filter>Файлы ресурсов</Filter>
     </Text>
+    <Text Include="in\log.idTable.txt">
+      <Filter>Файлы ресурсов</Filter>
+    </Text>
+    <Text Include="in\log.lexTable.txt">
+      <Filter>Файлы ресурсов</Filter>
+    </Text>
   </ItemGroup>
 </Project>

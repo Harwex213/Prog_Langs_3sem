@@ -46,6 +46,7 @@ namespace In
 			throw ERROR_THROW(110);
 		}
 		file.close();
+		sample.lines = interimData.lineNumber;
 		return sample;
 	}
 

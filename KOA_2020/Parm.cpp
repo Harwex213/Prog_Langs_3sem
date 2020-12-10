@@ -9,9 +9,9 @@ namespace Parm
 		wchar_t* temp_out = NULL;
 		wchar_t* temp_log = NULL;
 
-		bool chek_in = false;
-		bool chek_out = false;
-		bool chek_log = false;
+		bool check_in = false;
+		bool check_out = false;
+		bool check_log = false;
 
 		if (argc > 1)
 		{
@@ -19,25 +19,25 @@ namespace Parm
 			{
 				if (wcslen(argv[i]) <= PARM_MAX_SIZE)
 				{
-					if (!chek_in && (temp_in = wcsstr(argv[i], PARM_IN)))
-						chek_in = true;
+					if (!check_in && (temp_in = wcsstr(argv[i], PARM_IN)))
+						check_in = true;
 
-					if (!chek_out && (temp_out = wcsstr(argv[i], PARM_OUT)))
-						chek_out = true;
+					if (!check_out && (temp_out = wcsstr(argv[i], PARM_OUT)))
+						check_out = true;
 
-					if (!chek_log && (temp_log = wcsstr(argv[i], PARM_LOG)))
-						chek_log = true;
+					if (!check_log && (temp_log = wcsstr(argv[i], PARM_LOG)))
+						check_log = true;
 				}
 				else
 					throw ERROR_THROW(104);
 			}
 
-			if (chek_in)
+			if (check_in)
 				wcscpy_s(sample.in, (temp_in + wcslen(PARM_IN)));
 			else
 				throw ERROR_THROW(100);
 
-			if (chek_out)
+			if (check_out)
 				wcscpy_s(sample.out, (temp_out + wcslen(PARM_OUT)));
 			else
 			{
@@ -45,8 +45,14 @@ namespace Parm
 				wcscat_s(sample.out, PARM_OUT_DEFAULT_EXT);
 			}
 
-			if (chek_log)
+			if (check_log)
+			{
 				wcscpy_s(sample.log, (temp_log + wcslen(PARM_LOG)));
+				wcsncpy_s(sample.logLexTable, sample.log, wcslen(sample.log) - 4);
+				wcscat_s(sample.logLexTable, PARM_LOG_LEXTABLE_EXT);
+				wcsncpy_s(sample.logIdTable, sample.log, wcslen(sample.log) - 4);
+				wcscat_s(sample.logIdTable, PARM_LOG_IDTABLE_EXT);
+			}
 			else
 			{
 				wcscpy_s(sample.log, sample.in);

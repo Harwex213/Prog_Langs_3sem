@@ -172,6 +172,8 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="in\in.txt" />
+    <Text Include="in\log.idTable.txt" />
+    <Text Include="in\log.lexTable.txt" />
     <Text Include="in\log.txt" />
     <Text Include="in\out.txt" />
   </ItemGroup>

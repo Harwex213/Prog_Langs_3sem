@@ -353,7 +353,7 @@ namespace LexAnalysis
 	void SetIdxTIandIdxFirstLE(const IT::IdTable& idTable, const LT::LexTable& lexTable, IT::Entry& entryId, LT::Entry& entryLex)
 	{
 		// Выставляем у лексемы ссылку на id в таблице идентификаторов.
-		entryLex.idxTI = IT::GetId(idTable, entryId.idName, entryId.visibility);
+		entryLex.idxTI = IT::GetId(idTable, entryId, entryId.visibility);
 		// Выставляем EntryId ссылку в таблице Лексем.
 		entryId.idxfirstLE = lexTable.current_size;
 	}
@@ -371,6 +371,7 @@ namespace LexAnalysis
 		delete[] entry.idName;
 		entry.idDataType = IT::UNDEF;
 		entry.idType = IT::U;
+		entry.idxfirstLE = NULL;
 		analysisData.idDataType = IT::UNDEF;
 		analysisData.idType = IT::U;
 	}

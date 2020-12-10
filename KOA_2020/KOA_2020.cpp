@@ -5,32 +5,29 @@
 int wmain(int argc, wchar_t* argv[])
 {
 	setlocale(LC_ALL, "rus");
-	Log::LOG log = Log::INITLOG;
+	Log::LOG log;
 	try
 	{
 		//std::chrono::high_resolution_clock::time_point t1 = std::chrono::high_resolution_clock::now();
 
 		Parm::PARM parm = Parm::getparm(argc, argv);
-		In::IN in = In::getin(parm.in);
-		Out::OUT out = Out::getout(parm.out);
-		log = Log::getlog(parm.log);
+		log = Log::getlog(parm.log, parm.logLexTable, parm.logIdTable);
 
 		// Lex Analysis Stage.
+		In::IN in = In::getin(parm.in);
 		LT::LexTable lexTable = LT::Create(LT_MAXSIZE);
 		IT::IdTable idTable = IT::Create(TI_MAXSIZE);
 		LexAnalysis::Lexer(in, lexTable, idTable);
 
 		// Write results Stage.
-		//WriteLexTable()
-		//WriteIdTable()
+		Log::WriteLogLexTable(log, lexTable);
+		Log::WriteLogIdTable(log, idTable);
 		Log::WriteLog(log);
 		Log::WriteParm(log, parm);
 		Log::WriteIn(log, in);
-		Out::WriteAnalyze(out, in, log);
 
 		// Close files Stage.
 		Log::Close(log);
-		Out::Close(out);
 
 		// Parse Stage.
 		// For Debug:
