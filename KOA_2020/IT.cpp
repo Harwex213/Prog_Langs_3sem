@@ -27,12 +27,11 @@ namespace IT
 	{
 		return idtable.table[n];
 	}
-	int GetId(const IdTable& idTable, char* id, std::list<std::string> visibility)
+	int GetId(const IdTable& idTable, char* id, std::forward_list<std::string> visibility)
 	{
-		auto tempVisibility = visibility.rbegin();
 		for (int i = 0; i < idTable.current_size; i++)
 		{
-			if (*tempVisibility == *idTable.table[i].visibility.rbegin() && (strcmp(id, idTable.table[i].idName) == 0))
+			if (LexAnalysis::ViewVisibility(visibility, idTable.table[i].visibility) && (strcmp(id, idTable.table[i].idName) == 0))
 				return i;
 		}
 		return LT_TI_NULLXDX;

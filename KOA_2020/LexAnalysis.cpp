@@ -14,8 +14,6 @@ namespace LexAnalysis
 		LT::Entry entryLex;
 		IT::Entry entryId;
 
-		analysisData.SetGlobalVisibility();
-
 		for (int i = 0; i < in.wordCounter; i++)
 		{
 			automat.string = in.alfaLxmTable[i].text;
@@ -41,11 +39,12 @@ namespace LexAnalysis
 					case SUCCESS:
 						break;
 					}
-					switch (CheckForIdentificator(idTable, entryId))
+					switch (CheckForIdentificator(idTable, entryId, analysisData))
 					{
 					case OK:
 						IT::AddEntry(idTable, entryId);
 						break;
+					case VARIABLE_ALREADY_DEAD:
 					case NOT_DECLARED:
 						throw ERROR_THROW_IN(SEMANTICS_ERROR_SERIES, LINE, POSITION)
 						break;
@@ -56,7 +55,8 @@ namespace LexAnalysis
 						throw ERROR_THROW_IN(SEMANTICS_ERROR_SERIES + 2, LINE, POSITION);
 						break;
 					case ALREADY_EXIST:
-						analysisData.literalId--;
+						if (entryId.idType == IT::LITERAL)
+							analysisData.literalId--;
 						break;
 					}
 					SetIdxTIandIdxFirstLE(idTable, lexTable, entryId, entryLex);
@@ -102,53 +102,50 @@ namespace LexAnalysis
 			analysisData.idType = IT::FUNCTION;
 			break;
 		case LEX_PARENTHESES_LEFT:
-			analysisData.bracesCounter++;
 			break;
 		case LEX_PARENTHESES_RIGHT:
 			// В любом случае выходим из функции.
 			analysisData.functionIn = false;
-			analysisData.bracesCounter--;
 			break;
 		case LEX_MAIN:
 			// Устанавливаем видимость "main"
-			analysisData.visibility.push_back(*temp.string);
+			analysisData.visibilityList.push_front(*temp.string);
 			analysisData.mainWas++;
 			break;
 		case LEX_WHILE:
 		{
-			char idNumber[ID_MAXSIZE - 1];
-			itoa(analysisData.whileId++, idNumber, DEC_NUMBER_SYMBOL);
-			strcat(analysisData.WhileIdChar, idNumber);
-			analysisData.visibility.push_back(analysisData.WhileIdChar);
-			analysisData.WhileIdChar[1] = IN_NULL_STR;
-			analysisData.whileIn = true;
+			analysisData.whileIdString += std::to_string(analysisData.whileId++);
+			analysisData.visibilityList.push_front(analysisData.whileIdString);
+			analysisData.whileIdString.resize(RESET_TO_ONE);
+			analysisData.whileIdString.shrink_to_fit();
 			break;
 		}
 		case LEX_IF:
 		{
-			char idNumber[ID_MAXSIZE - 1];
-			itoa(analysisData.ifId++, idNumber, DEC_NUMBER_SYMBOL);
-			strcat(analysisData.IfIdChar, idNumber);
-			analysisData.visibility.push_back(analysisData.IfIdChar);
-			analysisData.IfIdChar[1] = IN_NULL_STR;
+			analysisData.ifIdString += std::to_string(analysisData.ifId++);
+			analysisData.visibilityList.push_front(analysisData.ifIdString);
+			analysisData.ifIdString.resize(RESET_TO_ONE);
+			analysisData.ifIdString.shrink_to_fit();
 			break;
 		}
 		case LEX_ELSE:
 		{
-			char idNumber[ID_MAXSIZE - 1];
-			itoa(analysisData.elseId++, idNumber, DEC_NUMBER_SYMBOL);
-			strcat(analysisData.ElseIdChar, idNumber);
-			analysisData.visibility.push_back(analysisData.ElseIdChar);
-			analysisData.ElseIdChar[1] = IN_NULL_STR;
+			analysisData.elseIdString += std::to_string(analysisData.elseId++);
+			analysisData.visibilityList.push_front(analysisData.elseIdString);
+			analysisData.elseIdString.resize(RESET_TO_ONE);
+			analysisData.elseIdString.shrink_to_fit();
 			break;
 		}
 		case LEX_BRACES_LEFT:
+			analysisData.bracesCounter++;
 			break;
 		case LEX_BRACES_RIGHT:
-			if (!analysisData.visibility.empty())
-				analysisData.visibility.pop_back();
-			if (analysisData.whileIn)
-				analysisData.whileIn = false;
+			analysisData.bracesCounter--;
+			if (analysisData.visibilityList.empty())
+			{
+				// Error! Лишняя закрывающая скобка.
+			}
+			analysisData.visibilityList.pop_front();
 			break;
 		case LEX_BRACKETS_LEFT:
 			break;
@@ -201,14 +198,19 @@ namespace LexAnalysis
 
 	void SetVisibility(const FST::FST& temp, AnalysisData& analysisData, IT::Entry& entry)
 	{
-		if (entry.idType != IT::LITERAL)
+		switch (entry.idType)
 		{
-			entry.visibility = analysisData.visibility;
-			if (analysisData.idType == IT::FUNCTION)
-				analysisData.visibility.push_back(entry.idName);
+		case IT::LITERAL:
+			entry.visibility.push_front(LITERAL_VISIBILITY);
+			break;
+		case IT::FUNCTION:
+			entry.visibility = analysisData.visibilityList;
+			analysisData.visibilityList.push_front(entry.idName);
+			break;
+		default:
+			entry.visibility = analysisData.visibilityList;
+			break;
 		}
-		else
-			entry.visibility.push_back(LITERAL_VISIBILITY);
 	}
 
 	SetValueReturnCode SetValue(const FST::FST& temp, AnalysisData& analysisData, IT::Entry& entry)
@@ -219,6 +221,7 @@ namespace LexAnalysis
 			{
 			case IT::UINT:
 			{
+				// Нужно ещё проверять на 8-ые числа
 				long long checkNumber = strtoll(*temp.string, NULL, DEC_NUMBER_SYMBOL);
 				if (checkNumber >= UINT_MIN && checkNumber <= UINT_MAX)
 					entry.value.vUint = checkNumber;
@@ -276,28 +279,15 @@ namespace LexAnalysis
 		return SUCCESS;
 	}
 
-	CheckIdentificatorReturnCode CheckForIdentificator(const IT::IdTable& idTable, IT::Entry& entryId)
+	CheckIdentificatorReturnCode CheckForIdentificator(const IT::IdTable& idTable, IT::Entry& entryId, AnalysisData& analysisData)
 	{
-		auto tempVisibility = entryId.visibility.rbegin();
 		// Проверяем не объявлена ли переменная вне функции.
-		if (*tempVisibility == MAIN_VISIBILITY && entryId.idType == IT::VARIABLE)
+		if (*entryId.visibility.begin() == STANDART_VISIBILITY && entryId.idType == IT::VARIABLE)
 			return GLOBAL_DECLARATION;
 		for (int i = 0; i < idTable.current_size; i++)
 		{
-			// Смотрим по видимости + совпадении имени идентификатора.
-			// Далее смотрим по типу идентификатора. U - объявление уже было. 
-			if (*tempVisibility == *idTable.table[i].visibility.rbegin() && (strcmp(entryId.idName, idTable.table[i].idName) == 0))
-				switch (entryId.idType)
-				{
-				case IT::U:
-					return ALREADY_EXIST;
-					break;
-				default:
-					return RE_DECLARATION;
-					break;
-				}
 			// Проверяем по значению литерала, не был ли создан такой же ранее.
-			if (*tempVisibility == *idTable.table[i].visibility.rbegin() && *tempVisibility == LITERAL_VISIBILITY)
+			if (entryId.visibility == idTable.table[i].visibility && entryId.idType == IT::LITERAL)
 			{
 				switch (entryId.idDataType)
 				{
@@ -319,6 +309,20 @@ namespace LexAnalysis
 					break;
 				}
 			}
+			// Смотрим по видимости + совпадении имени идентификатора.
+			// Далее смотрим по типу идентификатора. U - объявление уже было. 
+			if (ViewVisibility(entryId.visibility, idTable.table[i].visibility) && (strcmp(entryId.idName, idTable.table[i].idName) == 0))
+			{
+				switch (entryId.idType)
+				{
+				case IT::U:
+					return ALREADY_EXIST;
+					break;
+				default:
+					return RE_DECLARATION;
+					break;
+				}
+			}
 		}
 		// Если совпадений ранее не нашли, но тип идентификатора не определён
 		// (не было ключевого слова ранее) ==> использование необъявленного идентификатора.
@@ -327,13 +331,23 @@ namespace LexAnalysis
 		return OK;
 	}
 
-	bool ViewVisibility(std::list<std::string> visibilityThis, std::list<std::string> visibilityThat)
+	bool ViewVisibility(std::forward_list<std::string> visibilityCurrentId, std::forward_list<std::string> visibilityExistingId)
 	{
-		for (size_t i = 0; i < visibilityThis.size(); i++)
+		visibilityCurrentId.reverse();
+		visibilityExistingId.reverse();
+		auto iterator_currentId = visibilityCurrentId.begin();
+		auto iterator_existingId = visibilityExistingId.begin();
+		bool coincide = true;
+		for (; (iterator_currentId != visibilityCurrentId.end()) && (iterator_existingId != visibilityExistingId.end()); ++iterator_currentId, ++iterator_existingId)
 		{
-
+			if (*iterator_currentId != *iterator_existingId)
+				coincide = false;
 		}
-		return false;
+		if (iterator_existingId != visibilityExistingId.end())
+			coincide = false;
+		visibilityCurrentId.reverse();
+		visibilityExistingId.reverse();
+		return coincide;
 	}
 
 	void SetIdxTIandIdxFirstLE(const IT::IdTable& idTable, const LT::LexTable& lexTable, IT::Entry& entryId, LT::Entry& entryLex)

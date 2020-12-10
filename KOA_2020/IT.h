@@ -1,6 +1,5 @@
 #pragma once
-#include <list>
-#include <vector>
+#include <forward_list>
 
 #define ID_MAXSIZE		30				// максимальное количество сиволов в идентификаторе
 #define TI_MAXSIZE		4096			// максимальное количество эл-ов в таблице идентификаторов 
@@ -15,18 +14,11 @@ namespace IT
 	enum IDDATATYPE { UNDEF = 0, UINT = 1, STRING = 2, BOOL = 3, FLOAT = 4 };
 	enum IDTYPE { U = 0, PARAM = 1, VARIABLE = 2, FUNCTION = 3, LITERAL = 4 };
 
-	struct Visibility
-	{
-		std::string visibilityInitilization;
-		std::string visibilityFunction;
-	};
-
 	struct Entry
 	{
 		int idxfirstLE;
 		char* idName = NULL;
-		Visibility visibilityTest;
-		std::list<std::string> visibility;
+		std::forward_list<std::string> visibility;
 		IDDATATYPE	idDataType = UNDEF;
 		IDTYPE	idType = U;
 		union
@@ -53,6 +45,6 @@ namespace IT
 	IdTable Create(int size);
 	void AddEntry(IdTable& idtable, Entry entry);
 	Entry GetEntry(const IdTable& idtable, int n);
-	int GetId(const IdTable& idTable, char* id, std::list<std::string> visibility);
+	int GetId(const IdTable& idTable, char* id, std::forward_list<std::string> visibility);
 	void Delete(IdTable& idtable);
 }
