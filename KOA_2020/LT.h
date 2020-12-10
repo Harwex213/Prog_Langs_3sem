@@ -39,8 +39,6 @@
 #define	LEX_SEMICOLON				';'
 #define	LEX_IDENTIFICATOR			'i'
 #define	LEX_LITERAL					'l'
-#define	LEX_TRUE					'l'
-#define	LEX_FALSE					'l'
 
 #define PARM_LEX_DEFAULT_EXT L".lex.txt" //для файла с итогом лексического анализa(идентификаторы и литералы)
 
