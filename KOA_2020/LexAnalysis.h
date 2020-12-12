@@ -54,13 +54,14 @@ namespace LexAnalysis
 	void Lexer(const In::IN& in, LT::LexTable& lextable, IT::IdTable& idtable);
 	bool FindGraph(const std::vector<FST::FST*> graph, FST::FST*& temp);
 	void CheckLexema(const FST::FST& temp, AnalysisData& analysisData);
-	void SetIdTypeAndIdDataType(const FST::FST& temp, AnalysisData& analysisData, IT::Entry& entry);
+	void SetIdType_IdDataType_IdxFirstLE(const FST::FST& temp, AnalysisData& analysisData, IT::Entry& entry, int idx);
 	void SetName(const FST::FST& temp, AnalysisData& analysisData, IT::Entry& entry);
 	void SetVisibility(const FST::FST& temp, AnalysisData& analysisData, IT::Entry& entry);
 	bool ViewVisibility(std::forward_list<std::string> visibilityCurrentId, std::forward_list<std::string> visibilityExistingId);
 	SetValueReturnCode SetValue(const FST::FST& temp, AnalysisData& analysisData, IT::Entry& entry);
 	CheckIdentificatorReturnCode CheckForIdentificator(const IT::IdTable& idTable, IT::Entry& entryId, AnalysisData& analysisData);
-	void SetIdxTIandIdxFirstLE(const IT::IdTable& idTable, const LT::LexTable& lexTable, IT::Entry& entryId, LT::Entry& entryLex);
+	void SetIdxTI(const IT::IdTable& idTable, const IT::Entry& entryId, LT::Entry& entryLex);
 	void SetLexEntry(LT::Entry& entry, char lexema, int line, int position);
 	void ResetAnalysisData(AnalysisData& analysisData, IT::Entry& entry);
+	void ResetIdxTILex(LT::Entry& entry);
 }

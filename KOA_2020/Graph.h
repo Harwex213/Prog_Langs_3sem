@@ -356,7 +356,7 @@ FST::NODE(12, \
 	FST::RELATION('8', 0), \
 	FST::RELATION('9', 0), \
 	FST::RELATION('0', 0), \
-	FST::RELATION(',', 1)), \
+	FST::RELATION('.', 1)), \
 FST::NODE(10, \
 	FST::RELATION('1', 1), \
 	FST::RELATION('2', 1), \

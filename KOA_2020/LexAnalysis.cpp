@@ -22,7 +22,7 @@ namespace LexAnalysis
 			{
 				if (temp->lexema == LEX_IDENTIFICATOR || temp->lexema == LEX_LITERAL)
 				{
-					SetIdTypeAndIdDataType(*temp, analysisData, entryId);
+					SetIdType_IdDataType_IdxFirstLE(*temp, analysisData, entryId, lexTable.current_size);
 					SetName(*temp, analysisData, entryId);
 					SetVisibility(*temp, analysisData, entryId);
 					switch (SetValue(*temp, analysisData, entryId))
@@ -59,18 +59,18 @@ namespace LexAnalysis
 							analysisData.literalId--;
 						break;
 					}
-					SetIdxTIandIdxFirstLE(idTable, lexTable, entryId, entryLex);
+					SetIdxTI(idTable, entryId, entryLex);
 					ResetAnalysisData(analysisData, entryId);
 				}
 				else
 					CheckLexema(*temp, analysisData);
 				SetLexEntry(entryLex, temp->lexema, LINE, POSITION);
 				LT::AddEntry(lexTable, entryLex);
+				ResetIdxTILex(entryLex);
 			}
 			else
 				throw ERROR_THROW_IN(LEX_ERROR_SERIES + 1, LINE, POSITION)
 		}
-		cout << "DONE";
 	}
 
 	bool FindGraph(const std::vector<FST::FST*> graph, FST::FST*& temp)
@@ -157,7 +157,7 @@ namespace LexAnalysis
 		}
 	}
 
-	void SetIdTypeAndIdDataType(const FST::FST& temp, AnalysisData& analysisData, IT::Entry& entry)
+	void SetIdType_IdDataType_IdxFirstLE(const FST::FST& temp, AnalysisData& analysisData, IT::Entry& entry, int idx)
 	{
 		if (temp.lexema == LEX_LITERAL)
 		{
@@ -166,6 +166,7 @@ namespace LexAnalysis
 		}
 		entry.idType = analysisData.idType;
 		entry.idDataType = analysisData.idDataType;
+		entry.idxfirstLE = idx;
 	}
 
 	void SetName(const FST::FST& temp, AnalysisData& analysisData, IT::Entry& entry)
@@ -350,12 +351,10 @@ namespace LexAnalysis
 		return coincide;
 	}
 
-	void SetIdxTIandIdxFirstLE(const IT::IdTable& idTable, const LT::LexTable& lexTable, IT::Entry& entryId, LT::Entry& entryLex)
+	void SetIdxTI(const IT::IdTable& idTable, const IT::Entry& entryId, LT::Entry& entryLex)
 	{
 		// Выставляем у лексемы ссылку на id в таблице идентификаторов.
-		entryLex.idxTI = IT::GetId(idTable, entryId, entryId.visibility);
-		// Выставляем EntryId ссылку в таблице Лексем.
-		entryId.idxfirstLE = lexTable.current_size;
+		entryLex.idxTI = IT::GetId(idTable, entryId);
 	}
 
 	void SetLexEntry(LT::Entry& entry, char lexema, int line, int position)
@@ -371,8 +370,12 @@ namespace LexAnalysis
 		delete[] entry.idName;
 		entry.idDataType = IT::UNDEF;
 		entry.idType = IT::U;
-		entry.idxfirstLE = NULL;
+		entry.idxfirstLE = LT_TI_NULLXDX;
 		analysisData.idDataType = IT::UNDEF;
 		analysisData.idType = IT::U;
+	}
+	void ResetIdxTILex(LT::Entry& entry)
+	{
+		entry.idxTI = LT_TI_NULLXDX;
 	}
 }

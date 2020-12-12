@@ -101,7 +101,191 @@ namespace Log
 		strftime(buffer, 300, " Дата: %d.%m.%Y %H:%M:%S", &timeinfo);
 		*log.streamIdTable << buffer << " ----- " << endl;
 
-
+		int StringLength = 35;
+		log.streamIdTable->setf(ios::left);
+		*log.streamIdTable << endl;
+		*log.streamIdTable << "|Params|\n";
+		log.streamIdTable->width(StringLength); *log.streamIdTable << "ID Name";
+		log.streamIdTable->width(StringLength); *log.streamIdTable << "idx First LE";
+		log.streamIdTable->width(StringLength); *log.streamIdTable << "Visibility Init";
+		log.streamIdTable->width(StringLength); *log.streamIdTable << "DataType";
+		log.streamIdTable->width(StringLength); *log.streamIdTable << "Value UINT";
+		log.streamIdTable->width(StringLength); *log.streamIdTable << "Value FLOAT";
+		log.streamIdTable->width(StringLength); *log.streamIdTable << "Value BOOL";
+		*log.streamIdTable << "Value STRING";
+		*log.streamIdTable << endl;
+		for (int i = 0; i < 7; i++)
+			*log.streamIdTable << "-----------------------------------";
+		*log.streamIdTable << endl;
+		for (int i = 0; i < idTable.current_size; i++)
+		{
+			if (idTable.table[i].idType == IT::PARAM)
+			{
+				log.streamIdTable->width(StringLength); *log.streamIdTable << idTable.table[i].idName;
+				log.streamIdTable->width(StringLength); *log.streamIdTable << idTable.table[i].idxfirstLE;
+				log.streamIdTable->width(StringLength); *log.streamIdTable << *idTable.table[i].visibility.cbegin();
+				log.streamIdTable->width(StringLength); *log.streamIdTable << idTable.table[i].idDataType;
+				switch (idTable.table[i].idDataType)
+				{
+				case IT::UINT:
+					log.streamIdTable->width(StringLength); *log.streamIdTable << idTable.table[i].value.vUint;
+					log.streamIdTable->width(StringLength); *log.streamIdTable << "-";
+					log.streamIdTable->width(StringLength); *log.streamIdTable << "-";
+					log.streamIdTable->width(StringLength); *log.streamIdTable << "-";
+					break;
+				case IT::FLOAT:
+					log.streamIdTable->width(StringLength); *log.streamIdTable << "-";
+					log.streamIdTable->width(StringLength); *log.streamIdTable << idTable.table[i].value.vFloat;
+					log.streamIdTable->width(StringLength); *log.streamIdTable << "-";
+					log.streamIdTable->width(StringLength); *log.streamIdTable << "-";
+					break;
+				case IT::BOOL:
+					log.streamIdTable->width(StringLength); *log.streamIdTable << "-";
+					log.streamIdTable->width(StringLength); *log.streamIdTable << "-";
+					log.streamIdTable->width(StringLength); *log.streamIdTable << idTable.table[i].value.vBool;
+					log.streamIdTable->width(StringLength); *log.streamIdTable << "-";
+					break;
+				case IT::STRING:
+					log.streamIdTable->width(StringLength); *log.streamIdTable << "-";
+					log.streamIdTable->width(StringLength); *log.streamIdTable << "-";
+					log.streamIdTable->width(StringLength); *log.streamIdTable << "-";
+					*log.streamIdTable << idTable.table[i].value.vString.string;
+					break;
+				}
+				*log.streamIdTable << endl;
+			}
+		}
+		*log.streamIdTable << endl;
+		*log.streamIdTable << "|Functions|\n";
+		log.streamIdTable->width(StringLength); *log.streamIdTable << "ID Name";
+		log.streamIdTable->width(StringLength); *log.streamIdTable << "idx First LE";
+		log.streamIdTable->width(StringLength); *log.streamIdTable << "Visibility";
+		log.streamIdTable->width(StringLength); *log.streamIdTable << "DataType";
+		log.streamIdTable->width(StringLength);
+		log.streamIdTable->width(StringLength);
+		log.streamIdTable->width(StringLength);
+		*log.streamIdTable << endl;
+		for (int i = 0; i < 7; i++)
+			*log.streamIdTable << "-----------------------------------";
+		*log.streamIdTable << endl;
+		for (int i = 0; i < idTable.current_size; i++)
+		{
+			if (idTable.table[i].idType == IT::FUNCTION)
+			{
+				log.streamIdTable->width(StringLength); *log.streamIdTable << idTable.table[i].idName;
+				log.streamIdTable->width(StringLength); *log.streamIdTable << idTable.table[i].idxfirstLE;
+				log.streamIdTable->width(StringLength); *log.streamIdTable << *idTable.table[i].visibility.cbegin();
+				log.streamIdTable->width(StringLength); *log.streamIdTable << idTable.table[i].idDataType;
+				log.streamIdTable->width(StringLength); *log.streamIdTable << "-";
+				log.streamIdTable->width(StringLength); *log.streamIdTable << "-";
+				log.streamIdTable->width(StringLength); *log.streamIdTable << "-";
+				*log.streamIdTable << endl;
+			}
+		}
+		*log.streamIdTable << endl;
+		*log.streamIdTable << "|Variables|\n";
+		log.streamIdTable->width(StringLength); *log.streamIdTable << "Name";
+		log.streamIdTable->width(StringLength); *log.streamIdTable << "idx First LE";
+		log.streamIdTable->width(StringLength); *log.streamIdTable << "Visiblity";
+		log.streamIdTable->width(StringLength); *log.streamIdTable << "DataType";
+		log.streamIdTable->width(StringLength); *log.streamIdTable << "Value UINT";
+		log.streamIdTable->width(StringLength); *log.streamIdTable << "Value FLOAT";
+		log.streamIdTable->width(StringLength); *log.streamIdTable << "Value BOOL";
+		log.streamIdTable->width(StringLength); *log.streamIdTable << "Value STRING";
+		*log.streamIdTable << endl;
+		for (int i = 0; i < 7; i++)
+			*log.streamIdTable << "-----------------------------------";
+		*log.streamIdTable << endl;
+		for (int i = 0; i < idTable.current_size; i++)
+		{
+			if (idTable.table[i].idType == IT::VARIABLE)
+			{
+				log.streamIdTable->width(StringLength); *log.streamIdTable << idTable.table[i].idName;
+				log.streamIdTable->width(StringLength); *log.streamIdTable << idTable.table[i].idxfirstLE;
+				log.streamIdTable->width(StringLength); *log.streamIdTable << *idTable.table[i].visibility.cbegin();
+				log.streamIdTable->width(StringLength); *log.streamIdTable << idTable.table[i].idDataType;
+				switch (idTable.table[i].idDataType)
+				{
+				case IT::UINT:
+					log.streamIdTable->width(StringLength); *log.streamIdTable << idTable.table[i].value.vUint;
+					log.streamIdTable->width(StringLength); *log.streamIdTable << "-";
+					log.streamIdTable->width(StringLength); *log.streamIdTable << "-";
+					log.streamIdTable->width(StringLength); *log.streamIdTable << "-";
+					break;
+				case IT::FLOAT:
+					log.streamIdTable->width(StringLength); *log.streamIdTable << "-";
+					log.streamIdTable->width(StringLength); *log.streamIdTable << idTable.table[i].value.vFloat;
+					log.streamIdTable->width(StringLength); *log.streamIdTable << "-";
+					log.streamIdTable->width(StringLength); *log.streamIdTable << "-";
+					break;
+				case IT::BOOL:
+					log.streamIdTable->width(StringLength); *log.streamIdTable << "-";
+					log.streamIdTable->width(StringLength); *log.streamIdTable << "-";
+					log.streamIdTable->width(StringLength); *log.streamIdTable << idTable.table[i].value.vBool;
+					log.streamIdTable->width(StringLength); *log.streamIdTable << "-";
+					break;
+				case IT::STRING:
+					log.streamIdTable->width(StringLength); *log.streamIdTable << "-";
+					log.streamIdTable->width(StringLength); *log.streamIdTable << "-";
+					log.streamIdTable->width(StringLength); *log.streamIdTable << "-";
+					log.streamIdTable->width(StringLength); *log.streamIdTable << idTable.table[i].value.vString.string;
+					break;
+				}
+				*log.streamIdTable << endl;
+			}
+		}
+		*log.streamIdTable << endl;
+		*log.streamIdTable << "|Literals|\n";
+		log.streamIdTable->width(StringLength); *log.streamIdTable << "Name";
+		log.streamIdTable->width(StringLength); *log.streamIdTable << "idx First LE";
+		log.streamIdTable->width(StringLength); *log.streamIdTable << "Visibility";
+		log.streamIdTable->width(StringLength); *log.streamIdTable << "DataType";
+		log.streamIdTable->width(StringLength); *log.streamIdTable << "Value UINT";
+		log.streamIdTable->width(StringLength); *log.streamIdTable << "Value FLOAT";
+		log.streamIdTable->width(StringLength); *log.streamIdTable << "Value BOOL";
+		log.streamIdTable->width(StringLength); *log.streamIdTable << "Value STRING";
+		*log.streamIdTable << endl;
+		for (int i = 0; i < 7; i++)
+			*log.streamIdTable << "-----------------------------------";
+		*log.streamIdTable << endl;
+		for (int i = 0; i < idTable.current_size; i++)
+		{
+			if (idTable.table[i].idType == IT::LITERAL)
+			{
+				log.streamIdTable->width(StringLength); *log.streamIdTable << idTable.table[i].idName;
+				log.streamIdTable->width(StringLength); *log.streamIdTable << idTable.table[i].idxfirstLE;
+				log.streamIdTable->width(StringLength); *log.streamIdTable << *idTable.table[i].visibility.cbegin();
+				log.streamIdTable->width(StringLength); *log.streamIdTable << idTable.table[i].idDataType;
+				switch (idTable.table[i].idDataType)
+				{
+				case IT::UINT:
+					log.streamIdTable->width(StringLength); *log.streamIdTable << idTable.table[i].value.vUint;
+					log.streamIdTable->width(StringLength); *log.streamIdTable << "-";
+					log.streamIdTable->width(StringLength); *log.streamIdTable << "-";
+					log.streamIdTable->width(StringLength); *log.streamIdTable << "-";
+					break;
+				case IT::FLOAT:
+					log.streamIdTable->width(StringLength); *log.streamIdTable << "-";
+					log.streamIdTable->width(StringLength); *log.streamIdTable << idTable.table[i].value.vFloat;
+					log.streamIdTable->width(StringLength); *log.streamIdTable << "-";
+					log.streamIdTable->width(StringLength); *log.streamIdTable << "-";
+					break;
+				case IT::BOOL:
+					log.streamIdTable->width(StringLength); *log.streamIdTable << "-";
+					log.streamIdTable->width(StringLength); *log.streamIdTable << "-";
+					log.streamIdTable->width(StringLength); *log.streamIdTable << idTable.table[i].value.vBool;
+					log.streamIdTable->width(StringLength); *log.streamIdTable << "-";
+					break;
+				case IT::STRING:
+					log.streamIdTable->width(StringLength); *log.streamIdTable << "-";
+					log.streamIdTable->width(StringLength); *log.streamIdTable << "-";
+					log.streamIdTable->width(StringLength); *log.streamIdTable << "-";
+					log.streamIdTable->width(StringLength); *log.streamIdTable << idTable.table[i].value.vString.string;
+					break;
+				}
+				*log.streamIdTable << endl;
+			}
+		}
 	}
 	void WriteParm(LOG log, Parm::PARM parm)
 	{
@@ -130,13 +314,13 @@ namespace Log
 		{
 			*log.stream << "Ошибка " << error.id << ": " << error.message << endl;
 			if (chek_smb)
-				*log.stream << "строка: " << error.inext.line << " позиция: " << error.inext.col << endl << endl;
+				*log.stream << "строка: " << error.inext.line << " позиция: " << error.inext.col;
 		}
 		else
 		{
 			cout << "Ошибка " << error.id << ": " << error.message << endl;
 			if (chek_smb)
-				cout << "строка: " << error.inext.line << " позиция: " << error.inext.col << endl << endl;
+				cout << "строка: " << error.inext.line << " позиция: " << error.inext.col;
 		}
 	}
 	void Close(LOG log)

@@ -36,11 +36,11 @@ namespace IT
 		}
 		return LT_TI_NULLXDX;
 	}
-	int GetId(const IdTable& idTable, Entry entry, std::forward_list<std::string> visibility)
+	int GetId(const IdTable& idTable, Entry entry)
 	{
 		for (int i = 0; i < idTable.current_size; i++)
 		{
-			if (LexAnalysis::ViewVisibility(visibility, idTable.table[i].visibility))
+			if (LexAnalysis::ViewVisibility(entry.visibility, idTable.table[i].visibility))
 				switch (entry.idType)
 				{
 					case IT::LITERAL:
