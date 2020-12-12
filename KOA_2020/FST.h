@@ -3,6 +3,7 @@
 #include <tchar.h>
 #include <vector>
 #include "IT.h"
+#include "LT.h"
 
 namespace FST
 {
@@ -28,6 +29,7 @@ namespace FST
 	struct FST
 	{
 		IT::IDDATATYPE idDataType = IT::UNDEF;
+		LT::OperationType operationType = LT::NONE;
 		char lexema;
 		char** string;
 		short position = 0;

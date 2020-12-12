@@ -34,6 +34,7 @@
 #define	LEX_OR						'v'
 #define	LEX_AND						'v'
 #define	LEX_INVERSION				'v'
+#define	LEX_OPERATION				'v'
 #define	LEX_ASSIGNMENT				'='
 #define	LEX_COMMA					','
 #define	LEX_SEMICOLON				';'
@@ -44,12 +45,15 @@
 
 namespace LT							// таблица лексем
 {
+	enum OperationType { NONE, PLUS, MINUS, MULTIPLY, DIVISION, EQUALLY, NON_EQUALLY, MORE, LESS, MORE_OR_EQUAL, LESS_OR_EQUAL, OR, AND, INVERSION };
+
 	struct Entry						// строка таблицы лексем
 	{
 		char lexema = '\0';
 		int line = 0;
 		int position = 0;
 		int idxTI = LT_TI_NULLXDX;
+		OperationType operationType = NONE;
 	};
 
 	struct LexTable						// экземпл€р таблицы лексем

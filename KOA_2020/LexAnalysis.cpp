@@ -63,10 +63,10 @@ namespace LexAnalysis
 					ResetAnalysisData(analysisData, entryId);
 				}
 				else
-					CheckLexema(*temp, analysisData);
+					CheckLexema(*temp, analysisData, entryLex);
 				SetLexEntry(entryLex, temp->lexema, LINE, POSITION);
 				LT::AddEntry(lexTable, entryLex);
-				ResetIdxTILex(entryLex);
+				ResetEntryLex(entryLex);
 			}
 			else
 				throw ERROR_THROW_IN(LEX_ERROR_SERIES + 1, LINE, POSITION)
@@ -84,7 +84,7 @@ namespace LexAnalysis
 		return ExecuteDone;
 	}
 
-	void CheckLexema(const FST::FST& temp, AnalysisData& analysisData)
+	void CheckLexema(const FST::FST& temp, AnalysisData& analysisData, LT::Entry& entryLex)
 	{
 		switch (temp.lexema)
 		{
@@ -150,7 +150,9 @@ namespace LexAnalysis
 		case LEX_BRACKETS_LEFT:
 			break;
 		case LEX_BRACKETS_RIGHT:
-			analysisData.bracesCounter++;
+			break;
+		case LEX_OPERATION:
+			entryLex.operationType = temp.operationType;
 			break;
 		default:
 			break;
@@ -374,8 +376,9 @@ namespace LexAnalysis
 		analysisData.idDataType = IT::UNDEF;
 		analysisData.idType = IT::U;
 	}
-	void ResetIdxTILex(LT::Entry& entry)
+	void ResetEntryLex(LT::Entry& entry)
 	{
 		entry.idxTI = LT_TI_NULLXDX;
+		entry.operationType = LT::NONE;
 	}
 }

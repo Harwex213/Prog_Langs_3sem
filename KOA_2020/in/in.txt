@@ -2,7 +2,7 @@ include "date.lib"
 float function FindMax(float arr[], uint i)
 {
     float retValue = 10.12312;
-    bool ass = true;
+    bool ass = 10 > 4;
     uint k = 10;
     while(k == i)
     {

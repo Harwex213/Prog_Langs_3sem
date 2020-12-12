@@ -9,7 +9,6 @@
 #define LITERAL_VISIBILITY "LITERAL"
 #define FUNCTION_VISIBILITY "FUNCTION"
 
-#define COUPLER_SYMBOL '_'
 #define FIRST_SYMBOL_TRUE 't'
 #define FIRST_SYMBOL_FALSE 'f'
 
@@ -17,7 +16,6 @@
 #define DEC_NUMBER_SYMBOL 10
 #define OCT_NUMBER_SYMBOL 8
 #define FIRST_SYMBOL 0
-#define VISIBILITY_FUNCTION 1
 #define RESET_TO_ONE 1
 
 namespace LexAnalysis
@@ -53,7 +51,7 @@ namespace LexAnalysis
 
 	void Lexer(const In::IN& in, LT::LexTable& lextable, IT::IdTable& idtable);
 	bool FindGraph(const std::vector<FST::FST*> graph, FST::FST*& temp);
-	void CheckLexema(const FST::FST& temp, AnalysisData& analysisData);
+	void CheckLexema(const FST::FST& temp, AnalysisData& analysisData, LT::Entry& entryLex);
 	void SetIdType_IdDataType_IdxFirstLE(const FST::FST& temp, AnalysisData& analysisData, IT::Entry& entry, int idx);
 	void SetName(const FST::FST& temp, AnalysisData& analysisData, IT::Entry& entry);
 	void SetVisibility(const FST::FST& temp, AnalysisData& analysisData, IT::Entry& entry);
@@ -63,5 +61,5 @@ namespace LexAnalysis
 	void SetIdxTI(const IT::IdTable& idTable, const IT::Entry& entryId, LT::Entry& entryLex);
 	void SetLexEntry(LT::Entry& entry, char lexema, int line, int position);
 	void ResetAnalysisData(AnalysisData& analysisData, IT::Entry& entry);
-	void ResetIdxTILex(LT::Entry& entry);
+	void ResetEntryLex(LT::Entry& entry);
 }

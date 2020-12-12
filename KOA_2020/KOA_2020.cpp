@@ -19,13 +19,6 @@ int wmain(int argc, wchar_t* argv[])
 		IT::IdTable idTable = IT::Create(TI_MAXSIZE);
 		LexAnalysis::Lexer(in, lexTable, idTable);
 
-		for (int i = 0; i < lexTable.current_size; i++)
-		{
-			if (lexTable.table[i].idxTI != LT_TI_NULLXDX)
-			{
-				cout << i << ' ' << lexTable.table[i].lexema << ' ' << idTable.table[lexTable.table[i].idxTI].idName << ' ' << idTable.table[lexTable.table[i].idxTI].idxfirstLE << endl;
-			}
-		}
 		// Write results Stage.
 		Log::WriteLogLexTable(log, lexTable);
 		Log::WriteLogIdTable(log, idTable);
