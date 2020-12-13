@@ -37,6 +37,10 @@ namespace GRB
 				Rule::Chain(4, TS('t'), TS('i'), TS(';'), NS('I')),
 				// Присваивание.
 				Rule::Chain(5, TS('i'), TS('='), NS('E'), TS(';'), NS('I')),
+				// Цикл
+				
+				// if -> else
+				Rule::Chain(5, TS('q'), TS('('), NS('E'), TS(';'), NS('I')),
 				
 				// Блок конечных.
 				// Объявление и присваивание.
@@ -54,6 +58,8 @@ namespace GRB
 				// Блок с операциями.
 				// Идентификатор.
 				Rule::Chain(2, TS('i'), NS('O')),
+				// Массив.
+				Rule::Chain(1, TS('i'), TS('['), NS('E'), TS(']'), NS('O')),
 				// Литерал.
 				Rule::Chain(2, TS('l'), NS('O')),
 				// Вызов функции.
@@ -64,6 +70,8 @@ namespace GRB
 				// Блок без операций.
 				// Идентификатор.
 				Rule::Chain(1, TS('i')),
+				// Массив.
+				Rule::Chain(1, TS('i'), TS('['), NS('E'), TS(']')),
 				// Литерал.
 				Rule::Chain(1, TS('l')),
 				// Вызов функции.
@@ -83,9 +91,11 @@ namespace GRB
 				// Params while creating.
 				NS('P'),
 				GRB_ERROR_SERIES + 4,
-				2,
+				4,
 				Rule::Chain(4, TS('t'), TS('i'), TS(','), NS('P')),
-				Rule::Chain(2, TS('t'), TS('i'))
+				Rule::Chain(6, TS('t'), TS('i'), TS('['), TS(']'), TS(','), NS('P')),
+				Rule::Chain(2, TS('t'), TS('i')),
+				Rule::Chain(4, TS('t'), TS('i'), TS('['), TS(']'))
 			),
 		Rule(
 				// Params while calling.
@@ -93,8 +103,10 @@ namespace GRB
 				GRB_ERROR_SERIES + 5,
 				4,
 				Rule::Chain(3, TS('i'), TS(','), NS('C')),
+				Rule::Chain(3, TS('i'), TS('['), NS('E'), TS(']'), TS(','), NS('C')),
 				Rule::Chain(3, TS('l'), TS(','), NS('C')),
 				Rule::Chain(1, TS('i')),
+				Rule::Chain(1, TS('i'), TS('['), NS('E'), TS(']')),
 				Rule::Chain(1, TS('l'))
 			)
 	);
