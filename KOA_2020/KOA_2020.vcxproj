@@ -164,7 +164,6 @@
     <ClInclude Include="Log.h" />
     <ClInclude Include="LT.h" />
     <ClInclude Include="MFST.h" />
-    <ClInclude Include="OT.h" />
     <ClInclude Include="Out.h" />
     <ClInclude Include="Parm.h" />
     <ClInclude Include="PolishNotation.h" />
