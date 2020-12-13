@@ -12,57 +12,60 @@ namespace GRB
 				GRB_ERROR_SERIES + 0,
 				2,
 				Rule::Chain(8, TS('m'), TS('{'), NS('N'), TS('r'), NS('E'), TS(';'), TS('}'), TS(';')),
-				Rule::Chain(14, TS('t'), TS('f'), TS('i'), TS('('), NS('F'), TS(')'), TS('{'), NS('N'), TS('r'), NS('E'), TS(';'), TS('}'), TS(';'), NS('S'))
+				Rule::Chain(14, TS('t'), TS('f'), TS('i'), TS('('), NS('P'), TS(')'), TS('{'), NS('N'), TS('r'), NS('E'), TS(';'), TS('}'), TS(';'), NS('S'))
 			),
 		Rule(
 				NS('N'),
 				GRB_ERROR_SERIES + 1,
-				9,
-				Rule::Chain(5, TS('d'), TS('t'), TS('i'), TS(';'), NS('N')),
+				7,
+				Rule::Chain(4, TS('d'), TS('t'), TS('i'), TS(';')),
+				Rule::Chain(5, TS('i'), TS('='), NS('E'), TS(';'), NS('N')),
+				Rule::Chain(4, TS('p'), NS('E'), TS(';'), NS('N')),
 				Rule::Chain(4, TS('d'), TS('t'), TS('i'), TS(';')),
 				Rule::Chain(4, TS('i'), TS('='), NS('E'), TS(';')),
-				Rule::Chain(5, TS('i'), TS('='), NS('E'), TS(';'), NS('N')),
 				Rule::Chain(8, TS('d'), TS('t'), TS('f'), TS('i'), TS('('), NS('F'), TS(')'), TS(';')),
-				Rule::Chain(9, TS('d'), TS('t'), TS('f'), TS('i'), TS('('), NS('F'), TS(')'), TS(';'), NS('N')),
 				Rule::Chain(3, TS('r'), NS('E'), TS(';')),
-				Rule::Chain(3, TS('p'), NS('E'), TS(';')),
-				Rule::Chain(4, TS('p'), NS('E'), TS(';'), NS('N'))
+				Rule::Chain(3, TS('p'), NS('E'), TS(';'))
 			),
 		Rule(
+				// Expressions.
 				NS('E'),
 				GRB_ERROR_SERIES + 2,
 				8,
+				Rule::Chain(5, TS('i'), TS('('), NS('C'), TS(')'), NS('O')),
 				Rule::Chain(1, TS('i')),
 				Rule::Chain(1, TS('l')),
 				Rule::Chain(3, TS('('), NS('E'), TS(')')),
-				Rule::Chain(4, TS('i'), TS('('), NS('W'), TS(')')),
-				Rule::Chain(2, TS('i'), NS('M')),
-				Rule::Chain(2, TS('l'), NS('M')),
-				Rule::Chain(4, TS('('), NS('E'), TS(')'), NS('M')),
-				Rule::Chain(5, TS('i'), TS('('), NS('W'), TS(')'), NS('M'))
+				Rule::Chain(4, TS('i'), TS('('), NS('C'), TS(')')),
+				Rule::Chain(2, TS('i'), NS('O')),
+				Rule::Chain(2, TS('l'), NS('O')),
+				Rule::Chain(4, TS('('), NS('E'), TS(')'), NS('O'))
 			),
 		Rule(
-				NS('M'),
+				// Operations: {+ - * / | & ~}. (and == > < >= <=)?
+				NS('O'),
 				GRB_ERROR_SERIES + 1,
 				2,
-				Rule::Chain(2, TS('v'), NS('E')),
-				Rule::Chain(3, TS('v'), NS('E'), NS('M'))
+				Rule::Chain(3, TS('v'), NS('E'), NS('O')),
+				Rule::Chain(2, TS('v'), NS('E'))
 			),
 		Rule(
-				NS('F'),
+				// Params while creating.
+				NS('P'),
 				GRB_ERROR_SERIES + 3,
 				2,
-				Rule::Chain(2, TS('t'), TS('i')),
-				Rule::Chain(4, TS('t'), TS('i'), TS(','), NS('F'))
+				Rule::Chain(4, TS('t'), TS('i'), TS(','), NS('P')),
+				Rule::Chain(2, TS('t'), TS('i'))
 			),
 		Rule(
-				NS('W'),
+				// Params while calling.
+				NS('C'),
 				GRB_ERROR_SERIES + 4,
 				4,
+				Rule::Chain(3, TS('i'), TS(','), NS('C')),
+				Rule::Chain(3, TS('l'), TS(','), NS('C')),
 				Rule::Chain(1, TS('i')),
-				Rule::Chain(1, TS('l')),
-				Rule::Chain(3, TS('i'), TS(','), NS('W')),
-				Rule::Chain(3, TS('l'), TS(','), NS('W'))
+				Rule::Chain(1, TS('l'))
 			)
 	);
 

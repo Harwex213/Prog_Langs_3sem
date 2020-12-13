@@ -15,7 +15,7 @@ int wmain(int argc, wchar_t* argv[])
 		Out::OUT out = Out::getout(parm.out);
 		log = Log::getlog(parm.log);
 
-		// Lex Analysis Stage.
+		// Lex Analysis Stages.
 		LT::LexTable lexTable = LT::Create(LT_MAXSIZE);
 		IT::IdTable idTable = IT::Create(TI_MAXSIZE);
 		LexAnalysis::FillTables(in, lexTable, idTable);
