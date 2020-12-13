@@ -34,13 +34,13 @@ int wmain(int argc, wchar_t* argv[])
 
 		// Parse Stage.
 		// For Debug:
-		MFST_TRACE_START;
-		MFST::Mfst mfst(lexTable, GRB::getGreibach());
-		mfst.start();
-		mfst.printRules();
+		//MFST_TRACE_START;
+		//MFST::Mfst mfst(lexTable, GRB::getGreibach());
+		//mfst.start();
+		//mfst.printRules();
 
 		// Polish Notation Stage.
-		//PolishNotation::TransformToPolishNotation(lexTable, idTable);
+		PolishNotation::TransformToPolishNotation(lexTable, idTable);
 
 		// Clear RAM Stage.
 		LT::Delete(lexTable);

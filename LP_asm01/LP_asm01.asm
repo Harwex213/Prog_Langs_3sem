@@ -1,46 +1,66 @@
-.586												; система команд                        
-.MODEL FLAT, STDCALL								; модель памяти        
-includelib	kernel32.lib							; библиотека 
-includelib	user32.lib								; библиотека 
-ExitProcess PROTO : DWORD
-getmin		PROTO : DWORD, : DWORD
-.STACK 4096                                         ; стек   
+.586
+.model flat, stdcall
+includelib libucrt.lib
+includelib kernel32.lib
+includelib "Mylib.lib"
+ExitProcess PROTO:DWORD 
+.stack 4096
 
-.DATA                                               ; сегмент данных 
-arr			DWORD   3, 5, -17, 3, 2, 8, -7, 0, 13, 32
-joker		dword	10
+ outnum PROTO : DWORD
 
-.CODE												; сегмент кода  
-getmin PROC array : DWORD, len : DWORD
-	mov esi, array
-	mov eax, [esi]
-	add esi, type array
-	dec len
-	mov ecx, len
-CYCLE:
-	mov ebx, [esi]
-	cmp ebx, eax
-	jg	NotMin
-	mov eax, ebx
-NotMin:
-	add esi, type array
-	loop CYCLE
+ outstr PROTO : DWORD
 
- 	ret
-getmin ENDP
+ outstrline PROTO : DWORD
 
-main PROC 
-START:
-	mov joker[4], 15
-	mov eax, joker[4]
-	invoke getmin, OFFSET Arr, lengthof Arr
+ outnumline PROTO : DWORD
 
-	push 0
-	call ExitProcess
+ system_pause PROTO 
 
+ random PROTO  : DWORD
+
+ lenght PROTO  : DWORD
+
+ power PROTO : DWORD, : DWORD
+.const
+ null_division BYTE 'ERROR: DIVISION BY ZERO', 0
+ overflow BYTE 'ERROR: VARIABLE OVERFLOW', 0 
+	L1 SDWORD 5
+	L2 BYTE '7', 0
+	L3 BYTE 'empty', 0
+.data
+	mainout SDWORD 0
+	maina DWORD ?
+	mainstr DWORD ?
+
+.code
+
+main PROC
+	push L1
+	pop mainout
+
+	push offset L2
+	pop maina
+
+	push offset L3
+	pop mainstr
+
+
+push mainstr
+call outstr
+call system_pause
+push 0
+call ExitProcess
+SOMETHINGWRONG:
+push offset null_division
+call outstrline
+call system_pause
+push -1
+call ExitProcess
+EXIT_OVERFLOW:
+push offset overflow
+call outstrline
+call system_pause
+push -2
+call ExitProcess
 main ENDP
-
 end main
-
-
-
