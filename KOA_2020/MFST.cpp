@@ -74,16 +74,16 @@ namespace MFST
 					GRB::Rule::Chain chain;
 					if ((nrulechain = rule.getNextChain(lenta[lenta_position], chain, nrulechain+1)) >= 0)
 					{
-						MFST_TRACE1;
+						//MFST_TRACE1;
 						saveState();
 						st.pop();
 						push_chain(chain);
 						rc = NS_OK;
-						MFST_TRACE2;
+						//MFST_TRACE2;
 					}
 					else
 					{
-						MFST_TRACE4("NS_NORULECHAIN/NS_RULE");
+						//MFST_TRACE4("NS_NORULECHAIN/NS_RULE");
 						saveDiagnosis(NS_NORULECHAIN);
 						rc = restState() ? NS_NORULECHAIN : NS_NORULE;
 					}
@@ -99,18 +99,18 @@ namespace MFST
 				st.pop();
 				nrulechain = -1;		//Зачем сбрасывать nrulechain?
 				rc = TS_OK;
-				MFST_TRACE3;
+				//MFST_TRACE3;
 			}
 			else
 			{
-				MFST_TRACE4("TS_NOK/NS_NORULECHAIN");
+				//MFST_TRACE4("TS_NOK/NS_NORULECHAIN");
 				rc = restState() ? TS_NOK : NS_NORULECHAIN;
 			}
 		}
 		else
 		{
 			rc = LENTA_END;
-			MFST_TRACE4("LENTA_END");
+			//MFST_TRACE4("LENTA_END");
 		}
 
 		return rc;
@@ -128,7 +128,7 @@ namespace MFST
 	bool Mfst::saveState()
 	{
 		storestate.push(MfstState(lenta_position, st, nrule, nrulechain));
-		MFST_TRACE6("SAVESTATE:", storestate.size());
+		//MFST_TRACE6("SAVESTATE:", storestate.size());
 		return true;
 	}
 
@@ -149,8 +149,8 @@ namespace MFST
 
 			storestate.pop();
 
-			MFST_TRACE5("RESTSTATE");
-			MFST_TRACE2;
+			//MFST_TRACE5("RESTSTATE");
+			//MFST_TRACE2;
 		}
 
 		return rc;

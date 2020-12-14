@@ -29,7 +29,7 @@ namespace GRB
 				// Instructions. 
 				NS('I'),
 				GRB_ERROR_SERIES + 2,
-				16,
+				18,
 				// Блок повторяющихся.
 				// Объявление и присваивание.
 				Rule::Chain(6, TS('t'), TS('i'), TS('='), NS('E'), TS(';'), NS('I')),
@@ -37,6 +37,8 @@ namespace GRB
 				Rule::Chain(4, TS('t'), TS('i'), TS(';'), NS('I')),
 				// Объявление массива.
 				Rule::Chain(7, TS('t'), TS('i'), TS('['), NS('E'), TS(']'), TS(';'), NS('I')),
+				// Объявление константы.
+				Rule::Chain(7, TS('c'), TS('t'), TS('i'), TS('='), TS('l'), TS(';'), NS('I')),
 				// Присваивание.
 				Rule::Chain(5, TS('i'), TS('='), NS('E'), TS(';'), NS('I')),
 				// Присваивание массива.
@@ -55,6 +57,8 @@ namespace GRB
 				Rule::Chain(3, TS('t'), TS('i'), TS(';')),
 				// Объявление массива.
 				Rule::Chain(6, TS('t'), TS('i'), TS('['), NS('E'), TS(']'), TS(';')),
+				// Объявление константы.
+				Rule::Chain(6, TS('c'), TS('t'), TS('i'), TS('='), TS('l'), TS(';')),
 				// Присваивание.
 				Rule::Chain(4, TS('i'), TS('='), NS('E'), TS(';')),
 				// Присваивание массива.
