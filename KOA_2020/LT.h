@@ -26,16 +26,18 @@
 #define	LEX_MINUS					'v'			// -
 #define	LEX_MULTIPLY				'v'			// *
 #define	LEX_DIVISION				'v'			// /
-#define	LEX_EQUALLY					'v'			// ==
-#define	LEX_NON_EQUALLY				'v'			// !=
-#define	LEX_MORE					'v'			// >
-#define	LEX_LESS					'v'			// <
-#define	LEX_MORE_OR_EQUAL			'v'			// >=
-#define	LEX_LESS_OR_EQUAL			'v'			// <=
+#define	LEX_EQUALLY					'g'			// ==
+#define	LEX_NON_EQUALLY				'g'			// !=
+#define	LEX_MORE					'g'			// >
+#define	LEX_LESS					'g'			// <
+#define	LEX_MORE_OR_EQUAL			'g'			// >=
+#define	LEX_LESS_OR_EQUAL			'g'			// <=
 #define	LEX_OR						'v'			// |
 #define	LEX_AND						'v'			// &
-#define	LEX_INVERSION				'v'			// !
-#define	LEX_OPERATION				'v'
+#define	LEX_INVERSION				'b'			// ~
+#define	LEX_BINARIES				'v'
+#define	LEX_COMPARISONS				'g'
+#define	LEX_UNARY					'b'
 #define	LEX_ASSIGNMENT				'='
 #define	LEX_COMMA					','
 #define	LEX_SEMICOLON				';'

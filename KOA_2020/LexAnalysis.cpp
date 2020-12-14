@@ -151,7 +151,9 @@ namespace LexAnalysis
 			break;
 		case LEX_BRACKETS_RIGHT:
 			break;
-		case LEX_OPERATION:
+		case LEX_BINARIES:
+		case LEX_COMPARISONS:
+		case LEX_UNARY:
 			entryLex.operationType = temp.operationType;
 			break;
 		default:

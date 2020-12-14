@@ -17,12 +17,12 @@ float function FindMax(float arr[], uint i)
     }
 	return retValue;
 }
-uint main
+float function FindMin(float arr[], uint i)
 {
-    float arrTest[];
-    float retValue;
-    uint k;
-    while(k > 0)
+    float retValue = 10.12312;
+    bool ass = 10 > 4;
+    uint k = 10;
+    while(k == i)
     {
         if(k > 100)
         {
@@ -33,7 +33,14 @@ uint main
             }
         }
     }
-    while(k > 0)
+	return retValue;
+}
+float function FindJoker(float arr[], uint i)
+{
+    float retValue = 10.12312;
+    bool ass = 10 > 4;
+    uint k = 10;
+    while(k == i)
     {
         if(k > 100)
         {
@@ -44,6 +51,50 @@ uint main
             }
         }
     }
- 	retValue = FindMax(arrTest[], 10);
- 	return 0;
+	return retValue;
+}
+main
+{
+    uint k = 0;
+    uint i = 10 - 30;
+    float retValue = 10.12312;
+    bool ass = 10 > 4;
+    while(k == i)
+    {
+        if(k > 100)
+        {
+            k = 100;
+            while(true)
+            {
+                retValue = 1031;
+            }
+        }
+    }
+    while(k == i)
+    {
+        if(k > 100)
+        {
+            k = 100;
+            while(true)
+            {
+                retValue = 1031;
+            }
+        }
+    }
+    while(k == i)
+    {
+        if(k > 100)
+        {
+            k = 100;
+            while(true)
+            {
+                retValue = 1031;
+            }
+        }
+    }
+    k = 100;
+    k = 1310;
+    k = 900;
+    k = 31;
+ 	return k;
 }

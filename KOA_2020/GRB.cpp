@@ -14,52 +14,68 @@ namespace GRB
 				4,
 				Rule::Chain(3, TS('d'), TS('l'), NS('L')),
 				Rule::Chain(2, TS('d'), TS('l')),
-				Rule::Chain(9, TS('m'), TS('{'), NS('I'), TS('r'), NS('E'), TS(';'), TS('}'), TS(';'), NS('S')),
-				Rule::Chain(14, TS('t'), TS('f'), TS('i'), TS('('), NS('P'), TS(')'), TS('{'), NS('I'), TS('r'), NS('E'), TS(';'), TS('}'), TS(';'), NS('S'))
+				Rule::Chain(8, TS('m'), TS('{'), NS('I'), TS('r'), NS('E'), TS(';'), TS('}'), NS('S')),
+				Rule::Chain(13, TS('t'), TS('f'), TS('i'), TS('('), NS('P'), TS(')'), TS('{'), NS('I'), TS('r'), NS('E'), TS(';'), TS('}'), NS('S'))
 		),
 		Rule(
 				// Functions and Main.
 				NS('S'),
 				GRB_ERROR_SERIES + 1,
 				2,
-				Rule::Chain(9, TS('m'), TS('{'), NS('I'), TS('r'), NS('E'), TS(';'), TS('}'), TS(';'), NS('S')),
-				Rule::Chain(14, TS('t'), TS('f'), TS('i'), TS('('), NS('P'), TS(')'), TS('{'), NS('I'), TS('r'), NS('E'), TS(';'), TS('}'), TS(';'), NS('S'))
+				Rule::Chain(8, TS('m'), TS('{'), NS('I'), TS('r'), NS('E'), TS(';'), TS('}'), NS('S')),
+				Rule::Chain(13, TS('t'), TS('f'), TS('i'), TS('('), NS('P'), TS(')'), TS('{'), NS('I'), TS('r'), NS('E'), TS(';'), TS('}'), NS('S'))
 			),
 		Rule(
 				// Instructions. 
 				NS('I'),
 				GRB_ERROR_SERIES + 2,
-				7,
+				16,
 				// Блок повторяющихся.
 				// Объявление и присваивание.
 				Rule::Chain(6, TS('t'), TS('i'), TS('='), NS('E'), TS(';'), NS('I')),
 				// Объявление.
 				Rule::Chain(4, TS('t'), TS('i'), TS(';'), NS('I')),
+				// Объявление массива.
+				Rule::Chain(7, TS('t'), TS('i'), TS('['), NS('E'), TS(']'), TS(';'), NS('I')),
 				// Присваивание.
 				Rule::Chain(5, TS('i'), TS('='), NS('E'), TS(';'), NS('I')),
+				// Присваивание массива.
+				Rule::Chain(8, TS('i'), TS('['), NS('E'), TS(']'), TS('='), NS('E'), TS(';'), NS('I')),
 				// Цикл
-				
+				Rule::Chain(8, TS('w'), TS('('), NS('E'), TS(')'), TS('{'), NS('I'), TS('}'), NS('I')),
 				// if -> else
-				Rule::Chain(5, TS('q'), TS('('), NS('E'), TS(';'), NS('I')),
+				Rule::Chain(12, TS('q'), TS('('), NS('E'), TS(')'), TS('{'), NS('I'), TS('}'), TS('e'), TS('{'), NS('I'), TS('}'), NS('I')),
+				// if
+				Rule::Chain(8, TS('q'), TS('('), NS('E'), TS(')'), TS('{'), NS('I'), TS('}'), NS('I')),
 				
 				// Блок конечных.
 				// Объявление и присваивание.
 				Rule::Chain(5, TS('t'), TS('i'), TS('='), NS('E'), TS(';')),
 				// Объявление.
 				Rule::Chain(3, TS('t'), TS('i'), TS(';')),
+				// Объявление массива.
+				Rule::Chain(6, TS('t'), TS('i'), TS('['), NS('E'), TS(']'), TS(';')),
 				// Присваивание.
-				Rule::Chain(4, TS('i'), TS('='), NS('E'), TS(';'))
+				Rule::Chain(4, TS('i'), TS('='), NS('E'), TS(';')),
+				// Присваивание массива.
+				Rule::Chain(7, TS('i'), TS('['), NS('E'), TS(']'), TS('='), NS('E'), TS(';')),
+				// Цикл
+				Rule::Chain(7, TS('w'), TS('('), NS('E'), TS(')'), TS('{'), NS('I'), TS('}')),
+				// if -> else
+				Rule::Chain(11, TS('q'), TS('('), NS('E'), TS(')'), TS('{'), NS('I'), TS('}'), TS('e'), TS('{'), NS('I'), TS('}')),
+				// if
+				Rule::Chain(7, TS('q'), TS('('), NS('E'), TS(')'), TS('{'), NS('I'), TS('}'))
 			),
 		Rule(
 				// Expressions.
 				NS('E'),
 				GRB_ERROR_SERIES + 3,
-				8,
+				10,
 				// Блок с операциями.
 				// Идентификатор.
 				Rule::Chain(2, TS('i'), NS('O')),
 				// Массив.
-				Rule::Chain(1, TS('i'), TS('['), NS('E'), TS(']'), NS('O')),
+				Rule::Chain(5, TS('i'), TS('['), NS('E'), TS(']'), NS('O')),
 				// Литерал.
 				Rule::Chain(2, TS('l'), NS('O')),
 				// Вызов функции.
@@ -71,7 +87,7 @@ namespace GRB
 				// Идентификатор.
 				Rule::Chain(1, TS('i')),
 				// Массив.
-				Rule::Chain(1, TS('i'), TS('['), NS('E'), TS(']')),
+				Rule::Chain(4, TS('i'), TS('['), NS('E'), TS(']')),
 				// Литерал.
 				Rule::Chain(1, TS('l')),
 				// Вызов функции.
@@ -83,9 +99,17 @@ namespace GRB
 				// Operations: {+ - * / | & ~}. (and == > < >= <=)?
 				NS('O'),
 				GRB_ERROR_SERIES + 3,
-				2,
+				8,
+				// Binaries: {+ - * / | &}
 				Rule::Chain(3, TS('v'), NS('E'), NS('O')),
-				Rule::Chain(2, TS('v'), NS('E'))
+				Rule::Chain(2, TS('v'), NS('E')),
+				Rule::Chain(4, TS('v'), TS('b'), NS('E'), NS('O')),
+				Rule::Chain(3, TS('v'), TS('b'), NS('E')),
+				// Comparisons { == > < >= <=}
+				Rule::Chain(3, TS('g'), NS('E'), NS('O')),
+				Rule::Chain(2, TS('g'), NS('E')),
+				Rule::Chain(4, TS('g'), TS('b'), NS('E'), NS('O')),
+				Rule::Chain(3, TS('g'), TS('b'), NS('E'))
 			),
 		Rule(
 				// Params while creating.
@@ -101,12 +125,12 @@ namespace GRB
 				// Params while calling.
 				NS('C'),
 				GRB_ERROR_SERIES + 5,
-				4,
+				6,
 				Rule::Chain(3, TS('i'), TS(','), NS('C')),
-				Rule::Chain(3, TS('i'), TS('['), NS('E'), TS(']'), TS(','), NS('C')),
+				Rule::Chain(6, TS('i'), TS('['), NS('E'), TS(']'), TS(','), NS('C')),
 				Rule::Chain(3, TS('l'), TS(','), NS('C')),
 				Rule::Chain(1, TS('i')),
-				Rule::Chain(1, TS('i'), TS('['), NS('E'), TS(']')),
+				Rule::Chain(4, TS('i'), TS('['), NS('E'), TS(']')),
 				Rule::Chain(1, TS('l'))
 			)
 	);
