@@ -210,4 +210,5 @@ namespace PolishNotation
 	};
 	void TransformToPolishNotation(LT::LexTable& lextable, IT::IdTable& idtable);
 	void PolishNotationExpression(int positionAfterAssignment, LT::LexTable& lextable, IT::IdTable& idtable);
+	void PolishNotationCondition(int positionAfterParenthesis, LT::LexTable& lextable, IT::IdTable& idtable);
 };
