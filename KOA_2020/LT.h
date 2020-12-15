@@ -75,12 +75,10 @@ namespace LT							// таблица лексем
 	{
 		int maxsize;					// емкость таблицы лексем < LT_MAXSIZE
 		int current_size = 0;				// текущий размер таблицы лексем < maxsize
-		std::vector<Entry> tableTest;
-		Entry* table;					// массив строк таблицы лексем
+		std::vector<Entry> table;
 	};
 
-	LexTable Create(int size);					// создать таблицу лексем
-	void AddEntry(LexTable& lextable, Entry entry);	// добавление лексем
+	void AddEntry(LexTable& lextable, Entry& entry);	// добавление лексем
 	Entry GetEntry(LexTable& lextable, int n);	// получить строку таблицы лексем
 	void Delete(LexTable& lextable);			// удалить таблицу лексем (освободить память)
 	char GetOperationSymbol(const Entry& entry);

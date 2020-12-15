@@ -2,7 +2,6 @@ include "date.lib"
 main
 {
     uint k = 0;
-
  	return k;
 }
 float function FindMax(float arr[], uint i)

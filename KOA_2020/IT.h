@@ -17,8 +17,10 @@ namespace IT
 	struct Entry
 	{
 		int idxfirstLE;
+		int functionParamsCount;
 		char* idName = NULL;
 		std::forward_list<std::string> visibility;
+		std::forward_list<int> paramsIdx;
 		IDDATATYPE	idDataType = UNDEF;
 		IDTYPE	idType = U;
 		union

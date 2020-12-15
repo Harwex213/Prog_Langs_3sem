@@ -26,6 +26,12 @@ namespace LexAnalysis
 	{
 		// See that we are in Function.
 		bool functionIn = false;
+		// See that need update IdFunction.
+		bool functionNeedUpdate = false;
+		// See that need update info about function params.
+		bool infoFunctionParamsNeedUpdate = false;
+		// Function Params Counter.
+		int functionParamsCounter = 0;
 		// Counter main. If > 1 ==> Error.
 		int mainWas = 0;
 		// Counter braces.
@@ -44,6 +50,8 @@ namespace LexAnalysis
 		int elseId = 0;
 		// Visibility of Identificators.
 		std::forward_list<std::string> visibilityList{ STANDART_VISIBILITY };
+		// Id of function params.
+		std::forward_list<int> paramsIdx;
 		// IdType and IdDataType
 		IT::IDDATATYPE idDataType = IT::UNDEF;
 		IT::IDTYPE idType = IT::U;
@@ -53,6 +61,7 @@ namespace LexAnalysis
 	bool FindGraph(const std::vector<FST::FST*> graph, FST::FST*& temp);
 	void CheckLexema(const FST::FST& temp, AnalysisData& analysisData, LT::Entry& entryLex);
 	void SetIdType_IdDataType_IdxFirstLE(const FST::FST& temp, AnalysisData& analysisData, IT::Entry& entry, int idx);
+	void SetFunctionParams(AnalysisData& analysisData, int id);
 	void SetName(const FST::FST& temp, AnalysisData& analysisData, IT::Entry& entry);
 	void SetVisibility(const FST::FST& temp, AnalysisData& analysisData, IT::Entry& entry);
 	bool ViewVisibility(std::forward_list<std::string> visibilityCurrentId, std::forward_list<std::string> visibilityExistingId);
@@ -62,4 +71,4 @@ namespace LexAnalysis
 	void SetLexEntry(LT::Entry& entry, char lexema, int line, int position);
 	void ResetAnalysisData(AnalysisData& analysisData, IT::Entry& entry);
 	void ResetEntryLex(LT::Entry& entry);
-}
+}	

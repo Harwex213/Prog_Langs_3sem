@@ -88,7 +88,9 @@ namespace MFST
 					}
 					else
 					{
+#ifdef DEBUG
 						MFST_TRACE4("NS_NORULECHAIN/NS_RULE");
+#endif // DEBUG
 						saveDiagnosis(NS_NORULECHAIN);
 						rc = restState() ? NS_NORULECHAIN : NS_NORULE;
 					}

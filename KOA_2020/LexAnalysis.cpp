@@ -23,6 +23,8 @@ namespace LexAnalysis
 				if (temp->lexema == LEX_IDENTIFICATOR || temp->lexema == LEX_LITERAL)
 				{
 					SetIdType_IdDataType_IdxFirstLE(*temp, analysisData, entryId, lexTable.current_size);
+					if (analysisData.infoFunctionParamsNeedUpdate)
+						SetFunctionParams(analysisData, lexTable.current_size);
 					SetName(*temp, analysisData, entryId);
 					SetVisibility(*temp, analysisData, entryId);
 					switch (SetValue(*temp, analysisData, entryId))
@@ -65,8 +67,11 @@ namespace LexAnalysis
 				else
 					CheckLexema(*temp, analysisData, entryLex);
 				SetLexEntry(entryLex, temp->lexema, LINE, POSITION);
+				if (analysisData.functionNeedUpdate)
+				{
+
+				}
 				LT::AddEntry(lexTable, entryLex);
-				lexTable.tableTest.push_back(entryLex);
 				ResetEntryLex(entryLex);
 			}
 			else
@@ -94,7 +99,10 @@ namespace LexAnalysis
 			analysisData.idType = IT::VARIABLE;
 			// Если мы в функции -> устанавливаем тип идентификатора как параметр
 			if (analysisData.functionIn)
+			{
 				analysisData.idType = IT::PARAM;
+				analysisData.infoFunctionParamsNeedUpdate = true;
+			}
 			analysisData.idDataType = temp.idDataType;
 			break;
 		case LEX_FUNCTION:
@@ -105,6 +113,10 @@ namespace LexAnalysis
 		case LEX_PARENTHESES_LEFT:
 			break;
 		case LEX_PARENTHESES_RIGHT:
+			if (analysisData.functionIn)
+			{
+				analysisData.functionNeedUpdate = true;
+			}
 			// В любом случае выходим из функции.
 			analysisData.functionIn = false;
 			break;
@@ -172,6 +184,14 @@ namespace LexAnalysis
 		entry.idType = analysisData.idType;
 		entry.idDataType = analysisData.idDataType;
 		entry.idxfirstLE = idx;
+	}
+
+	void SetFunctionParams(AnalysisData& analysisData, int id)
+	{
+		// Вносим информацию об действительных параметрах функции.
+		analysisData.functionParamsCounter++;
+		analysisData.paramsIdx.push_front(id);
+		analysisData.infoFunctionParamsNeedUpdate = false;
 	}
 
 	void SetName(const FST::FST& temp, AnalysisData& analysisData, IT::Entry& entry)
@@ -376,6 +396,7 @@ namespace LexAnalysis
 		entry.idDataType = IT::UNDEF;
 		entry.idType = IT::U;
 		entry.idxfirstLE = LT_TI_NULLXDX;
+
 		analysisData.idDataType = IT::UNDEF;
 		analysisData.idType = IT::U;
 	}

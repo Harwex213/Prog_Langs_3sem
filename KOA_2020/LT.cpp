@@ -2,23 +2,9 @@
 
 namespace LT							// таблица лексем
 {
-	LexTable Create(int size)			// создать таблицу лексем
+	void AddEntry(LexTable& lextable, Entry& entry)
 	{
-		if(size > LT_MAXSIZE)
-			throw ERROR_THROW(120);
-		LexTable sample;
-		sample.maxsize = size;
-		sample.current_size = 0;
-		sample.table = new Entry[size]; 
-		return sample;
-	};
-
-	void AddEntry(LexTable& lextable, Entry entry)
-	{
-		lextable.table[lextable.current_size].lexema = entry.lexema;
-		lextable.table[lextable.current_size].position = entry.position;
-		lextable.table[lextable.current_size].line = entry.line;
-		lextable.table[lextable.current_size].idxTI = entry.idxTI;
+		lextable.table.push_back(entry);
 		lextable.current_size++;
 	};
 
@@ -29,7 +15,8 @@ namespace LT							// таблица лексем
 
 	void Delete(LexTable& lextable)
 	{
-		delete[] lextable.table;
+		lextable.table.clear();
+		lextable.table.shrink_to_fit();
 	};
 
 	char GetOperationSymbol(const Entry& entry)
