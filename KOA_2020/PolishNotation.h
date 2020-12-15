@@ -1,6 +1,7 @@
 #pragma once
 #include "LT.h"
 #include "IT.h"
+#include "Error.h"
 // | Priority	| Operation |
 // | 0			| {			|
 // | 0			| }			|
@@ -93,7 +94,7 @@ namespace PolishNotation
 
 		void AnalyzePriority()
 		{
-			// Если стек операций пустой или на его дне открывающая скобка -> заносим
+			// Если стек операций пустой или на его дне открывающая скобка -> заносим текущую Entry.
 			if (operationStack.empty() ||
 				operationStack.top().savedEntryOperation.lexema == LEX_PARENTHESES_LEFT ||
 				operationStack.top().savedEntryOperation.lexema == LEX_BRACES_LEFT)
@@ -121,11 +122,13 @@ namespace PolishNotation
 
 		void MetParethesisRight()
 		{
+			// Выносим из стека все операции до скобки.
 			while (operationStack.top().savedEntryOperation.lexema != LEX_PARENTHESES_LEFT)
 			{
 				resultChain.push_back(operationStack.top().savedEntryOperation);
 				operationStack.pop();
 			}
+			// И уничтожаем скобку.
 			operationStack.pop();
 		}
 
@@ -134,6 +137,60 @@ namespace PolishNotation
 			tempOperationEntry.priority = BRACKETS_PRIORITY;
 			tempOperationEntry.savedEntryOperation = tempLexEntry;
 			operationStack.push(tempOperationEntry);
+		}
+
+		void MetBracketsRight()
+		{
+			// Выносим из стека все операции до скобки.
+			while (operationStack.top().savedEntryOperation.lexema != LEX_BRACKETS_LEFT)
+			{
+				resultChain.push_back(operationStack.top().savedEntryOperation);
+				operationStack.pop();
+			}
+			// И уничтожаем скобку.
+			operationStack.pop();
+		}
+		
+		void PushFunctionInfo(const IT::IdTable& idTable)
+		{
+			// Проверяем чтобы количество фактических и ожидаемых параметров было одинаково.
+			if (!Semantic::CheckFunctionCountParams(stackCFunc.stackParams[stackCFunc.countFunction], stackCFunc.calledFunction[stackCFunc.countFunction], idTable))
+				throw ERROR_THROW_IN(SEMANTICS_ERROR_SERIES + 1, tempLexEntry.line, tempLexEntry.position);
+			stackCFunc.countFunction--;
+			// Смотрим пуст ли стек с количеством параметров. Если да -> функции закончились. Если нет -> убираем последнюю функцию из вектора.
+			if (stackCFunc.stackParams.empty())
+				stackCFunc.isParams = false;
+			if (stackCFunc.isParams)
+			{
+				stackCFunc.calledFunction.pop_back();
+				stackCFunc.calledFunction.shrink_to_fit();
+				stackCFunc.stackParams.pop_back();
+				stackCFunc.stackParams.shrink_to_fit();
+			}
+		}
+
+		void MetComma()
+		{
+			bool check = true;
+			while (check)
+			{
+				if (operationStack.top().savedEntryOperation.lexema == LEX_PARENTHESES_LEFT || operationStack.top().savedEntryOperation.lexema == LEX_BRACKETS_LEFT)
+					check = false;
+				else
+				{
+					resultChain.push_back(operationStack.top().savedEntryOperation);
+					operationStack.pop();
+				}
+			}
+		}
+
+		void PopLastOperations()
+		{
+			while (!operationStack.empty())
+			{
+				resultChain.push_back(operationStack.top().savedEntryOperation);
+				operationStack.pop();
+			}
 		}
 	};
 	void TransformToPolishNotation(LT::LexTable& lextable, IT::IdTable& idtable);

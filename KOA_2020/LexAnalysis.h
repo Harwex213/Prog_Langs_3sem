@@ -18,6 +18,11 @@
 #define FIRST_SYMBOL 0
 #define RESET_TO_ONE 1
 
+#define LEX_ERROR_SERIES 120
+#define SEMANTICS_ERROR_SERIES 400
+#define LINE in.alfaLxmTable[i].line
+#define POSITION in.alfaLxmTable[i].position
+
 namespace LexAnalysis
 {
 	enum CheckIdentificatorReturnCode { OK = 1, GLOBAL_DECLARATION = 2, RE_DECLARATION = 3, ALREADY_EXIST = 4, NOT_DECLARED = 5, VARIABLE_ALREADY_DEAD = 6 };

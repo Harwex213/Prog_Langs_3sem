@@ -1,11 +1,12 @@
 #include "stdafx.h"
+#define DEBUG_PN
+
 namespace PolishNotation
 {
 	void TransformToPolishNotation(LT::LexTable& lexTable, IT::IdTable& idTable)
 	{
-		// Больше 9 параметров - сломается
 		// Если в параметрах поставить просто арифмитическое действие, то сломается
-		// Зачем нам [] для функций? (144 строчка)
+		// Правильный подсчёт количества параметров!
 
 		for (int i = 0; i < lexTable.current_size; i++)
 		{
@@ -68,85 +69,47 @@ namespace PolishNotation
 				}
 				case LEX_PARENTHESES_RIGHT:
 				{
-					while (stack.top().operation != LEX_LEFTBRACE)
-					{
-						temp = stack.top().operation;
-						stack.pop();						//Вносим все операции стека в результ. строку
-						resultString.push_back(temp);
-					}
-					stack.pop();							//Убираем левую скобку
-
-					if (isParams)
+					if (data.stackCFunc.isParams)
 						goto RightBrackets;
-
+					data.MetParethesisRight();
 					break;
 				}
-				case LEX_BRACES_LEFT:
+				case LEX_BRACKETS_LEFT:
 				{
 				LeftBrackets:
 					data.MetBracketsLeft();
 					break;
 				}
-				case LEX_BRACES_RIGHT:
+				case LEX_BRACKETS_RIGHT:
 				{
-					while (stack.top().operation != LEX_LEFTBRACKETS)
-					{
-						temp = stack.top().operation;
-						stack.pop();
-						resultString.push_back(temp);
-					}
-					stack.pop();
-
-					if (isParams)
-					{
-					RightBrackets:
-						temp = stackParams[countFunction--] + 48;
-						resultString.push_back(LEX_PARAMS_COUNT);
-						resultString.push_back(temp);
-
-						if (stackParams.empty())
-							isParams = false;
-						if (isParams)
-							stackParams.pop_back();
-					}
+				RightBrackets:
+					data.MetBracketsRight();
+					if (data.stackCFunc.isParams)
+						data.PushFunctionInfo(idTable);
 					break;
 				}
 				case LEX_COMMA:
 				{
-					bool check = true;
-					while (check)
-					{
-						if (stack.top().operation == LEX_LEFTBRACE || stack.top().operation == LEX_LEFTBRACKETS)
-							check = false;
-						else
-						{
-							temp = stack.top().operation;
-							stack.pop();						//Вносим все операции стека в результ. строку
-							resultString.push_back(temp);
-						}
-					}
+					data.MetComma();
 					break;
 				}
 			}
-			lextable_pos++;
+			lexTablePosition++;
 		}
+		data.PopLastOperations();
 
-		while (!stack.empty())
+#ifdef DEBUG_PN
+		for (int i = 0; i < data.resultChain.size(); i++)
 		{
-			temp = stack.top().operation;
-			stack.pop();						//Вносим все операции стека в результ. строку
-			resultString.push_back(temp);
+			if (data.resultChain[i].operationType == LT::NONE)
+				cout << data.resultChain[i].lexema;
+			else
+				cout << LT::GetOperationSymbol(data.resultChain[i]);
 		}
+#endif // DEBUG
 
-		int count = resultString.size();
-		for (int i = 0; i < count; i++)
-		{
-			cout << resultString.front();
-			resultString.pop_front();
-		}
-		cout << endl;
 
-		return transformDone;
+		return data.transformDone;
 	}
 
 }

@@ -1,8 +1,4 @@
 #include "stdafx.h"
-#define LEX_ERROR_SERIES 120
-#define SEMANTICS_ERROR_SERIES 400
-#define LINE in.alfaLxmTable[i].line
-#define POSITION in.alfaLxmTable[i].position
 
 namespace LexAnalysis
 {

@@ -36,7 +36,7 @@ int wmain(int argc, wchar_t* argv[])
 		mfst.printRules();
 
 		// Polish Notation Stage.
-		//PolishNotation::TransformToPolishNotation(lexTable, idTable);
+		PolishNotation::TransformToPolishNotation(lexTable, idTable);
 
 		// Clear RAM Stage.
 		LT::Delete(lexTable);

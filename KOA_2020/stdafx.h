@@ -23,6 +23,7 @@
 #include "Parm.h"
 #include "Graph.h"
 #include "LexAnalysis.h"
+#include "Semantic.h"
 #include "PolishNotation.h"
 #include "GRB.h"
 #include "MFST.h"
