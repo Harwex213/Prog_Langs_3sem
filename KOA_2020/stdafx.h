@@ -27,5 +27,6 @@
 #include "PolishNotation.h"
 #include "GRB.h"
 #include "MFST.h"
+#include "CodeGeneration.h"
 
 using namespace std;
