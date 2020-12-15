@@ -127,13 +127,20 @@ namespace GRB
 				// Params while calling.
 				NS('C'),
 				GRB_ERROR_SERIES + 5,
-				6,
+				12,
 				Rule::Chain(3, TS('i'), TS(','), NS('C')),
+				Rule::Chain(4, TS('i'), NS('O'), TS(','), NS('C')),
 				Rule::Chain(6, TS('i'), TS('['), NS('E'), TS(']'), TS(','), NS('C')),
+				Rule::Chain(7, TS('i'), TS('['), NS('E'), TS(']'), NS('O'), TS(','), NS('C')),
 				Rule::Chain(3, TS('l'), TS(','), NS('C')),
+				Rule::Chain(4, TS('l'), TS(','), NS('O'), NS('C')),
+
 				Rule::Chain(1, TS('i')),
+				Rule::Chain(2, TS('i'), NS('O')),
 				Rule::Chain(4, TS('i'), TS('['), NS('E'), TS(']')),
-				Rule::Chain(1, TS('l'))
+				Rule::Chain(5, TS('i'), TS('['), NS('E'), TS(']'), NS('O')),
+				Rule::Chain(1, TS('l')),
+				Rule::Chain(2, TS('l'), NS('O'))
 			)
 	);
 

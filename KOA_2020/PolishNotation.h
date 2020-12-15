@@ -27,10 +27,10 @@
 #define PM_PRIORITY			6
 #define MD_PRIORITY			7
 #define UNARY_PRIORITY		8
-#define BRACKETS_PRIORITY	9
+#define BRACKETS_PRIORITY	0
 
-#define LEX_CALL_FUNCTION (char)-128
-#define LEX_ARRAY_ADDRES (char)-126
+#define LEX_CALL_FUNCTION '@'
+#define LEX_ARRAY_ADDRES  '$'
 
 namespace PolishNotation 
 {
@@ -199,7 +199,15 @@ namespace PolishNotation
 				operationStack.pop();
 			}
 		}
+
+		void UpdateTables(int positionAfterAssignment, int endPosition, LT::LexTable& lexTable, IT::IdTable& idtable)
+		{
+			lexTable.table.erase(lexTable.table.begin() + positionAfterAssignment, lexTable.table.begin() + endPosition);
+			lexTable.table.insert(lexTable.table.begin() + positionAfterAssignment, resultChain.begin(), resultChain.end());
+			lexTable.table.shrink_to_fit();
+			lexTable.current_size = lexTable.table.size();
+		}
 	};
 	void TransformToPolishNotation(LT::LexTable& lextable, IT::IdTable& idtable);
-	bool PolishNotationExpression(int positionAfterAssignment, LT::LexTable& lextable, IT::IdTable& idtable);
+	void PolishNotationExpression(int positionAfterAssignment, LT::LexTable& lextable, IT::IdTable& idtable);
 };

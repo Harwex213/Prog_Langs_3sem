@@ -10,13 +10,20 @@ namespace PolishNotation
 		for (int i = 0; i < lexTable.current_size; i++)
 		{
 			if (lexTable.table[i].lexema == LEX_ASSIGNMENT)
-			{
 				PolishNotationExpression(i + 1, lexTable, idTable);
+			if (lexTable.table[i].lexema == LEX_WHILE)
+			{
+
+			}
+
+			if (lexTable.table[i].lexema == LEX_IF)
+			{
+
 			}
 		}
 	}
 
-	bool PolishNotationExpression(int positionAfterAssignment, LT::LexTable& lexTable, IT::IdTable& idTable)
+	void PolishNotationExpression(int positionAfterAssignment, LT::LexTable& lexTable, IT::IdTable& idTable)
 	{
 		int lexTablePosition = positionAfterAssignment;
 		PolishNotationData data;
@@ -96,6 +103,7 @@ namespace PolishNotation
 			lexTablePosition++;
 		}
 		data.PopLastOperations();
+		data.UpdateTables(positionAfterAssignment, lexTablePosition, lexTable, idTable);
 
 #ifdef DEBUG_PN
 		cout << endl;
@@ -108,9 +116,6 @@ namespace PolishNotation
 		}
 		cout << endl;
 #endif // DEBUG
-
-
-		return data.transformDone;
 	}
 
 }
