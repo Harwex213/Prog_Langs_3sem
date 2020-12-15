@@ -160,10 +160,10 @@ namespace Log
 		log.streamIdTable->width(StringLength); *log.streamIdTable << "ID Name";
 		log.streamIdTable->width(StringLength); *log.streamIdTable << "idx First LE";
 		log.streamIdTable->width(StringLength); *log.streamIdTable << "Visibility";
-		log.streamIdTable->width(StringLength); *log.streamIdTable << "DataType";
-		log.streamIdTable->width(StringLength);
-		log.streamIdTable->width(StringLength);
-		log.streamIdTable->width(StringLength);
+		log.streamIdTable->width(StringLength); *log.streamIdTable << "Return DataType";
+		log.streamIdTable->width(StringLength); *log.streamIdTable << "Params ID";
+		log.streamIdTable->width(StringLength); *log.streamIdTable << "Params Counter";
+		log.streamIdTable->width(StringLength); 
 		*log.streamIdTable << endl;
 		for (int i = 0; i < 7; i++)
 			*log.streamIdTable << "-----------------------------------";
@@ -176,8 +176,16 @@ namespace Log
 				log.streamIdTable->width(StringLength); *log.streamIdTable << idTable.table[i].idxfirstLE;
 				log.streamIdTable->width(StringLength); *log.streamIdTable << *idTable.table[i].visibility.cbegin();
 				log.streamIdTable->width(StringLength); *log.streamIdTable << idTable.table[i].idDataType;
-				log.streamIdTable->width(StringLength); *log.streamIdTable << "-";
-				log.streamIdTable->width(StringLength); *log.streamIdTable << "-";
+				int tempCounter = 0;
+				auto iterator = idTable.table[i].paramsIdx.begin();
+				while (iterator != idTable.table[i].paramsIdx.end())
+				{
+					*log.streamIdTable << *iterator << ' ';
+					iterator++;
+					tempCounter += 2;
+				}
+				log.streamIdTable->width(abs(StringLength - tempCounter)); *log.streamIdTable << ' ';
+				log.streamIdTable->width(StringLength); *log.streamIdTable << idTable.table[i].functionParamsCount;
 				log.streamIdTable->width(StringLength); *log.streamIdTable << "-";
 				*log.streamIdTable << endl;
 			}

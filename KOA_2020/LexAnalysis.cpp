@@ -22,9 +22,9 @@ namespace LexAnalysis
 			{
 				if (temp->lexema == LEX_IDENTIFICATOR || temp->lexema == LEX_LITERAL)
 				{
-					SetIdType_IdDataType_IdxFirstLE(*temp, analysisData, entryId, lexTable.current_size);
+					SetIdType_IdDataType_IdxFirstLE(*temp, analysisData, entryId, lexTable.current_size, idTable.current_size);
 					if (analysisData.infoFunctionParamsNeedUpdate)
-						SetFunctionParams(analysisData, lexTable.current_size);
+						SetFunctionParams(analysisData, idTable.current_size);
 					SetName(*temp, analysisData, entryId);
 					SetVisibility(*temp, analysisData, entryId);
 					switch (SetValue(*temp, analysisData, entryId))
@@ -68,9 +68,7 @@ namespace LexAnalysis
 					CheckLexema(*temp, analysisData, entryLex);
 				SetLexEntry(entryLex, temp->lexema, LINE, POSITION);
 				if (analysisData.functionNeedUpdate)
-				{
-
-				}
+					UpdateFunctionParamsInfo(analysisData, idTable);
 				LT::AddEntry(lexTable, entryLex);
 				ResetEntryLex(entryLex);
 			}
@@ -114,9 +112,7 @@ namespace LexAnalysis
 			break;
 		case LEX_PARENTHESES_RIGHT:
 			if (analysisData.functionIn)
-			{
 				analysisData.functionNeedUpdate = true;
-			}
 			// В любом случае выходим из функции.
 			analysisData.functionIn = false;
 			break;
@@ -174,7 +170,7 @@ namespace LexAnalysis
 		}
 	}
 
-	void SetIdType_IdDataType_IdxFirstLE(const FST::FST& temp, AnalysisData& analysisData, IT::Entry& entry, int idx)
+	void SetIdType_IdDataType_IdxFirstLE(const FST::FST& temp, AnalysisData& analysisData, IT::Entry& entry, int idxLex, int idxId)
 	{
 		if (temp.lexema == LEX_LITERAL)
 		{
@@ -183,14 +179,17 @@ namespace LexAnalysis
 		}
 		entry.idType = analysisData.idType;
 		entry.idDataType = analysisData.idDataType;
-		entry.idxfirstLE = idx;
+		entry.idxfirstLE = idxLex;
+		// Сохраняем id текущей функции.
+		if (analysisData.functionIn && entry.idType == IT::FUNCTION)
+			analysisData.currentFunctionId = idxId;
 	}
 
-	void SetFunctionParams(AnalysisData& analysisData, int id)
+	void SetFunctionParams(AnalysisData& analysisData, int idx)
 	{
 		// Вносим информацию об действительных параметрах функции.
 		analysisData.functionParamsCounter++;
-		analysisData.paramsIdx.push_front(id);
+		analysisData.paramsIdx.push_front(idx);
 		analysisData.infoFunctionParamsNeedUpdate = false;
 	}
 
@@ -404,5 +403,14 @@ namespace LexAnalysis
 	{
 		entry.idxTI = LT_TI_NULLXDX;
 		entry.operationType = LT::NONE;
+	}
+
+	void UpdateFunctionParamsInfo(AnalysisData& analysisData, IT::IdTable& idTable)
+	{
+		analysisData.functionNeedUpdate = false;
+		idTable.table[analysisData.currentFunctionId].paramsIdx = analysisData.paramsIdx;
+		idTable.table[analysisData.currentFunctionId].functionParamsCount = analysisData.functionParamsCounter;
+		analysisData.paramsIdx.clear();
+		analysisData.functionParamsCounter = 0;
 	}
 }

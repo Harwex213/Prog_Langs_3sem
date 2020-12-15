@@ -30,6 +30,8 @@ namespace LexAnalysis
 		bool functionNeedUpdate = false;
 		// See that need update info about function params.
 		bool infoFunctionParamsNeedUpdate = false;
+		// Id of cureent Function.
+		int currentFunctionId = 0;
 		// Function Params Counter.
 		int functionParamsCounter = 0;
 		// Counter main. If > 1 ==> Error.
@@ -60,7 +62,7 @@ namespace LexAnalysis
 	void Lexer(const In::IN& in, LT::LexTable& lextable, IT::IdTable& idtable);
 	bool FindGraph(const std::vector<FST::FST*> graph, FST::FST*& temp);
 	void CheckLexema(const FST::FST& temp, AnalysisData& analysisData, LT::Entry& entryLex);
-	void SetIdType_IdDataType_IdxFirstLE(const FST::FST& temp, AnalysisData& analysisData, IT::Entry& entry, int idx);
+	void SetIdType_IdDataType_IdxFirstLE(const FST::FST& temp, AnalysisData& analysisData, IT::Entry& entry, int idxLex, int idxId);
 	void SetFunctionParams(AnalysisData& analysisData, int id);
 	void SetName(const FST::FST& temp, AnalysisData& analysisData, IT::Entry& entry);
 	void SetVisibility(const FST::FST& temp, AnalysisData& analysisData, IT::Entry& entry);
@@ -71,4 +73,5 @@ namespace LexAnalysis
 	void SetLexEntry(LT::Entry& entry, char lexema, int line, int position);
 	void ResetAnalysisData(AnalysisData& analysisData, IT::Entry& entry);
 	void ResetEntryLex(LT::Entry& entry);
+	void UpdateFunctionParamsInfo(AnalysisData& analysisData, IT::IdTable& idTable);
 }	
