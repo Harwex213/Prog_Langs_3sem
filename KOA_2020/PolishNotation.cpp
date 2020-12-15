@@ -31,7 +31,7 @@ namespace PolishNotation
 				case LEX_IDENTIFICATOR:
 				{
 					// Если в параметрах + стек Параметров не пустой -> увеличиваем количество фактических параметров.
-					if (data.stackCFunc.isParams && !data.stackCFunc.stackParams.empty())
+					if (data.stackCFunc.isParams && data.stackCFunc.stackParams[data.stackCFunc.countFunction] == 0)
 						data.stackCFunc.stackParams[data.stackCFunc.countFunction]++;
 
 					// Смотрим -> фунция или переменная.
@@ -99,6 +99,7 @@ namespace PolishNotation
 		data.PopLastOperations();
 
 #ifdef DEBUG_PN
+		cout << endl;
 		for (int i = 0; i < data.resultChain.size(); i++)
 		{
 			if (data.resultChain[i].operationType == LT::NONE)
@@ -106,6 +107,7 @@ namespace PolishNotation
 			else
 				cout << LT::GetOperationSymbol(data.resultChain[i]);
 		}
+		cout << endl;
 #endif // DEBUG
 
 

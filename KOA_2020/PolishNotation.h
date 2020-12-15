@@ -29,8 +29,8 @@
 #define UNARY_PRIORITY		8
 #define BRACKETS_PRIORITY	9
 
-#define LEX_CALL_FUNCTION (char)-5
-#define LEX_ARRAY_ADDRES (char)-6
+#define LEX_CALL_FUNCTION (char)-128
+#define LEX_ARRAY_ADDRES (char)-126
 
 namespace PolishNotation 
 {
@@ -43,7 +43,7 @@ namespace PolishNotation
 	{
 		vector<LT::Entry> calledFunction;
 		vector<int> stackParams;
-		int countFunction = 0;
+		int countFunction = -1;
 		bool isParams = false;
 	};
 	struct PolishNotationData
@@ -136,6 +136,7 @@ namespace PolishNotation
 		{
 			tempOperationEntry.priority = BRACKETS_PRIORITY;
 			tempOperationEntry.savedEntryOperation = tempLexEntry;
+			tempOperationEntry.savedEntryOperation.lexema = LEX_BRACKETS_LEFT;
 			operationStack.push(tempOperationEntry);
 		}
 
@@ -156,6 +157,9 @@ namespace PolishNotation
 			// Проверяем чтобы количество фактических и ожидаемых параметров было одинаково.
 			if (!Semantic::CheckFunctionCountParams(stackCFunc.stackParams[stackCFunc.countFunction], stackCFunc.calledFunction[stackCFunc.countFunction], idTable))
 				throw ERROR_THROW_IN(SEMANTICS_ERROR_SERIES + 1, tempLexEntry.line, tempLexEntry.position);
+			// Заносим вызов функции в результирующую цепочку, предварительно поменяв её лексему.
+			stackCFunc.calledFunction[stackCFunc.countFunction].lexema = LEX_CALL_FUNCTION;
+			resultChain.push_back(stackCFunc.calledFunction[stackCFunc.countFunction]);
 			stackCFunc.countFunction--;
 			// Смотрим пуст ли стек с количеством параметров. Если да -> функции закончились. Если нет -> убираем последнюю функцию из вектора.
 			if (stackCFunc.stackParams.empty())
@@ -171,6 +175,9 @@ namespace PolishNotation
 
 		void MetComma()
 		{
+			// Увеличиваем количество передаваемых параметров.
+			stackCFunc.stackParams[stackCFunc.countFunction]++;
+			// Выталкиваем все операции до скобки.
 			bool check = true;
 			while (check)
 			{

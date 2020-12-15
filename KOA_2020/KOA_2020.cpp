@@ -25,9 +25,6 @@ int wmain(int argc, wchar_t* argv[])
 		Log::WriteParm(log, parm);
 		Log::WriteIn(log, in);
 
-		// Close files Stage.
-		Log::Close(log);
-
 		// Parse Stage.
 		// For Debug:
 		//MFST_TRACE_START;
@@ -42,7 +39,10 @@ int wmain(int argc, wchar_t* argv[])
 		LT::Delete(lexTable);
 		IT::Delete(idTable);
 
-		// Time optimization chek.
+		// Close files Stage.
+		Log::Close(log);
+
+		// Time optimization check.
 		//std::chrono::high_resolution_clock::time_point t2 = std::chrono::high_resolution_clock::now();
 		//std::chrono::duration<double> time_span = std::chrono::duration_cast<std::chrono::duration < double >> (t2 - t1);
 		//std::cout << time_span.count() << " seconds.";

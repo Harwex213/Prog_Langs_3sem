@@ -1,29 +1,11 @@
 include "date.lib"
 uint function FindMax(uint arr[], uint i)
 {
-    uint retValue = 10.12312;
-    bool ass = 10 > 4;
-    const uint k = 100;
-    while(k == i)
-    {
-        if(k > 100 + 100)
-        {
-            k = 100;
-            while(true)
-            {
-                retValue = 1031;
-            }
-        }
-    }
-	return retValue;
-}
-uint function Joker()
-{
-uint k= 100;
-return k;
+    uint k = 10 + (900 * 310 + 10) | 10;
+	return k;
 }
 main
 {
-    uint k = 0;
+    uint k = FindMax(1,99);
  	return k;
 }

@@ -26,13 +26,13 @@ namespace LexAnalysis
 					switch (SetValue(*temp, analysisData, entryId))
 					{
 					case GOING_BEYOND_UINT:
-						throw ERROR_THROW_IN(SEMANTICS_ERROR_SERIES + 4, LINE, POSITION);
+						throw ERROR_THROW_IN(SEMANTICS_ERROR_SERIES + 3, LINE, POSITION);
 						break;
 					case GOING_BEYOND_FLOAT:
 						throw ERROR_THROW_IN(SEMANTICS_ERROR_SERIES + 5, LINE, POSITION);
 						break;
 					case GOING_BEYOND_STRING:
-						throw ERROR_THROW_IN(SEMANTICS_ERROR_SERIES + 6, LINE, POSITION);
+						throw ERROR_THROW_IN(SEMANTICS_ERROR_SERIES + 4, LINE, POSITION);
 						break;
 					case SUCCESS:
 						break;

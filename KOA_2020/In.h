@@ -77,7 +77,7 @@ namespace In
 		bool wasMinus = false;
 		bool shiftPosition = false;
 		std::vector<char> tempVector;
-		char specialSymbol = -1;
+		char specialSymbol = -128;
 		int specialSymbolCounter = 0;
 
 		void ResealWord(IN& in)
