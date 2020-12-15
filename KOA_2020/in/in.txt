@@ -1,7 +1,7 @@
 include "date.lib"
-float function FindMax(float arr[], uint i)
+uint function FindMax(uint arr[], uint i)
 {
-    float retValue = 10.12312;
+    uint retValue = 10.12312;
     bool ass = 10 > 4;
     const uint k = 100;
     while(k == i)
@@ -16,6 +16,11 @@ float function FindMax(float arr[], uint i)
         }
     }
 	return retValue;
+}
+uint function Joker()
+{
+uint k= 100;
+return k;
 }
 main
 {

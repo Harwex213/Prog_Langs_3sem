@@ -1,4 +1,4 @@
------ Протокол -----  Дата: 15.12.2020 13:00:39 ----- 
+----- Протокол -----  Дата: 15.12.2020 16:10:44 ----- 
 
 |Params|
 ID Name                            idx First LE                       Visibility Init                    DataType                           Value UINT                         Value FLOAT                        Value BOOL                         Value STRING
@@ -10,6 +10,7 @@ i                                  12                                 FindMax   
 ID Name                            idx First LE                       Visibility                         Return DataType                    Params ID                          Params Counter                     
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 FindMax                            4                                  GLOBAL                             4                                  3 2                                2                                  -                                  
+Joker                              71                                 GLOBAL                             1                                                                     0                                  -                                  
 
 |Variables|
 Name                               idx First LE                       Visiblity                          DataType                           Value UINT                         Value FLOAT                        Value BOOL                         Value STRING                       
@@ -17,7 +18,8 @@ Name                               idx First LE                       Visiblity 
 retValue                           16                                 FindMax                            4                                  -                                  0                                  -                                  -                                  
 ass                                21                                 FindMax                            3                                  -                                  -                                  0                                  -                                  
 k                                  29                                 FindMax                            1                                  0                                  -                                  -                                  -                                  
-k                                  72                                 main                               1                                  0                                  -                                  -                                  -                                  
+k                                  76                                 Joker                              1                                  0                                  -                                  -                                  -                                  
+k                                  87                                 main                               1                                  0                                  -                                  -                                  -                                  
 
 |Literals|
 Name                               idx First LE                       Visibility                         DataType                           Value UINT                         Value FLOAT                        Value BOOL                         Value STRING                       
@@ -29,4 +31,4 @@ L3                                 25                                 LITERAL   
 L4                                 31                                 LITERAL                            1                                  100                                -                                  -                                  -                                  
 L5                                 55                                 LITERAL                            3                                  -                                  -                                  1                                  -                                  
 L6                                 60                                 LITERAL                            1                                  1031                               -                                  -                                  -                                  
-L7                                 74                                 LITERAL                            1                                  0                                  -                                  -                                  -                                  
+L7                                 89                                 LITERAL                            1                                  0                                  -                                  -                                  -                                  

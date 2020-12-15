@@ -48,12 +48,10 @@
 #define SYMBOL_MINUS				'-'
 #define SYMBOL_MULTIPLY				'*'
 #define SYMBOL_DIVISION				'/'
-#define SYMBOL_EQUALLY				
-#define SYMBOL_NON_EQUALLY
-#define SYMBOL_MORE
-#define SYMBOL_LESS
-#define SYMBOL_MORE_OR_EQUAL
-#define SYMBOL_LESS_OR_EQUAL
+#define SYMBOL_EQUALLY				'='
+#define SYMBOL_NON_EQUALLY			'!'
+#define SYMBOL_MORE					'>'
+#define SYMBOL_LESS					'<'
 #define SYMBOL_OR					'|'
 #define SYMBOL_AND					'&'
 #define SYMBOL_INVERSION			'~'

@@ -26,6 +26,38 @@ namespace LT							// таблица лексем
 		case PLUS:
 			return SYMBOL_PLUS;
 			break;
+		case MINUS:
+			return SYMBOL_MINUS;
+			break;
+		case MULTIPLY:
+			return SYMBOL_MULTIPLY;
+			break;
+		case DIVISION:
+			return SYMBOL_DIVISION;
+			break;
+		case EQUALLY:
+			return SYMBOL_EQUALLY;
+			break;
+		case NON_EQUALLY:
+			return SYMBOL_NON_EQUALLY;
+			break;
+		case MORE:
+		case MORE_OR_EQUAL:
+			return SYMBOL_MORE;
+			break;
+		case LESS:
+		case LESS_OR_EQUAL:
+			return SYMBOL_LESS;
+			break;
+		case OR:
+			return SYMBOL_OR;
+			break;
+		case AND:
+			return SYMBOL_AND;
+			break;
+		case INVERSION:
+			return SYMBOL_INVERSION;
+			break;
 		default:
 			return NULL;
 			break;
