@@ -6,6 +6,6 @@ uint function FindMax(uint arr[], uint i)
 }
 main
 {
-    uint k = FindMax(1,99);
+    uint k = FindMax(~);
  	return k;
 }

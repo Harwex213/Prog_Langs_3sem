@@ -1,4 +1,4 @@
------ Протокол -----  Дата: 15.12.2020 20:33:02 ----- 
+----- Протокол -----  Дата: 15.12.2020 20:55:02 ----- 
 
 |Params|
 ID Name                            idx First LE                       Visibility Init                    DataType                           Value UINT                         Value FLOAT                        Value BOOL                         Value STRING
@@ -24,5 +24,3 @@ L0                                 1                                  LITERAL   
 L1                                 18                                 LITERAL                            1                                  10                                 -                                  -                                  -                                  
 L2                                 21                                 LITERAL                            1                                  900                                -                                  -                                  -                                  
 L3                                 23                                 LITERAL                            1                                  310                                -                                  -                                  -                                  
-L4                                 41                                 LITERAL                            1                                  1                                  -                                  -                                  -                                  
-L5                                 43                                 LITERAL                            1                                  99                                 -                                  -                                  -                                  

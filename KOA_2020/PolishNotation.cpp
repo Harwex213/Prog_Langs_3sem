@@ -6,7 +6,6 @@ namespace PolishNotation
 	void TransformToPolishNotation(LT::LexTable& lexTable, IT::IdTable& idTable)
 	{
 		// Если в параметрах поставить просто арифмитическое действие, то сломается
-		// Правильный подсчёт количества параметров!
 
 		for (int i = 0; i < lexTable.current_size; i++)
 		{
