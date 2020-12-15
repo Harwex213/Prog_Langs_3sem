@@ -32,8 +32,16 @@ namespace LT							// таблица лексем
 		delete[] lextable.table;
 	};
 
-	void PrintLexTable(LexTable lextable)
+	char GetOperationSymbol(const Entry& entry)
 	{
-
+		switch (entry.operationType)
+		{
+		case PLUS:
+			return SYMBOL_PLUS;
+			break;
+		default:
+			return NULL;
+			break;
+		}
 	}
 }

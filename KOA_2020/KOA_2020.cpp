@@ -1,5 +1,4 @@
 ﻿#include "stdafx.h"
-
 // -in:c:#in\in.txt -out:c:#in\out.txt -log:c:#in\log.txt
 
 int wmain(int argc, wchar_t* argv[])
@@ -31,7 +30,7 @@ int wmain(int argc, wchar_t* argv[])
 
 		// Parse Stage.
 		// For Debug:
-		MFST_TRACE_START;
+		//MFST_TRACE_START;
 		MFST::Mfst mfst(lexTable, GRB::getGreibach());
 		mfst.start();
 		mfst.printRules();

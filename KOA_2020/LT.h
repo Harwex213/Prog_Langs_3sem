@@ -44,6 +44,20 @@
 #define	LEX_IDENTIFICATOR			'i'
 #define	LEX_LITERAL					'l'
 
+#define SYMBOL_PLUS					'+'
+#define SYMBOL_MINUS				'-'
+#define SYMBOL_MULTIPLY				'*'
+#define SYMBOL_DIVISION				'/'
+#define SYMBOL_EQUALLY				
+#define SYMBOL_NON_EQUALLY
+#define SYMBOL_MORE
+#define SYMBOL_LESS
+#define SYMBOL_MORE_OR_EQUAL
+#define SYMBOL_LESS_OR_EQUAL
+#define SYMBOL_OR					'|'
+#define SYMBOL_AND					'&'
+#define SYMBOL_INVERSION			'~'
+
 namespace LT							// таблица лексем
 {
 	enum OperationType { NONE, PLUS, MINUS, MULTIPLY, DIVISION, EQUALLY, NON_EQUALLY, MORE, LESS, MORE_OR_EQUAL, LESS_OR_EQUAL, OR, AND, INVERSION };
@@ -60,7 +74,8 @@ namespace LT							// таблица лексем
 	struct LexTable						// экземпляр таблицы лексем
 	{
 		int maxsize;					// емкость таблицы лексем < LT_MAXSIZE
-		int current_size;				// текущий размер таблицы лексем < maxsize
+		int current_size = 0;				// текущий размер таблицы лексем < maxsize
+		std::vector<Entry> tableTest;
 		Entry* table;					// массив строк таблицы лексем
 	};
 
@@ -68,5 +83,5 @@ namespace LT							// таблица лексем
 	void AddEntry(LexTable& lextable, Entry entry);	// добавление лексем
 	Entry GetEntry(LexTable& lextable, int n);	// получить строку таблицы лексем
 	void Delete(LexTable& lextable);			// удалить таблицу лексем (освободить память)
-	void PrintLexTable(LexTable lextable);
+	char GetOperationSymbol(const Entry& entry);
 }

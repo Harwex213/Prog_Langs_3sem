@@ -1,4 +1,5 @@
 #include "stdafx.h"
+//#define DEBUG
 
 namespace MFST
 {
@@ -74,16 +75,20 @@ namespace MFST
 					GRB::Rule::Chain chain;
 					if ((nrulechain = rule.getNextChain(lenta[lenta_position], chain, nrulechain+1)) >= 0)
 					{
-						//MFST_TRACE1;
+#ifdef DEBUG
+						MFST_TRACE1;
+#endif // DEBUG
 						saveState();
 						st.pop();
 						push_chain(chain);
 						rc = NS_OK;
-						//MFST_TRACE2;
+#ifdef DEBUG
+						MFST_TRACE2;
+#endif // DEBUG
 					}
 					else
 					{
-						//MFST_TRACE4("NS_NORULECHAIN/NS_RULE");
+						MFST_TRACE4("NS_NORULECHAIN/NS_RULE");
 						saveDiagnosis(NS_NORULECHAIN);
 						rc = restState() ? NS_NORULECHAIN : NS_NORULE;
 					}
@@ -97,20 +102,26 @@ namespace MFST
 			{
 				lenta_position++;
 				st.pop();
-				nrulechain = -1;		//Зачем сбрасывать nrulechain?
+				nrulechain = -1;
 				rc = TS_OK;
-				//MFST_TRACE3;
+#ifdef DEBUG
+				MFST_TRACE3;
+#endif // DEBUG
 			}
 			else
 			{
-				//MFST_TRACE4("TS_NOK/NS_NORULECHAIN");
+#ifdef DEBUG
+				MFST_TRACE4("TS_NOK/NS_NORULECHAIN");
+#endif // DEBUG
 				rc = restState() ? TS_NOK : NS_NORULECHAIN;
 			}
 		}
 		else
 		{
 			rc = LENTA_END;
-			//MFST_TRACE4("LENTA_END");
+#ifdef DEBUG
+			MFST_TRACE4("LENTA_END");
+#endif // DEBUG
 		}
 
 		return rc;
@@ -128,7 +139,9 @@ namespace MFST
 	bool Mfst::saveState()
 	{
 		storestate.push(MfstState(lenta_position, st, nrule, nrulechain));
-		//MFST_TRACE6("SAVESTATE:", storestate.size());
+#ifdef DEBUG
+		MFST_TRACE6("SAVESTATE:", storestate.size());
+#endif // DEBUG
 		return true;
 	}
 
@@ -148,9 +161,10 @@ namespace MFST
 			nrulechain = state.nrulechain;
 
 			storestate.pop();
-
-			//MFST_TRACE5("RESTSTATE");
-			//MFST_TRACE2;
+#ifdef DEBUG
+			MFST_TRACE5("RESTSTATE");
+			MFST_TRACE2;
+#endif // DEBUG
 		}
 
 		return rc;

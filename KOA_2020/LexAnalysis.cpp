@@ -66,6 +66,7 @@ namespace LexAnalysis
 					CheckLexema(*temp, analysisData, entryLex);
 				SetLexEntry(entryLex, temp->lexema, LINE, POSITION);
 				LT::AddEntry(lexTable, entryLex);
+				lexTable.tableTest.push_back(entryLex);
 				ResetEntryLex(entryLex);
 			}
 			else

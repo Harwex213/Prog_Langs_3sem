@@ -73,15 +73,15 @@ namespace Log
 		*log.streamLexTable << buffer << " ----- " << endl;
 
 		int counter = 0;
-		for (int i = 0; i < lexTable.table[lexTable.current_size - 1].line; i++)
+		for (int i = 0; i < lexTable.tableTest[lexTable.current_size - 1].line; i++)
 		{
-			*log.streamLexTable << lexTable.table[counter].line << ' ';
-			while (lexTable.table[counter].line == i + 1)
+			*log.streamLexTable << lexTable.tableTest[counter].line << ' ';
+			while (counter < lexTable.tableTest.size() && lexTable.tableTest[counter].line == i + 1)
 			{
-				*log.streamLexTable << lexTable.table[counter].lexema;
-				if (lexTable.table[counter].lexema == LEX_IDENTIFICATOR || lexTable.table[counter].lexema== LEX_LITERAL)
+				*log.streamLexTable << lexTable.tableTest[counter].lexema;
+				if (lexTable.tableTest[counter].lexema == LEX_IDENTIFICATOR || lexTable.tableTest[counter].lexema== LEX_LITERAL)
 				{
-					*log.streamLexTable << "(" << lexTable.table[counter].idxTI << ")";
+					*log.streamLexTable << "(" << lexTable.tableTest[counter].idxTI << ")";
 				}
 				counter++;
 			}

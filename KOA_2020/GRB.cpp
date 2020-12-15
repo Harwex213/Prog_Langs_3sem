@@ -3,25 +3,19 @@
 
 namespace GRB
 {
+	// Что можно добавить:
+	// 1) Объявление константы с инверсией.
+	// 2) ...
 	Greibach greibach(
-		NS('L'),
+		NS('S'),
 		TS('$'),
-		7,
-		Rule(
-				// Libraries.
-				NS('L'),
-				GRB_ERROR_SERIES + 0,
-				4,
-				Rule::Chain(3, TS('d'), TS('l'), NS('L')),
-				Rule::Chain(2, TS('d'), TS('l')),
-				Rule::Chain(8, TS('m'), TS('{'), NS('I'), TS('r'), NS('E'), TS(';'), TS('}'), NS('S')),
-				Rule::Chain(13, TS('t'), TS('f'), TS('i'), TS('('), NS('P'), TS(')'), TS('{'), NS('I'), TS('r'), NS('E'), TS(';'), TS('}'), NS('S'))
-		),
+		6,
 		Rule(
 				// Functions and Main.
 				NS('S'),
 				GRB_ERROR_SERIES + 1,
-				2,
+				3,
+				Rule::Chain(3, TS('d'), TS('l'), NS('S')),
 				Rule::Chain(8, TS('m'), TS('{'), NS('I'), TS('r'), NS('E'), TS(';'), TS('}'), NS('S')),
 				Rule::Chain(13, TS('t'), TS('f'), TS('i'), TS('('), NS('P'), TS(')'), TS('{'), NS('I'), TS('r'), NS('E'), TS(';'), TS('}'), NS('S'))
 			),
@@ -74,7 +68,7 @@ namespace GRB
 				// Expressions.
 				NS('E'),
 				GRB_ERROR_SERIES + 3,
-				10,
+				12,
 				// Блок с операциями.
 				// Идентификатор.
 				Rule::Chain(2, TS('i'), NS('O')),
@@ -86,6 +80,8 @@ namespace GRB
 				Rule::Chain(5, TS('i'), TS('('), NS('C'), TS(')'), NS('O')),
 				// Выражения со скобками.
 				Rule::Chain(4, TS('('), NS('E'), TS(')'), NS('O')),
+				// Unary { ~ }
+				Rule::Chain(3, TS('b'), NS('E'), NS('O')),
 
 				// Блок без операций.
 				// Идентификатор.
@@ -97,7 +93,9 @@ namespace GRB
 				// Вызов функции.
 				Rule::Chain(4, TS('i'), TS('('), NS('C'), TS(')')),
 				// Выражения со скобками.
-				Rule::Chain(3, TS('('), NS('E'), TS(')'))
+				Rule::Chain(3, TS('('), NS('E'), TS(')')),
+				// Unary { ~ }
+				Rule::Chain(2, TS('b'), NS('E'))
 			),
 		Rule(
 				// Operations: {+ - * / | & ~}. (and == > < >= <=)?
