@@ -34,6 +34,16 @@ namespace Log
 			ptr++;
 		}
 	}
+	void WriteLineLexLog(LOG log, const char* c, ...)
+	{
+		const char** ptr = &c;
+
+		while (*ptr != "")
+		{
+			*log.streamLexTable << *ptr;
+			ptr++;
+		}
+	}
 	void WriteLine(LOG log, const wchar_t* c, ...)
 	{
 		const wchar_t** ptr = &c;

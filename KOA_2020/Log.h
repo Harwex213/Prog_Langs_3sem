@@ -21,6 +21,7 @@ namespace Log
 
 	LOG getlog(wchar_t logfile[], wchar_t logLexTableFile[], wchar_t logIdTableFile[]);
 	void WriteLine(LOG log, const char* c, ...);
+	void WriteLineLexLog(LOG log, const char* c, ...);
 	void WriteLine(LOG log, const wchar_t* c, ...);
 	void WriteLog(LOG log);
 	void WriteLogLexTable(LOG log, LT::LexTable lexTable);

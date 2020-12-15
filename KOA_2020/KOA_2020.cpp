@@ -34,6 +34,8 @@ int wmain(int argc, wchar_t* argv[])
 
 		// Polish Notation Stage.
 		PolishNotation::TransformToPolishNotation(lexTable, idTable);
+		Log::WriteLineLexLog(log, "...Преобразование выражений в вид польской обратной записи...\n", "");
+		Log::WriteLogLexTable(log, lexTable);
 
 		// Clear RAM Stage.
 		LT::Delete(lexTable);
